@@ -116,7 +116,7 @@ ALTER SEQUENCE ads_id_seq OWNED BY ads.id;
 --
 
 CREATE TABLE area (
-    uid integer NOT NULL,
+    sid integer NOT NULL,
     aid integer NOT NULL,
     start date NOT NULL,
     exp date
@@ -284,11 +284,34 @@ CREATE TABLE staff (
     uid integer NOT NULL,
     sid integer NOT NULL,
     exp date,
-    start date NOT NULL
+    start date NOT NULL,
+    id integer NOT NULL,
+    post character varying(256) NOT NULL
 );
 
 
 ALTER TABLE staff OWNER TO web;
+
+--
+-- Name: staff_id_seq; Type: SEQUENCE; Schema: public; Owner: web
+--
+
+CREATE SEQUENCE staff_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE staff_id_seq OWNER TO web;
+
+--
+-- Name: staff_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: web
+--
+
+ALTER SEQUENCE staff_id_seq OWNED BY staff.id;
+
 
 --
 -- Name: users; Type: TABLE; Schema: public; Owner: web; Tablespace: 
@@ -376,6 +399,13 @@ ALTER TABLE ONLY service ALTER COLUMN id SET DEFAULT nextval('service_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: web
 --
 
+ALTER TABLE ONLY staff ALTER COLUMN id SET DEFAULT nextval('staff_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: web
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -421,7 +451,7 @@ SELECT pg_catalog.setval('ads_id_seq', 1, false);
 -- Data for Name: area; Type: TABLE DATA; Schema: public; Owner: web
 --
 
-COPY area (uid, aid, start, exp) FROM stdin;
+COPY area (sid, aid, start, exp) FROM stdin;
 \.
 
 
@@ -497,8 +527,15 @@ SELECT pg_catalog.setval('service_id_seq', 1, false);
 -- Data for Name: staff; Type: TABLE DATA; Schema: public; Owner: web
 --
 
-COPY staff (uid, sid, exp, start) FROM stdin;
+COPY staff (uid, sid, exp, start, id, post) FROM stdin;
 \.
+
+
+--
+-- Name: staff_id_seq; Type: SEQUENCE SET; Schema: public; Owner: web
+--
+
+SELECT pg_catalog.setval('staff_id_seq', 1, false);
 
 
 --
@@ -537,7 +574,7 @@ ALTER TABLE ONLY ads
 --
 
 ALTER TABLE ONLY area
-    ADD CONSTRAINT area_pkey PRIMARY KEY (uid, aid);
+    ADD CONSTRAINT area_pkey PRIMARY KEY (sid, aid);
 
 
 --
@@ -562,6 +599,14 @@ ALTER TABLE ONLY orders
 
 ALTER TABLE ONLY service
     ADD CONSTRAINT service_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: staff_pkey; Type: CONSTRAINT; Schema: public; Owner: web; Tablespace: 
+--
+
+ALTER TABLE ONLY staff
+    ADD CONSTRAINT staff_pkey PRIMARY KEY (id);
 
 
 --
@@ -597,11 +642,11 @@ ALTER TABLE ONLY area
 
 
 --
--- Name: afu_key; Type: FK CONSTRAINT; Schema: public; Owner: web
+-- Name: afs_key; Type: FK CONSTRAINT; Schema: public; Owner: web
 --
 
 ALTER TABLE ONLY area
-    ADD CONSTRAINT afu_key FOREIGN KEY (uid) REFERENCES users(id);
+    ADD CONSTRAINT afs_key FOREIGN KEY (sid) REFERENCES staff(id);
 
 
 --
