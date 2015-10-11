@@ -49,7 +49,6 @@ CREATE TABLE address (
     city character varying(64) NOT NULL,
     street character varying(128) NOT NULL,
     house character varying(16) NOT NULL,
-    floor integer NOT NULL,
     id integer NOT NULL
 );
 
@@ -84,7 +83,10 @@ ALTER SEQUENCE address_id_seq OWNED BY address.id;
 CREATE TABLE ads (
     id integer NOT NULL,
     description text NOT NULL,
-    owner integer NOT NULL
+    owner integer NOT NULL,
+    cheched boolean DEFAULT false NOT NULL,
+    ts time without time zone DEFAULT now() NOT NULL,
+    location integer
 );
 
 
@@ -159,6 +161,20 @@ ALTER SEQUENCE category_id_seq OWNED BY category.id;
 
 
 --
+-- Name: comments; Type: TABLE; Schema: public; Owner: web; Tablespace: 
+--
+
+CREATE TABLE comments (
+    aid integer NOT NULL,
+    uid integer NOT NULL,
+    ts time without time zone DEFAULT now() NOT NULL,
+    data text NOT NULL
+);
+
+
+ALTER TABLE comments OWNER TO web;
+
+--
 -- Name: favorite; Type: TABLE; Schema: public; Owner: web; Tablespace: 
 --
 
@@ -181,7 +197,9 @@ CREATE TABLE orders (
     serv integer NOT NULL,
     loc integer NOT NULL,
     start time without time zone,
-    exp time without time zone
+    exp time without time zone,
+    state character varying(16) DEFAULT 'waiting'::character varying NOT NULL,
+    ts time without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -326,7 +344,11 @@ CREATE TABLE users (
     passwd character varying(64) NOT NULL,
     mail character varying(64) NOT NULL,
     home integer NOT NULL,
-    room integer NOT NULL
+    room integer,
+    role character varying(16) DEFAULT 'user'::character varying NOT NULL,
+    bdata date,
+    floor integer,
+    gender character(1)
 );
 
 
@@ -421,7 +443,7 @@ COPY ad_cat (ads, cat) FROM stdin;
 -- Data for Name: address; Type: TABLE DATA; Schema: public; Owner: web
 --
 
-COPY address (city, street, house, floor, id) FROM stdin;
+COPY address (city, street, house, id) FROM stdin;
 \.
 
 
@@ -436,7 +458,7 @@ SELECT pg_catalog.setval('address_id_seq', 1, false);
 -- Data for Name: ads; Type: TABLE DATA; Schema: public; Owner: web
 --
 
-COPY ads (id, description, owner) FROM stdin;
+COPY ads (id, description, owner, cheched, ts, location) FROM stdin;
 \.
 
 
@@ -471,6 +493,14 @@ SELECT pg_catalog.setval('category_id_seq', 1, false);
 
 
 --
+-- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: web
+--
+
+COPY comments (aid, uid, ts, data) FROM stdin;
+\.
+
+
+--
 -- Data for Name: favorite; Type: TABLE DATA; Schema: public; Owner: web
 --
 
@@ -482,7 +512,7 @@ COPY favorite (aid, uid) FROM stdin;
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: web
 --
 
-COPY orders (id, owner, description, serv, loc, start, exp) FROM stdin;
+COPY orders (id, owner, description, serv, loc, start, exp, state, ts) FROM stdin;
 \.
 
 
@@ -542,7 +572,7 @@ SELECT pg_catalog.setval('staff_id_seq', 1, false);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: web
 --
 
-COPY users (id, name, surname, patronymic, login, passwd, mail, home, room) FROM stdin;
+COPY users (id, name, surname, patronymic, login, passwd, mail, home, room, role, bdata, floor, gender) FROM stdin;
 \.
 
 
@@ -634,6 +664,14 @@ ALTER TABLE ONLY photo
 
 
 --
+-- Name: ads_location_fkey; Type: FK CONSTRAINT; Schema: public; Owner: web
+--
+
+ALTER TABLE ONLY ads
+    ADD CONSTRAINT ads_location_fkey FOREIGN KEY (location) REFERENCES address(id);
+
+
+--
 -- Name: afa_key; Type: FK CONSTRAINT; Schema: public; Owner: web
 --
 
@@ -655,6 +693,22 @@ ALTER TABLE ONLY area
 
 ALTER TABLE ONLY ad_cat
     ADD CONSTRAINT c_fkey FOREIGN KEY (cat) REFERENCES category(id);
+
+
+--
+-- Name: comments_aid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: web
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT comments_aid_fkey FOREIGN KEY (aid) REFERENCES ads(id);
+
+
+--
+-- Name: comments_uid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: web
+--
+
+ALTER TABLE ONLY comments
+    ADD CONSTRAINT comments_uid_fkey FOREIGN KEY (uid) REFERENCES users(id);
 
 
 --
