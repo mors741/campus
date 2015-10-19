@@ -30,6 +30,22 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: ad; Type: TABLE; Schema: public; Owner: web; Tablespace: 
+--
+
+CREATE TABLE ad (
+    id integer NOT NULL,
+    description text NOT NULL,
+    owner integer NOT NULL,
+    cheched boolean DEFAULT false NOT NULL,
+    ts time without time zone DEFAULT now() NOT NULL,
+    location integer
+);
+
+
+ALTER TABLE ad OWNER TO web;
+
+--
 -- Name: ad_cat; Type: TABLE; Schema: public; Owner: web; Tablespace: 
 --
 
@@ -77,22 +93,6 @@ ALTER SEQUENCE address_id_seq OWNED BY address.id;
 
 
 --
--- Name: ads; Type: TABLE; Schema: public; Owner: web; Tablespace: 
---
-
-CREATE TABLE ads (
-    id integer NOT NULL,
-    description text NOT NULL,
-    owner integer NOT NULL,
-    cheched boolean DEFAULT false NOT NULL,
-    ts time without time zone DEFAULT now() NOT NULL,
-    location integer
-);
-
-
-ALTER TABLE ads OWNER TO web;
-
---
 -- Name: ads_id_seq; Type: SEQUENCE; Schema: public; Owner: web
 --
 
@@ -110,7 +110,7 @@ ALTER TABLE ads_id_seq OWNER TO web;
 -- Name: ads_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: web
 --
 
-ALTER SEQUENCE ads_id_seq OWNED BY ads.id;
+ALTER SEQUENCE ads_id_seq OWNED BY ad.id;
 
 
 --
@@ -161,10 +161,10 @@ ALTER SEQUENCE category_id_seq OWNED BY category.id;
 
 
 --
--- Name: comments; Type: TABLE; Schema: public; Owner: web; Tablespace: 
+-- Name: comment; Type: TABLE; Schema: public; Owner: web; Tablespace: 
 --
 
-CREATE TABLE comments (
+CREATE TABLE comment (
     aid integer NOT NULL,
     uid integer NOT NULL,
     ts time without time zone DEFAULT now() NOT NULL,
@@ -172,7 +172,7 @@ CREATE TABLE comments (
 );
 
 
-ALTER TABLE comments OWNER TO web;
+ALTER TABLE comment OWNER TO web;
 
 --
 -- Name: favorite; Type: TABLE; Schema: public; Owner: web; Tablespace: 
@@ -187,10 +187,10 @@ CREATE TABLE favorite (
 ALTER TABLE favorite OWNER TO web;
 
 --
--- Name: orders; Type: TABLE; Schema: public; Owner: web; Tablespace: 
+-- Name: order; Type: TABLE; Schema: public; Owner: web; Tablespace: 
 --
 
-CREATE TABLE orders (
+CREATE TABLE "order" (
     id integer NOT NULL,
     owner integer NOT NULL,
     description text NOT NULL,
@@ -203,7 +203,7 @@ CREATE TABLE orders (
 );
 
 
-ALTER TABLE orders OWNER TO web;
+ALTER TABLE "order" OWNER TO web;
 
 --
 -- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: web
@@ -223,7 +223,7 @@ ALTER TABLE orders_id_seq OWNER TO web;
 -- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: web
 --
 
-ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
+ALTER SEQUENCE orders_id_seq OWNED BY "order".id;
 
 
 --
@@ -332,10 +332,10 @@ ALTER SEQUENCE staff_id_seq OWNED BY staff.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: web; Tablespace: 
+-- Name: user; Type: TABLE; Schema: public; Owner: web; Tablespace: 
 --
 
-CREATE TABLE users (
+CREATE TABLE "user" (
     id integer NOT NULL,
     name character varying(64) NOT NULL,
     surname character varying(64) NOT NULL,
@@ -348,11 +348,12 @@ CREATE TABLE users (
     role character varying(16) DEFAULT 'user'::character varying NOT NULL,
     bdata date,
     floor integer,
-    gender character(1)
+    gender character(1),
+    picture character varying(256)
 );
 
 
-ALTER TABLE users OWNER TO web;
+ALTER TABLE "user" OWNER TO web;
 
 --
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: web
@@ -372,7 +373,14 @@ ALTER TABLE users_id_seq OWNER TO web;
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: web
 --
 
-ALTER SEQUENCE users_id_seq OWNED BY users.id;
+ALTER SEQUENCE users_id_seq OWNED BY "user".id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: web
+--
+
+ALTER TABLE ONLY ad ALTER COLUMN id SET DEFAULT nextval('ads_id_seq'::regclass);
 
 
 --
@@ -386,13 +394,6 @@ ALTER TABLE ONLY address ALTER COLUMN id SET DEFAULT nextval('address_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: web
 --
 
-ALTER TABLE ONLY ads ALTER COLUMN id SET DEFAULT nextval('ads_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: web
---
-
 ALTER TABLE ONLY category ALTER COLUMN id SET DEFAULT nextval('category_id_seq'::regclass);
 
 
@@ -400,7 +401,7 @@ ALTER TABLE ONLY category ALTER COLUMN id SET DEFAULT nextval('category_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: web
 --
 
-ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::regclass);
+ALTER TABLE ONLY "order" ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::regclass);
 
 
 --
@@ -428,7 +429,15 @@ ALTER TABLE ONLY staff ALTER COLUMN id SET DEFAULT nextval('staff_id_seq'::regcl
 -- Name: id; Type: DEFAULT; Schema: public; Owner: web
 --
 
-ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Data for Name: ad; Type: TABLE DATA; Schema: public; Owner: web
+--
+
+COPY ad (id, description, owner, cheched, ts, location) FROM stdin;
+\.
 
 
 --
@@ -452,14 +461,6 @@ COPY address (city, street, house, id) FROM stdin;
 --
 
 SELECT pg_catalog.setval('address_id_seq', 1, false);
-
-
---
--- Data for Name: ads; Type: TABLE DATA; Schema: public; Owner: web
---
-
-COPY ads (id, description, owner, cheched, ts, location) FROM stdin;
-\.
 
 
 --
@@ -493,10 +494,10 @@ SELECT pg_catalog.setval('category_id_seq', 1, false);
 
 
 --
--- Data for Name: comments; Type: TABLE DATA; Schema: public; Owner: web
+-- Data for Name: comment; Type: TABLE DATA; Schema: public; Owner: web
 --
 
-COPY comments (aid, uid, ts, data) FROM stdin;
+COPY comment (aid, uid, ts, data) FROM stdin;
 \.
 
 
@@ -509,10 +510,10 @@ COPY favorite (aid, uid) FROM stdin;
 
 
 --
--- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: web
+-- Data for Name: order; Type: TABLE DATA; Schema: public; Owner: web
 --
 
-COPY orders (id, owner, description, serv, loc, start, exp, state, ts) FROM stdin;
+COPY "order" (id, owner, description, serv, loc, start, exp, state, ts) FROM stdin;
 \.
 
 
@@ -569,10 +570,10 @@ SELECT pg_catalog.setval('staff_id_seq', 1, false);
 
 
 --
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: web
+-- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: web
 --
 
-COPY users (id, name, surname, patronymic, login, passwd, mail, home, room, role, bdata, floor, gender) FROM stdin;
+COPY "user" (id, name, surname, patronymic, login, passwd, mail, home, room, role, bdata, floor, gender, picture) FROM stdin;
 \.
 
 
@@ -595,7 +596,7 @@ ALTER TABLE ONLY address
 -- Name: ads_pkey; Type: CONSTRAINT; Schema: public; Owner: web; Tablespace: 
 --
 
-ALTER TABLE ONLY ads
+ALTER TABLE ONLY ad
     ADD CONSTRAINT ads_pkey PRIMARY KEY (id);
 
 
@@ -619,7 +620,7 @@ ALTER TABLE ONLY category
 -- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: web; Tablespace: 
 --
 
-ALTER TABLE ONLY orders
+ALTER TABLE ONLY "order"
     ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
 
 
@@ -643,7 +644,7 @@ ALTER TABLE ONLY staff
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: web; Tablespace: 
 --
 
-ALTER TABLE ONLY users
+ALTER TABLE ONLY "user"
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
@@ -652,7 +653,7 @@ ALTER TABLE ONLY users
 --
 
 ALTER TABLE ONLY ad_cat
-    ADD CONSTRAINT a_fkey FOREIGN KEY (ads) REFERENCES ads(id);
+    ADD CONSTRAINT a_fkey FOREIGN KEY (ads) REFERENCES ad(id);
 
 
 --
@@ -660,14 +661,14 @@ ALTER TABLE ONLY ad_cat
 --
 
 ALTER TABLE ONLY photo
-    ADD CONSTRAINT ads_fkey FOREIGN KEY (ads) REFERENCES ads(id);
+    ADD CONSTRAINT ads_fkey FOREIGN KEY (ads) REFERENCES ad(id);
 
 
 --
 -- Name: ads_location_fkey; Type: FK CONSTRAINT; Schema: public; Owner: web
 --
 
-ALTER TABLE ONLY ads
+ALTER TABLE ONLY ad
     ADD CONSTRAINT ads_location_fkey FOREIGN KEY (location) REFERENCES address(id);
 
 
@@ -699,16 +700,16 @@ ALTER TABLE ONLY ad_cat
 -- Name: comments_aid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: web
 --
 
-ALTER TABLE ONLY comments
-    ADD CONSTRAINT comments_aid_fkey FOREIGN KEY (aid) REFERENCES ads(id);
+ALTER TABLE ONLY comment
+    ADD CONSTRAINT comments_aid_fkey FOREIGN KEY (aid) REFERENCES ad(id);
 
 
 --
 -- Name: comments_uid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: web
 --
 
-ALTER TABLE ONLY comments
-    ADD CONSTRAINT comments_uid_fkey FOREIGN KEY (uid) REFERENCES users(id);
+ALTER TABLE ONLY comment
+    ADD CONSTRAINT comments_uid_fkey FOREIGN KEY (uid) REFERENCES "user"(id);
 
 
 --
@@ -716,7 +717,7 @@ ALTER TABLE ONLY comments
 --
 
 ALTER TABLE ONLY favorite
-    ADD CONSTRAINT fad_fkey FOREIGN KEY (aid) REFERENCES ads(id);
+    ADD CONSTRAINT fad_fkey FOREIGN KEY (aid) REFERENCES ad(id);
 
 
 --
@@ -724,30 +725,30 @@ ALTER TABLE ONLY favorite
 --
 
 ALTER TABLE ONLY favorite
-    ADD CONSTRAINT fus_fkey FOREIGN KEY (uid) REFERENCES users(id);
+    ADD CONSTRAINT fus_fkey FOREIGN KEY (uid) REFERENCES "user"(id);
 
 
 --
 -- Name: ord_fkey; Type: FK CONSTRAINT; Schema: public; Owner: web
 --
 
-ALTER TABLE ONLY orders
-    ADD CONSTRAINT ord_fkey FOREIGN KEY (owner) REFERENCES users(id);
+ALTER TABLE ONLY "order"
+    ADD CONSTRAINT ord_fkey FOREIGN KEY (owner) REFERENCES "user"(id);
 
 
 --
 -- Name: owner_fkey; Type: FK CONSTRAINT; Schema: public; Owner: web
 --
 
-ALTER TABLE ONLY ads
-    ADD CONSTRAINT owner_fkey FOREIGN KEY (owner) REFERENCES users(id);
+ALTER TABLE ONLY ad
+    ADD CONSTRAINT owner_fkey FOREIGN KEY (owner) REFERENCES "user"(id);
 
 
 --
 -- Name: serv_fkey; Type: FK CONSTRAINT; Schema: public; Owner: web
 --
 
-ALTER TABLE ONLY orders
+ALTER TABLE ONLY "order"
     ADD CONSTRAINT serv_fkey FOREIGN KEY (serv) REFERENCES service(id);
 
 
@@ -764,14 +765,14 @@ ALTER TABLE ONLY staff
 --
 
 ALTER TABLE ONLY staff
-    ADD CONSTRAINT staff_uid_fkey FOREIGN KEY (uid) REFERENCES users(id);
+    ADD CONSTRAINT staff_uid_fkey FOREIGN KEY (uid) REFERENCES "user"(id);
 
 
 --
 -- Name: users_home_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: web
 --
 
-ALTER TABLE ONLY users
+ALTER TABLE ONLY "user"
     ADD CONSTRAINT users_home_id_fkey FOREIGN KEY (home) REFERENCES address(id);
 
 
