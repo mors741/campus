@@ -1,4 +1,4 @@
-# portal-obshagy
+# campus
 
 [git]: http://git-scm.com/book/ru/v1 
 [Скачать]: http://git-scm.com/downloads
