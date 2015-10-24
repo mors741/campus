@@ -50,7 +50,7 @@ ALTER TABLE ad OWNER TO web;
 --
 
 CREATE TABLE ad_cat (
-    ads integer NOT NULL,
+    ad integer NOT NULL,
     cat integer NOT NULL
 );
 
@@ -233,7 +233,7 @@ ALTER SEQUENCE orders_id_seq OWNED BY "order".id;
 CREATE TABLE photo (
     id integer NOT NULL,
     path character varying(256) NOT NULL,
-    ads integer NOT NULL
+    ad integer NOT NULL
 );
 
 
@@ -346,7 +346,7 @@ CREATE TABLE "user" (
     home integer NOT NULL,
     room integer,
     role character varying(16) DEFAULT 'user'::character varying NOT NULL,
-    bdata date,
+    bdate date,
     floor integer,
     gender character(1),
     picture character varying(256)
@@ -444,7 +444,7 @@ COPY ad (id, description, owner, cheched, ts, location) FROM stdin;
 -- Data for Name: ad_cat; Type: TABLE DATA; Schema: public; Owner: web
 --
 
-COPY ad_cat (ads, cat) FROM stdin;
+COPY ad_cat (ad, cat) FROM stdin;
 \.
 
 
@@ -528,7 +528,7 @@ SELECT pg_catalog.setval('orders_id_seq', 1, false);
 -- Data for Name: photo; Type: TABLE DATA; Schema: public; Owner: web
 --
 
-COPY photo (id, path, ads) FROM stdin;
+COPY photo (id, path, ad) FROM stdin;
 \.
 
 
@@ -573,7 +573,7 @@ SELECT pg_catalog.setval('staff_id_seq', 1, false);
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: web
 --
 
-COPY "user" (id, name, surname, patronymic, login, passwd, mail, home, room, role, bdata, floor, gender, picture) FROM stdin;
+COPY "user" (id, name, surname, patronymic, login, passwd, mail, home, room, role, bdate, floor, gender, picture) FROM stdin;
 \.
 
 
@@ -653,7 +653,7 @@ ALTER TABLE ONLY "user"
 --
 
 ALTER TABLE ONLY ad_cat
-    ADD CONSTRAINT a_fkey FOREIGN KEY (ads) REFERENCES ad(id);
+    ADD CONSTRAINT a_fkey FOREIGN KEY (ad) REFERENCES ad(id);
 
 
 --
@@ -661,7 +661,7 @@ ALTER TABLE ONLY ad_cat
 --
 
 ALTER TABLE ONLY photo
-    ADD CONSTRAINT ads_fkey FOREIGN KEY (ads) REFERENCES ad(id);
+    ADD CONSTRAINT ads_fkey FOREIGN KEY (ad) REFERENCES ad(id);
 
 
 --
@@ -726,6 +726,14 @@ ALTER TABLE ONLY favorite
 
 ALTER TABLE ONLY favorite
     ADD CONSTRAINT fus_fkey FOREIGN KEY (uid) REFERENCES "user"(id);
+
+
+--
+-- Name: loc_fkey; Type: FK CONSTRAINT; Schema: public; Owner: web
+--
+
+ALTER TABLE ONLY "order"
+    ADD CONSTRAINT loc_fkey FOREIGN KEY (loc) REFERENCES address(id);
 
 
 --
