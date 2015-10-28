@@ -119,6 +119,9 @@ ALTER TABLE area
 ALTER TABLE ad_cat
     ADD CONSTRAINT c_fkey FOREIGN KEY (cat) REFERENCES category(id);
 
+ALTER TABLE photo
+    ADD CONSTRAINT p_fkey FOREIGN KEY (ad) REFERENCES ad(id);
+
 ALTER TABLE comment
     ADD CONSTRAINT comments_aid_fkey FOREIGN KEY (aid) REFERENCES ad(id);
 
