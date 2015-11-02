@@ -1,10 +1,11 @@
 <?php
 
-$link = mysqli_connect('localhost','root','','patent');
+$link = mysqli_connect('localhost','root','rayman_lara94','patent');
 
-$login = trim(strtolower($_POST['login']));
+$login = trim(strtolower($_GET['login']));
 
-$query = "SELECT id FROM users WHERE login = '$login' LIMIT 1";
-$result = $link->query($query);
-$num = $result->num_rows;
-echo $num ;
+if (mysql_query("SELECT id FROM users WHERE login = '$login' LIMIT 1"))
+{
+    echo 'false';
+}
+echo 'true';

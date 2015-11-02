@@ -1,0 +1,102 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 02.11.2015, 0:20:44
+    Author     : anastasia
+*/
+
+body {
+    padding-top: 80px;
+
+    background-image: url('../Pictures/background-texture-blue.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+.btn-group-au 
+{
+    background-color: #A41616;
+    background-image: linear-gradient(to bottom, #297EAD, #113D41);
+    height:50px;
+
+    border: medium none;
+}
+.hero-unit {
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #eeeeee;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.hero-unit h1 {
+    margin-bottom: 0;
+    font-size: 60px;
+    line-height: 1;
+    letter-spacing: -1px;
+    color: inherit;
+}
+
+.hero-unit p {
+    font-size: 18px;
+    font-weight: 200;
+    line-height: 30px;
+    color: inherit;
+}
+.navbar-inverse {
+    background-color: #A41616;
+    background-image: linear-gradient(to bottom, #297EAD, #113D41);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    border: medium none;
+}
+
+.navbar-inverse .navbar-brand:focus {
+    color: #FFF;
+    background-color: #000;
+    background-image: linear-gradient(to bottom, #6AC0F0, #13545A);
+}
+footer {
+    background-color: transparent;
+    padding: 40px;
+    min-height: 1px;
+    margin-top:60px;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+.row {
+    margin-left: -20px;
+}
+
+.span4 {
+    width: 560px;
+    background-color: #eeeeee;
+    float: left;
+    padding: 10px;
+    min-height: 1px;
+    margin-left: 20px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.span3 {
+    padding: 40px;
+    margin-bottom: 40px;
+    background-color: #eeeeee;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+
+
+.navbar-inverse .navbar-nav {
+    color: #E3E3E3;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: #E0E0E0;
+}

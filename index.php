@@ -1,131 +1,217 @@
-﻿<html>
-    <head>
-        <title>Оформление авторских свидетельств</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf8"/>	
-		<link rel="shortcut icon" href="Pictures/idea.ico">
-		
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script language="javascript" src="js/dropdown.js"></script>
-		<script language="javascript" src="js/counter.js"></script>
-		<link rel="stylesheet" type="text/css" href="CSS/dropdown.css"/>	
-		<link rel="stylesheet" type="text/css" href="CSS/menu.css"/>
-		<link rel="stylesheet" type="text/css" href="CSS/button.css" />
-		<link rel="stylesheet" type="text/css" href="CSS/message.css"/>
-		
-	</head>
-    <body>
-		<div id="menu">
-			<a href="index.php" class="logo" onclick="myFunction()" >
-				<p id="counter">
-					<?php
-						if (isset($_COOKIE['count']) == false){
-							$t = strtotime('tomorrow');
-							setcookie('count','0',$t);
-							echo 0;
-						} else {
-							echo $_COOKIE['count']; 
-						}
-					?>
-				</p>
-			</a>
-			<a href="index.php"><img src="Pictures/Logo.png"></a> <br>
-			
-			<a href="index.php" class="button" />Главная</a>
-			<a href="services.php" class="button"/>Услуги</a>
-			<a href="news.php" class="button"/>Новости</a>
-			<a href="inventions.php" class="button"/>Изобретения</a>
-			<a href="registration.php" class="button"/>Регистрация</a>
-		</div>
-		
-        <div id="right">
-			<h3>Скажи НЕТ плагиату и пиратству!</h3>
-			<img src='Pictures/plagiat3.png' id="image_1"  width="320" height="240" class="f_image"/>		
-		</div>
-		
-		<?php
-			$link = mysqli_connect('localhost','root','','patent') or die("Error " . mysqli_error($link));
-			session_start();
-			
-			$_SESSION['timeout']=120;  //Поменьше
-			
-			if (isset($_SESSION['login'])){
-				if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $_SESSION['timeout'])) {
-					// last request was more than 2 minutes ago
-					session_unset();     // unset $_SESSION variable for the run-time 
-					session_destroy();   // destroy session data in storage
-					echo '<div class="m_auth m_error">Извините, время Вашей сессии истекло</div>';
-				}
-				$_SESSION['last_activity'] = time(); // update last activity time stamp
-			}
-			
-			if(isset($_POST['enter'])){
-				$_POST['password']=md5($_POST['password']);
-				$query = "SELECT password FROM users WHERE login='".$_POST['login']."';" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
-				$result = $link->query($query);
-				$user_data = mysqli_fetch_array($result);
-				$result->close();
-				if($_POST['login']=="admin")
-					$_SESSION['admin']=1;
-				if($user_data['password']==$_POST['password']){
-					$_SESSION['login']=$_POST['login'];
-					setcookie("login",$_POST['login'],time()+86400); // 1 day
-					echo ('<div class="m_auth m_success">Добро пожаловать, '.$_SESSION["login"].'!</div>');
-				}
-				else {
-					echo '<div class="m_auth m_error">Неверный логин или пароль</div>';
-				}
-			}
-			
-			if(isset($_POST['logout'])){
-				session_unset();     // unset $_SESSION variable for the run-time 
-				session_destroy();   // destroy session data in storage
-            }
-			
-			if (isset($_SESSION['login'])){				
-				echo '	<div id="sign-out">
-							<div class="dropdown">
-								<a class="account button" style="font:12px/normal sans-serif;">'.$_SESSION["login"].'<img src="Pictures/arrow.png" style="margin-left: 7px;"/></a>
-				
-								<div class="submenu" style="display: none; ">
-									<ul class="root">
-										<li><a href="inventions.php">Мои изобретения</a></li>
-										<li><a href="patent.php">Новое изобретение</a></li>
-										<li>
-											<form method="post" action="index.php">
-												<input type="submit" name="logout" value="Выйти"/>
-											</form>
-										</li>
-									</ul>
-								</div>
-							</div>				
-						</div>';
-				
-			} else {
-				echo '<div id="sign-up"><form method="post" action="index.php">
-						<input type="text" class="inputs" name="login" placeholder="Логин"/><br />
-						<input type="password" class="inputs" name="password" placeholder="Пароль"/><br />
-						<input type="submit" class="button primary" name="enter" value="Вход"/>             
-					</form></div>';
-			}
-		?>
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://mybootstrap.ru/examples/hero.html# -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>.: ПОРТАЛ ОБЩЕЖИТИЯ НИЯУ МИФИ :. </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-		<div id="content"> <br>
-			<h1>Добро пожаловать!</h1>
-			<p>Уважаемый посетитель, Вы попали на сайт Патентного отдела.
-				Тут Вы сможете подать заявку на изобретение, оформить авторское свидетельство.
-				А так же ознакомиться с уже зарегистрированными изобретениями
-				и просто почитать новости в области науки.</p>
-			<p>Перед началом работы, пожалуйста, пройдите авторизацию.</p>
-			<table>
-				<tr>
-					<td><a href="http://www.copyright.ru/ru/library/zakonoproekti/pravovoe_regulirovanie_in/prinyatie_zakona_o_borbe_/"><img src="Pictures/main1.jpg" width="300" height="300" class="f_image"/></a></td>
-					<td><a href="http://www.vaap.ru/content/registratsiya-avtorskogo-prava"><img src="Pictures/main3.jpg" width="300" height="300" class="f_image"/></a></td>
-				</tr>
-				<tr>
-					<td><a href="http://elvin-dill.livejournal.com/29186.html?thread=182274"><img src="Pictures/main4.jpg" width="300" height="300" class="f_image"/></a></td>
-					<td><a href="https://ru.wikipedia.org/wiki/%D0%9D%D0%B0%D1%80%D1%83%D1%88%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B0%D0%B2%D1%82%D0%BE%D1%80%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_%D0%BF%D1%80%D0%B0%D0%B2%D0%B0"><img src="Pictures/main2.jpg" width="300" height="300" class="f_image"/></a></td>				
-				</tr>
-			</table>
+    <!-- Le styles -->
+    <link href="CSS/bootstrap.css" rel="stylesheet">
+    <link href="CSS/content.css" rel="stylesheet">
+  
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="/wp-content/themes/clear-theme/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+  
+    </head>
+
+  <body>
+          
+
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					
+				</button>
+				<a class="navbar-brand" href="index.html">Портал общежития НИЯУ МИФИ</a>
+                                
+            
+                                
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav navbar-left">
+              <li class="active"><a href="index.php">ГЛАВНАЯ</a></li>
+              <li><a href="dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a></li>
+              <li><a href="services.php">УСЛУГИ</a></li>
+
+            </ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a class="btn-group-au" href="registration.php">РЕГИСТРАЦИЯ</a>
+					</li>
+					<li>
+						<button type="button" class="btn-group-au" data-toggle="modal" data-target="#myModal">АВТОРИЗАЦИЯ</button>
+					</li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
 		</div>
-	</body>
-</html>
+		<!-- /.container -->
+	</nav>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">АВТОРИЗАЦИЯ</h4>
+      </div>
+      <div class="modal-body">
+       <form role="form">
+  <div class="form-group">
+    <label for="exampleInputEmail1">Логин (Email)</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Введите email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Пароль</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
+  </div>
+ 
+  <div class="checkbox">
+    <label>
+          <input type="checkbox"> Запомнить
+        </label>
+  </div>
+  <button type="submit" class="btn btn-default">Отправить</button>
+   <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+</form>
+
+      </div>
+      <div class="modal-footer">
+       
+      </div>
+    </div>
+
+  </div>
+</div>
+    <div class="container">
+   
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+          
+          <div id="myCarousel" class="carousel slide">
+		<!-- Indicators -->
+		
+  <ol style="margin-bottom: 1%"  class="carousel-indicators">
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
+    <li data-target="#myCarousel" data-slide-to="2"></li>
+  </ol>
+
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner">
+		
+                  <div class="active item" data-slide-number="0"><img class="img-rounded" src="Pictures/1.jpg">
+                  <div class="carousel-caption" style='background: rgba(0, 0, 0, 0.4) none repeat scroll 0px 0px; border-radius: 6px' >
+              <h2>Нужна тех. помощь?</h2>
+              
+    <p>Просто сделай заказ услуг</p>
+              
+            </div>
+                  </div>
+                  
+                  <div class="item" data-slide-number="1"><img class="img-rounded" src="Pictures/2.jpg">
+                
+            <div class="carousel-caption" style='background: rgba(0, 0, 0, 0.4) none repeat scroll 0px 0px; border-radius: 6px' >
+              <h2>Размещай объявления</h2>
+              
+    <p>И оценивай объявления других пользователей</p>
+               
+            </div>
+</div>
+                  <div class="item" data-slide-number="2"><img class="img-rounded" src="Pictures/3.jpg">
+                   <div class="carousel-caption" style='background: rgba(0, 0, 0, 0.4) none repeat scroll 0px 0px; border-radius: 6px'>
+              <h2>Помогай администрации общежития</h2>
+              
+    <p>Оценивай качество исполнения услуг</p>
+              
+            </div>
+                  </div>
+               
+		</div>
+                 <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+    
+  </a>
+  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+  
+  </a>
+          </div>
+        <h1></h1>
+      </div>
+
+      <!-- Example row of columns -->
+    <div class='row'>
+        <div class="span4">
+            <h2>Широкие возможности</h2>
+            <p> Регистрируйся и получай доступ к таким сервисам как объявления и услуги а также оценка услуг.</p>
+            
+          
+        </div>
+        <div class="span4">
+          <h2>Эффективная полезность</h2>
+          <p>Сервис полезен для студентов и сотрудников МИФИ,  также администрации и персонала общежития</p>
+       </div>
+        
+      </div>
+
+      
+
+      
+
+    </div>
+      <footer>
+        <p style="color:white">© Портал общежития НИЯУ МИФИ, 2015
+        </p>
+         <font style="color:white">© 2015 Портал общежития НИЯУ МИФИ <br>
+г. Москва, ул. Москворечье, д. 2. корп. 1 и 2<br>
+г. Москва, ул. Москворечье, д. 19, корп. 3 и 4<br>
+г. Москва, ул. Кошкина, д. 11, корп. 1.<br>
+Заведующая общежитием - Мозгунова Валентина Ивановна, тел. (499) 725-24-47, ул. Москворечье, д. 2, кор. 1, ком. 142<br>
+Заместитель директора - Тараканов Юрий Михайлович, тел. (499) 725-24-85, ул. Москворечье, д. 2 кор. 2, ком. 8<br>
+Начальник управления студенческими общежитиями — Краскович Сергей Леонидович, тел. (499) 725-24-85<br>
+       </font>
+      </footer>
+      <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap-transition.js"></script>
+    <script src="js/bootstrap-alert.js"></script>
+    <script src="js/bootstrap-dropdown.js"></script>
+    <script src="js/bootstrap-scrollspy.js"></script>
+    <script src="js/bootstrap-tab.js"></script>
+    <script src="js/bootstrap-tooltip.js"></script>
+    <script src="js/bootstrap-popover.js"></script>
+    <script src="js/bootstrap-button.js"></script>
+    <script src="js/bootstrap-collapse.js"></script>
+    <script src="js/bootstrap-carousel"></script>
+    <script src="js/bootstrap-typeahead.js"></script>
+    <script src="js/bootstrap.min.js"></script> 
+   
+
+  <script>
+		$('.carousel').carousel({
+			interval: 5000 //changes the speed
+		});
+                
+                
+
+	    $('#modal').modal('show');
+
+	
+	</script>
+
+</body></html>
