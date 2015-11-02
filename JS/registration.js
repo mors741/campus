@@ -30,18 +30,54 @@ $(document).ready(function(){
             });
 			return true;
         },
-        "1Извините, этот логин уже занят"
+        "Извините, этот логин уже занят"
     );
+
+    $.validator.addMethod(
+    	'mephiEmail',
+    	function(value, element) {
+    		var res = value.split('@');
+			if (res[1] != 'mephi.ru'){
+				return false;
+			}
+			res = res[0].match(/\w+/g);
+			if (res == null || res.length > 1){
+				return false;
+			}
+			return true;
+		},
+		'Должна быть указана почта МИФИ'
+	);
+
+	$.validator.addMethod(
+    	'correctName',
+    	function(value, element) {
+    		var reg = /[a-zа-яё'_-]{1,64}/g;
+			var res = value.match(reg);
+			if (res == null || res.length > 1){
+				return false//return false
+			} 
+			return true
+		},
+		'Только латинские и русские буквы и символы \' _ -'
+	);
 
 	$("#register-form").validate({
 		rules: {
 			login: {
 				uniqueUserName: true,
 				required: true,
-				minlength: 5
+				email: true,
+				mephiEmail: true
 			},
-			fname: "required",
-			lname: "required",
+			fname: {
+				required: true,
+				correctName: true
+			},
+			lname: {
+				required: true,
+				correctName: true
+			},
 			email: {
 				required: true,
 				email: true
@@ -56,12 +92,19 @@ $(document).ready(function(){
         },
 		messages: {
 			login: {
-				uniqueUserName: "Бла-бла-бла",
-				required: "Пожалуйста, введите логин",
-                minlength: "Минимальная длина логина - 5 символов"  
+				uniqueUserName: "Извините, этот логин уже занят",
+				required: "Пожалуйста, заполните поле",
+				email: "Неверный формат e-mail",
+                mephiEmail: "Должна быть указана почта МИФИ"
 			},
-			fname: "Пожалуйста, введите Ваше имя",
-			lname: "Пожалуйста, введите Вашу фамилию",
+			fname: {
+				required: "Пожалуйста, заполните поле",
+				correctName: "Только латинские и русские буквы и символы \' _ -"
+			},
+			lname: {
+				required: "Пожалуйста, заполните поле",
+				correctName: "Только латинские и русские буквы и символы \' _ -"
+			}, 
 			password: {
 				required: "Пожалуйста, введите пароль",
 				minlength: "Минимальная длина пароля - 5 символов"
