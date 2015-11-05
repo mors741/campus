@@ -154,8 +154,3 @@ ALTER TABLE staff
 
 ALTER TABLE users
     ADD CONSTRAINT users_home_id_fkey FOREIGN KEY (home) REFERENCES address(id);
-
-REVOKE ALL ON public FROM PUBLIC;
-REVOKE ALL ON public FROM postgres;
-GRANT ALL ON public TO postgres;
-GRANT ALL ON public TO PUBLIC;
