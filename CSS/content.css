@@ -67,7 +67,7 @@ footer {
     box-shadow:0 1px 4px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
 .row {
-    margin-left: -20px;
+    margin: 20px;
 }
 
 .span4 {
@@ -100,3 +100,4 @@ footer {
 .navbar-inverse .navbar-nav > li > a {
     color: #E0E0E0;
 }
+

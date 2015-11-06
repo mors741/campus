@@ -7,17 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Le styles -->
     <link href="CSS/bootstrap.css" rel="stylesheet">
     <link href="CSS/content.css" rel="stylesheet">
   
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/wp-content/themes/clear-theme/js/html5shiv.js"></script>
-    <![endif]-->
-
-    <!-- Fav and touch icons -->
   
     </head>
 
@@ -68,13 +61,14 @@
         <h4 class="modal-title">АВТОРИЗАЦИЯ</h4>
       </div>
       <div class="modal-body">
-       <form role="form">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Логин (Email)</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Введите email">
+          <div style="padding-top:30px" class="panel-body" >
+       <form role="form" id="loginform" class="form-horizontal">
+  <div style="margin-bottom: 25px" class="input-group">
+
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input type="email" class="form-control" id="exampleInputEmail1" placeholder="Введите email">
   </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Пароль</label>
+  <div style="margin-bottom: 25px" class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
   </div>
  
@@ -83,10 +77,10 @@
           <input type="checkbox"> Запомнить
         </label>
   </div>
-  <button type="submit" class="btn btn-default">Отправить</button>
-   <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+  <button type="submit" id="btn-fblogin" href="#" class="btn btn-primary">Отправить</button>
+   <button type="button"  class="btn btn-primary" data-dismiss="modal">Закрыть</button>
 </form>
-
+          </div>
       </div>
       <div class="modal-footer">
        

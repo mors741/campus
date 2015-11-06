@@ -12,20 +12,63 @@
     <link href="CSS/content.css" rel="stylesheet">
   
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="/wp-content/themes/clear-theme/js/html5shiv.js"></script>
-    <![endif]-->
+	  <script src="js/jquery-2.1.4.js"></script>
+	  <script src="js/jquery.validate.min.js"></script>
+	  <script src="js/registration.js"></script>
 
-    <!-- Fav and touch icons -->
-  
     </head>
 
   <body>
-          
+<?php
+
+$link = mysqli_connect('localhost','root','','campus') or die("Ошибка при соединении с базой данных.." . mysqli_error($link));
+
+if(isset($_POST['register'])){
+	$login=$_POST['login'];
+	$password=md5($_POST['password']);
+	$name=$_POST['name'];
+	$surname=$_POST['surname'];
+	$yes=$_POST['yes'];
+	if ($yes=="no") {
+		$home = 0;
+		$room = 0;
+	}
+	else
+	{
+		$home=$_POST['home'];
+		$room=$_POST['room'];
+	}
+	$query = "SELECT id FROM users WHERE login='$login'" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+	$result = $link->query($query);
+	$myrow = mysqli_fetch_array($result);
+	if (!empty($myrow['id'])) {
+		echo ('<div class="m_auth m_error">Извините, введённый вами логин<br> уже зарегистрирован.<br>Введите другой логин</div>');
+	}
+	else {
+
+		$query = "SELECT id FROM users WHERE home='$home'" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+		$result1 = $link->query($query);
+		if ($result1 == "false"){
+			echo <<<_END
+                     <script>
+alert("Ваш аккаунт успешно создан!")
+</script>
+<script>
+document.location.replace("http://localhost/");
+</script>
+_END;
+			die();
+		}
+		else {
+			echo '<div class="m_auth m_error">Ошибка при регистрации<br>нового пользователя</div>';
+		}
+	}
+}
+
+?>
 
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -99,16 +142,17 @@
    
       <!-- Main hero unit for a primary marketing message or call to action -->
       
-        <div class="span3"> 
+        <div class="span3">
 
-		
-			<form action="" method="post" id="register-form" novalidate="novalidate">
+
+			<form action="" method="post" id="register-form">
 				<div class="control-group form-group">
 					<label for="login">Логин</label>
 					<div class="form-group">
-						<input type="text" name="login" id="login" class="form-control"  placeholder="Введите email"/>
+						<input type="text" name="login" id="login" class="form-control"/>
+						<p id="login_error"></p>
 					</div>
-				</div>
+</div>
 
 				<div class="control-group form-group">
 					<label for="password">Пароль</label>
@@ -120,36 +164,52 @@
 				<div class="control-group form-group">
 					<label for="password">Подтвердите пароль</label>
 					<div class="form-group">
-						<input type="password" name="password" id="confirmpassword" class="form-control"  placeholder="Пароль"/>
+						<input type="password" name="rpassword" id="rpassword" class="form-control"  placeholder="Пароль"/>
 					</div>
 				</div>
 
 				<div class="control-group form-group">
-					<label for="login">Фамилия</label>
-					<div class="controls">
-						<input type="text" name="surname" id="surname" class="medium inputs"/>
+					<label for="surname">Фамилия</label>
+					<div class="form-group">
+						<input type="text" name="surname" id="surname" class="form-control"/>
 					</div>
 				</div>
 
 				<div class="control-group form-group">
-					<label for="login">Имя</label>
-					<div class="controls">
-						<input type="text" name="name" id="name" class="medium inputs"/>
+					<label for="name">Имя</label>
+					<div class="form-group">
+						<input type="text" name="name" id="name" class="form-control"/>
 					</div>
 				</div>
 
 				<div class="control-group form-group" >
-					<label for="login">Проживаете в общежитии?</label>
-					<div class="controls">
-						<input type="checkbox" name="obshaga" id="obshaga" class="medium inputs"/>
+					<label for="yes">Проживаете в общежитии?</label>
+					<div class="form-group">
+						<label for="yes"><input type="radio" name="yes" id="yes" value="user"  title="Да"/>Да</label>
+						<label for="yes"><input type="radio" name="yes" id="no" value="nouser"  title="Нет"/>Нет</label>
+					</div>
+				</div>
+<div id="user" style="display:none">
+				<div class="control-group form-group" >
+					<label for="home">Корпус</label>
+					<div class="form-group">
+						<input type="text"  value="" name="home" id="home" class="form-control"/>
 					</div>
 				</div>
 
 				<div class="control-group form-group" >
-					<input type="submit" class="button subit" value="Зарегистрироваться" name="register" style="margin-right: 100;"/>
+					<label for="room">Квартира</label>
+					<div class="form-group">
+						<input type="text"  value="" name="room" id="room" class="form-control"/>
+					</div>
 				</div>
+</div>
+				<div class="control-group form-group" >
+					<input type="submit" class="button submit" value="Зарегистрироваться" name="register" style="margin-right: 100;"/>
+				</div>
+
 			</form>
-                
+
 	</div>
       </div>
   

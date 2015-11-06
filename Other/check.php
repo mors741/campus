@@ -1,6 +1,6 @@
 <?php
 
-$link = mysqli_connect('localhost','root','rayman_lara94','patent');
+$link = mysqli_connect('localhost','root','rayman_lara94','campus');
 
 $login = trim(strtolower($_GET['login']));
 
