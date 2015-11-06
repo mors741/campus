@@ -82,23 +82,25 @@
 					}
 					
 					if (isset($_SESSION['login'])){				
-						echo '	<div id="sign-out">
-									<div class="dropdown">
-										<a class="account button" style="font:12px/normal sans-serif;">'.$_SESSION["login"].'<img src="Pictures/arrow.png" style="margin-left: 7px;"/></a>
-						
-										<div class="submenu" style="display: none; ">
-											<ul class="root">
-												<li><a href="inventions.php">Мои изобретения</a></li>
-												<li><a href="patent.php">Новое изобретение</a></li>
-												<li>
-													<form method="post" action="index.php">
-														<input type="submit" name="logout" value="Выйти"/>
-													</form>
-												</li>
-											</ul>
-										</div>
-									</div>				
-								</div>';
+						echo '<div id="sign-out">
+								<div class="dropdown">
+									<ul class="nav navbar-nav navbar-right">
+										<li>
+											<a class="account btn-group-au">'.$_SESSION["login"].'&nbsp;&nbsp;<img src="Pictures/arrow_w.png"/></a>
+										</li>
+									</ul>
+									<div class="submenu" style="display: none; ">
+										<ul class="root">
+											<li><a href="inventions.php">Личный кабинет</a></li>
+											<li>
+												<form method="post" action="index.php">
+													<input type="submit" name="logout" value="Выйти"/>
+												</form>
+											</li>
+										</ul>
+									</div>
+								</div>				
+							</div>';
 						
 					} else {
 						echo '<ul class="nav navbar-nav navbar-right">
