@@ -3,7 +3,8 @@
     overflow: visible;
     display: inline-block;
     padding: 0.5em 1em;
-    border: 1px solid #d4d4d4;
+	font-size: 16pt;
+    /*border: 1px solid #d4d4d4;
     margin: 0;
     text-decoration: none;
     text-align: center;
@@ -19,9 +20,9 @@
     background-image: -ms-linear-gradient(#f4f4f4, #ececec);
     background-image: -o-linear-gradient(#f4f4f4, #ececec);
     background-image: linear-gradient(#f4f4f4, #ececec);
-    -moz-background-clip: padding; /* for Firefox 3.6 */
+    -moz-background-clip: padding;
     background-clip: padding-box;
-    border-radius: 0.35em;
+    border-radius: 0.35em;*/
     /* IE hacks */
     zoom: 1;
     *display: inline;

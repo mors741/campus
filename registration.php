@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- saved from url=(0041)http://mybootstrap.ru/examples/hero.html# -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>Bootstrap, from Twitter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,55 +15,14 @@
 	  <script src="js/jquery-2.1.4.js"></script>
 	  <script src="js/jquery.validate.min.js"></script>
 	  <script src="js/registration.js"></script>
+          <script src="js/bootstrap.min.js"></script> 
+          
 
     </head>
 
   <body>
 <?php
-
-$link = mysqli_connect('localhost','root','','campus') or die("Ошибка при соединении с базой данных.." . mysqli_error($link));
-
-if(isset($_POST['register'])){
-	$login=$_POST['login'];
-	$password=md5($_POST['password']);
-	$name=$_POST['name'];
-	$surname=$_POST['surname'];
-	$yes=$_POST['yes'];
-	if ($yes=="no") {
-		$home = 0;
-		$room = 0;
-	}
-	else
-	{
-		$home=$_POST['home'];
-		$room=$_POST['room'];
-	}
-	$query = "SELECT id FROM users WHERE login='$login'" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-	$result = $link->query($query);
-	$myrow = mysqli_fetch_array($result);
-	if (!empty($myrow['id'])) {
-		echo ('<div class="m_auth m_error">Извините, введённый вами логин<br> уже зарегистрирован.<br>Введите другой логин</div>');
-	}
-	else {
-
-		$query = "SELECT id FROM users WHERE home='$home'" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-		$result1 = $link->query($query);
-		if ($result1 == "false"){
-			echo <<<_END
-                     <script>
-alert("Ваш аккаунт успешно создан!")
-</script>
-<script>
-document.location.replace("http://localhost/");
-</script>
-_END;
-			die();
-		}
-		else {
-			echo '<div class="m_auth m_error">Ошибка при регистрации<br>нового пользователя</div>';
-		}
-	}
-}
+include('/lib/reg.php');
 
 ?>
 
@@ -83,13 +42,13 @@ _END;
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav navbar-left">
-              <li class="active"><a href="index.php">ГЛАВНАЯ</a></li>
+              <li><a href="index.php">ГЛАВНАЯ</a></li>
               <li><a href="dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a></li>
               <li><a href="services.php">УСЛУГИ</a></li>
 
             </ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li>
+					<li class="active">
 						<a class="btn-group-au" href="registration.php">РЕГИСТРАЦИЯ</a>
 					</li>
 					<li>
@@ -101,95 +60,101 @@ _END;
 		</div>
 		<!-- /.container -->
 	</nav>
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+ <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">АВТОРИЗАЦИЯ</h4>
-      </div>
-      <div class="modal-body">
-       <form role="form">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Логин (Email)</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Введите email">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Пароль</label>
-    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Пароль">
-  </div>
- 
-  <div class="checkbox">
-    <label>
-          <input type="checkbox"> Запомнить
-        </label>
-  </div>
-  <button type="submit" class="btn btn-default">Отправить</button>
-   <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-</form>
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">АВТОРИЗАЦИЯ</h4>
+            </div>
+            <div class="modal-body">
+                <div style="padding-top:30px" class="panel-body" >
+                    <form role="form" method="post" action="index.php" class="form-horizontal">
+                        <div style="margin-bottom: 25px" class="input-group">
 
-      </div>
-      <div class="modal-footer">
-       
-      </div>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input type="email" class="form-control" id="login" name="login" placeholder="Введите email">
+                        </div>
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
+                        </div>
+
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Запомнить
+                            </label>
+                        </div>
+                        <br>
+                        <button type="submit" name="enter"  class="btn btn-primary">Отправить</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
     </div>
-
-  </div>
 </div>
     <div class="container">
    
       <!-- Main hero unit for a primary marketing message or call to action -->
       
         <div class="span3">
-
+            <div class="panel-heading"><h4 class="modal-title">РЕГИСТРАЦИЯ</h4></div>
 
 			<form action="" method="post" id="register-form">
+                            <div class="span-reg">
 				<div class="control-group form-group">
-					<label for="login">Логин</label>
+					<label for="login">Логин (email НИЯУ МИФИ)</label>
 					<div class="form-group">
-						<input type="text" name="login" id="login" class="form-control"/>
-						<p id="login_error"></p>
+						<input type="text" name="login" id="login" class="form-control" placeholder="email"/>
+						<p id="login_error" style="display:none">Извините, но этот логин занят</p>
 					</div>
 </div>
 
 				<div class="control-group form-group">
 					<label for="password">Пароль</label>
 					<div class="form-group">
-						<input type="password" name="password" id="password" class="form-control"  placeholder="Пароль"/>
+						<input type="password" name="pass" id="pass" class="form-control"  placeholder="Пароль"/>
 					</div>
 				</div>
 
 				<div class="control-group form-group">
 					<label for="password">Подтвердите пароль</label>
 					<div class="form-group">
-						<input type="password" name="rpassword" id="rpassword" class="form-control"  placeholder="Пароль"/>
+						<input type="password" name="rpass" id="rpass" class="form-control"  placeholder="Пароль"/>
 					</div>
 				</div>
+                            
 
 				<div class="control-group form-group">
 					<label for="surname">Фамилия</label>
 					<div class="form-group">
-						<input type="text" name="surname" id="surname" class="form-control"/>
+						<input type="text" name="surname" id="surname" class="form-control" placeholder="Фамилия"/>
 					</div>
 				</div>
 
 				<div class="control-group form-group">
 					<label for="name">Имя</label>
 					<div class="form-group">
-						<input type="text" name="name" id="name" class="form-control"/>
+						<input type="text" name="name" id="name" class="form-control" placeholder="Имя"/>
 					</div>
 				</div>
-
+                            </div>
+                            <div class="span-reg">
 				<div class="control-group form-group" >
 					<label for="yes">Проживаете в общежитии?</label>
 					<div class="form-group">
-						<label for="yes"><input type="radio" name="yes" id="yes" value="user"  title="Да"/>Да</label>
-						<label for="yes"><input type="radio" name="yes" id="no" value="nouser"  title="Нет"/>Нет</label>
+						<label><input type="radio" name="yes" id="yes" value="user"  title="Да"/>Да</label>
+						<label><input type="radio" name="yes" id="no" value="nouser"  title="Нет"/>Нет</label>
+                                                <br>
+                                                <label for="yes" class="error" generated="true" style="display:none"></label>
 					</div>
 				</div>
-<div id="user" style="display:none">
+<div id="user" style="display:none; width:100%">
 				<div class="control-group form-group" >
 					<label for="home">Корпус</label>
 					<div class="form-group">
@@ -204,16 +169,37 @@ _END;
 					</div>
 				</div>
 </div>
-				<div class="control-group form-group" >
-					<input type="submit" class="button submit" value="Зарегистрироваться" name="register" style="margin-right: 100;"/>
+    </div>
+                            <br>
+                            <div style="margin-top: 470px; ">
+                                <hr>
+                                <div class="control-group form-group" >
+                                    <label><input type="checkbox"  value="agree" name="agree" />  Я прочитал и согласен с правилами пользовательского соглашения</label>
+				<label for="agree" class="error" generated="true" style="display:none"></label>
+                                </div>
+				<div class="control-group form-group">
+					<input type="submit"  class="btn btn-primary" value="Зарегистрироваться" name="register"/>
 				</div>
-
+                            </div>
 			</form>
 
+            
 	</div>
       </div>
-  
-     
+   <footer>
+            <p style="color:white">© Портал общежития НИЯУ МИФИ, 2015</p>
+            <font style="color:white">© 2015 Портал общежития НИЯУ МИФИ <br>
+            г. Москва, ул. Москворечье, д. 2. корп. 1 и 2<br>
+            г. Москва, ул. Москворечье, д. 19, корп. 3 и 4<br>
+            г. Москва, ул. Кошкина, д. 11, корп. 1.<br>
+            Заведующая общежитием - Мозгунова Валентина Ивановна, тел. (499) 725-24-47, ул. Москворечье, д. 2, кор. 1, ком. 142<br>
+            Заместитель директора - Тараканов Юрий Михайлович, тел. (499) 725-24-85, ул. Москворечье, д. 2 кор. 2, ком. 8<br>
+            Начальник управления студенческими общежитиями — Краскович Сергей Леонидович, тел. (499) 725-24-85<br>
+            </font>
+        </footer>
+        <!-- /container -->
 
-	</body>
+
+
+    </body>
 </html>

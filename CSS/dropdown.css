@@ -1,6 +1,5 @@
 div.dropdown {
 	color: #555;
-	margin: 3px -22px 0 0;
 	position: relative;
 	height: 17px;
 	text-align:left;
@@ -10,8 +9,8 @@ div.submenu
 	margin-top:10px;
 	background: #fff;
 	position: absolute;
-	top: 20px;
-	left: -20px;
+	top: 38px;
+	right: -4px;
 	z-index: 100;
 	width: 135px;
 	display: none;
@@ -22,7 +21,6 @@ div.submenu
 .dropdown  li a {
 	color: #555555;
 	display: block;
-	font:12px/normal sans-serif;
 	padding: 6px 15px;
 	cursor: pointer;
 	text-decoration:none;
@@ -38,7 +36,6 @@ div.submenu
 	color: #a00;
 	background:#fff;
 	display: block;
-	font:12px/normal sans-serif;
 	padding: 6px 15px;
 	cursor: pointer;
 	text-decoration:none;
@@ -54,9 +51,7 @@ div.submenu
 }
 
 a.account {
-	position: absolute;
 	z-index: 110;
-	text-decoration: none;
 }
 
 .root
@@ -64,6 +59,5 @@ a.account {
 	list-style:none;
 	margin:0px;
 	padding:0px;
-	font-size: 12px;
 	border-top:1px solid #dedede;
 }

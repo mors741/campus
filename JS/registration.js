@@ -12,41 +12,35 @@
                 success: function(response)
                 {
 					res = response;
-					if(response == 1){
-						//$('#login').css('border', '3px #C33 solid');	
-						//$('#tick').hide();     							// галочка и крестик
-						//$('#cross').fadeIn();  							// галочка и крестик
-						//alert("ska");
-						$('#login_error').fadeIn();
+					if(response === 1){
+	
+						
+				$('#login_error').css('display','inline');
 						login_correct = false;
 
 					}else{
-						//$('#login').css('border', '3px #090 solid');
-						//$('#cross').hide();								// галочка и крестик
-						//$('#tick').fadeIn();								// галочка и крестик
-						$('#login_error').hide();
+														// галочка и крестик
+						$('#login_error').css('display','none');
+                                                $('#login_error').css('color','red');
 						login_correct = true;
 
 					}
                 }
             });
-			if (login_correct==true) {
-				return true;
-			}
-			else return false;
-        },
-        "Извините, этот логин уже занят"
+	return true;		
+        }
+        
     );
 
     $.validator.addMethod(
     	'mephiEmail',
     	function(value, element) {
     		var res = value.split('@');
-			if (res[1] != 'mephi.ru'){
+			if (res[1] !== 'mephi.ru'){
 				return false;
 			}
 			res = res[0].match(/\w+/g);
-			if (res == null || res.length > 1){
+			if (res === null || res.length > 1){
 				return false;
 			}
 			return true;
@@ -56,13 +50,13 @@
 
 	$.validator.addMethod(
     	'correctName',
-    	function(value, element) {
+    	function(value, element){
     		var reg = /[a-zа-яё'_-]{1,64}/g;
 			var res = value.match(reg);
-			if (res == null || res.length > 1){
-				return false//return false
-			} 
-			return true
+			if (res === null || res.length > 1){
+				return false;//return false
+			}
+			return true;
 		},
 		'Только латинские и русские буквы и символы \' _ -'
 	);
@@ -83,24 +77,33 @@
 				required: true,
 				correctName: true
 			},
-			email: {
-				required: true,
-				email: true
-			},
-			home: {
-			digits: true,
-			},
 
-			room: {
-			digits: true,
-			},
-			password: {
+			
+			pass: {
 				required: true,
 				minlength: 5
 			},
-			rpassword: {
-				equalTo: "#password"
-			}
+			rpass: {
+				equalTo: "#pass",
+                                required: true
+			},
+                        yes:
+                                {
+                                required:true    
+                                },
+                                
+                                home: {
+			digits: true,
+                        range: [0,4]
+			},
+
+			room: {
+			digits: true
+			},
+                        agree: {
+                            required: true
+                        }
+                                
         },
 		messages: {
 			login: {
@@ -117,22 +120,32 @@
 				required: "Пожалуйста, заполните поле",
 				correctName: "Только латинские и русские буквы и символы \' _ -"
 			}, 
-			password: {
+			pass: {
 				required: "Пожалуйста, введите пароль",
 				minlength: "Минимальная длина пароля - 5 символов"
 			},
-			email: {
-				required: "Пожалуйста, введите Ваш Email адрес",
-				email:  "Некорректный формат Email адреса"
-			},
+                        rpass: {
+                                equalTo: "Пароли должны совпадать",
+                                required: "Обязателен для заполнения"
+                            },
+                            
+                        yes: {
+                          required: "Ответьте на вопрос!"
+                        },    
 			home: {
 			digits: "Только в числовом виде",
+                        range: "Только от 1 до 4"
 
 			},
 			room: {
-			digits: "Только в числовом виде",
+			digits: "Только в числовом виде"
 			},
-			rpassword: "Пароли должны совпадать"
+                        
+                        
+                        agree: {
+                          required: "Вы не приняли соглашение"  
+                        }
+			
 		},
 		submitHandler: function(form) {
 			if (login_correct)
@@ -143,7 +156,7 @@
 	});
 
 	$("#yes").click(function(){
-		if ($("input:checked").val() == "user") {
+		if ($("input:checked").val() === "user") {
 			$("#user").css('display', 'inline-block');
 			$("#home").css('display', 'inline-block');
 			$("#room").css('display', 'inline-block');
@@ -156,7 +169,7 @@
 	});
 
 	$("#no").click(function(){
-		if ($("input:checked").val() == "nouser") {
+		if ($("input:checked").val() === "nouser") {
 			$("#user").css('display', 'none');
 			$("#home").attr('type', 'hidden');
 			$("#room").attr('type', 'hidden');
