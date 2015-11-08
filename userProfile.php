@@ -38,14 +38,13 @@
 				<li><a style="color: whitesmoke" href="dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a></li>
 				<li><a style="color: whitesmoke" href="services.php">УСЛУГИ</a></li>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li class="active">
-					<a class="btn-group-au" href="userProfile.php">Личный кабинет</a>
-				</li>
-			</ul>
+			<?php
+                include("/lib/log.php");
+            ?>	
 		</div>
 	</div>
 </nav>
+
 <div class="container">
 <div class="span3">
 
@@ -69,13 +68,13 @@
 											 alt="" class="img-rounded img-responsive" />
 									</div>
 									<div class="col-sm-4 col-md-4">
-										<p> <br/><label for="login">E-Mail: </label> admin@mephi.com
-											<br/><label for="name">Имя :</label> admin
-											<br/><label for="surname">Фамилия: </label> admin
-											<br/> <label for="address">Адрес: </label> Москворечье д.2,к.2
-											<br/> <label for="room">Номер комнаты: </label> 15
-											<br/> <label for="birthday">Дата рожедния: </label> 10.10.1910
-											<br/> <label for="conact">Контакты: </label> 0000000000
+										<p> <br/><label for="login">E-Mail: </label> <?php echo $user_data['login'] ?>
+											<br/><label for="name">Имя :</label> <?php echo $user_data['name'] ?>
+											<br/><label for="surname">Фамилия: </label> <?php echo $user_data['surname'] ?>
+											<br/> <label for="address">Корпус: </label> <?php echo $user_data['home'] ?>
+											<br/> <label for="room">Номер комнаты: </label> <?php echo $user_data['room'] ?>
+											<!--<br/> <label for="birthday">Дата рождения: </label> <?php echo $user_data['bdate'] ?>
+											<br/> <label for="conact">Контакты: </label> <?php echo $user_data['contacts'] ?> -->
 										</p>
 									</div>
 								</div>
