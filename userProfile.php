@@ -81,7 +81,7 @@
 												echo $user_data['patronymic'];
 											}?>
 											<br/><label for="surname">Фамилия: </label> <?php echo $user_data['surname'] ?>
-											<?php if ($user_data['post'] != '') {
+											<?php if (($user_data['role'] != 'local') && ($user_data['role'] != 'campus')) {
 												echo '<br/><label for="post">Должность: </label> ';
 												echo $user_data['post'];
 											}?>
