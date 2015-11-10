@@ -60,7 +60,7 @@
 					}?>
 					<li role="presentation"><a href="#favourites" aria-controls="favourites" role="tab" data-toggle="tab">Закладки</a></li>
 					<li role="presentation"><a href="#myAds" aria-controls="myAds" role="tab" data-toggle="tab">Мои объявления</a></li>
-					<?php if ($user_data['role'] == 'manage' || $user_data['role'] == 'moder') {
+					<?php if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder') {
 						echo '<li role="presentation"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Инструменты модератора</a></li>';
 					}?>
 				</ul>
