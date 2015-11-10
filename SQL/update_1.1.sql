@@ -1,0 +1,2 @@
+ALTER TABLE `orders` CHANGE `start` `ordate` DATE NULL DEFAULT NULL;
+ALTER TABLE `orders` CHANGE `exp` `timeint` TINYINT NULL DEFAULT NULL;
