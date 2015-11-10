@@ -178,7 +178,6 @@ EOT;
 												<option value="" selected="selected">(Укажите свой пол)</option>
 												<option value="М">М</option>
 												<option value="Ж">Ж</option>
-												<option value="Асеев">АСЕЕВ</option>
 											</select>
 										</div>
 									</div>
