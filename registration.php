@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!-- saved from url=(0041)http://mybootstrap.ru/examples/hero.html# -->
 <html lang="ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -12,8 +12,8 @@
     <link href="CSS/content.css" rel="stylesheet">
   
 
-	  <script src="js/jquery-2.1.4.js"></script>
-	  <script src="js/jquery.validate.min.js"></script>
+         <script src="js/jquery.js"></script>
+	  <script src="js/jquery.validate.js"></script>
 	  <script src="js/registration.js"></script>
           <script src="js/bootstrap.min.js"></script> 
           
@@ -111,8 +111,8 @@ include('/lib/reg.php');
 					<label for="login">Логин (email НИЯУ МИФИ)</label>
 					<div class="form-group">
 						<input type="text" name="login" id="login" class="form-control" placeholder="email"/>
-						<p id="login_error" style="display:none">Извините, но этот логин занят</p>
-					</div>
+                                                <label id="login_error" style="display:none">Извините, но этот логин занят</label>
+							</div>
 </div>
 
 				<div class="control-group form-group">
