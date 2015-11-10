@@ -277,7 +277,7 @@ EOT;
 					}?>
 					<div role="tabpanel" class="tab-pane" id="favourites">Здесь будут закладки</div>
 					<div role="tabpanel" class="tab-pane" id="myAds">Здесь будут объявления</div>
-					<?php if ($user_data['role'] == 'manage' || $user_data['role'] == 'moder') {
+					<?php if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder') {
 						echo '<div role="tabpanel" class="tab-pane" id="tools">Здесь будут инструменты для регистрации</div>';
 					}?>
 					
