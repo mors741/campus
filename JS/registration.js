@@ -36,7 +36,7 @@
     	'mephiEmail',
     	function(value, element) {
     		var res = value.split('@');
-			if (res[1] !== 'mephi.ru'){
+			if (res[1] !== 'campus.mephi.ru'){
 				return false;
 			}
 			res = res[0].match(/\w+/g);
