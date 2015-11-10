@@ -48,7 +48,7 @@
 <div class="container">
 <div class="span3">
 
-	<div class="row" style="width: 150%">
+	<div class="row" style="width: 200%">
 		<div class="col-md-6">
 			<div class="card">
 				<ul class="nav nav-tabs" role="tablist">
@@ -57,6 +57,9 @@
 					<li role="presentation"><a href="#privacySettings" aria-controls="privacySettings" role="tab" data-toggle="tab">Настройки приватности</a></li>
 					<li role="presentation"><a href="#favourites" aria-controls="favourites" role="tab" data-toggle="tab">Закладки</a></li>
 					<li role="presentation"><a href="#myAds" aria-controls="myAds" role="tab" data-toggle="tab">Мои объявления</a></li>
+					<?php if ($user_data['role'] == 'manage' || $user_data['role'] == 'moder') {
+						echo '<li role="presentation"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Инструменты модератора</a></li>';
+					}?>
 				</ul>
 				<!-- Tab panes -->
 				<div class="tab-content">
@@ -69,12 +72,41 @@
 									</div>
 									<div class="col-sm-4 col-md-4">
 										<p> <br/><label for="login">E-Mail: </label> <?php echo $user_data['login'] ?>
-											<br/><label for="name">Имя :</label> <?php echo $user_data['name'] ?>
+											<br/><label for="name">Имя:</label> <?php echo $user_data['name'] ?>
+											<?php if ($user_data['patronymic'] != '') {
+												echo '<br/><label for="patronymic">Отчество: </label> ';
+												echo $user_data['patronymic'];
+											}?>
 											<br/><label for="surname">Фамилия: </label> <?php echo $user_data['surname'] ?>
-											<br/> <label for="address">Корпус: </label> <?php echo $user_data['home'] ?>
-											<br/> <label for="room">Номер комнаты: </label> <?php echo $user_data['room'] ?>
-											<!--<br/> <label for="birthday">Дата рождения: </label> <?php echo $user_data['bdate'] ?>
-											<br/> <label for="conact">Контакты: </label> <?php echo $user_data['contacts'] ?> -->
+											<?php if ($user_data['post'] != '') {
+												echo '<br/><label for="post">Должность: </label> ';
+												echo $user_data['post'];
+											}?>
+											<?php if ($user_data['gender'] != '') {
+												echo '<br/><label for="gender">Пол: </label> ';
+												echo " ";
+												echo $user_data['gender'];
+											}?>
+											<?php if ($user_data['bdate'] != '') {
+												echo '<br/><label for="bdate">Дата рождения: </label> ';
+												echo $user_data['bdate'];
+											}?>
+											<?php if ($user_data['contacts'] != '') {
+												echo '<br/><label for="contacts">Контакты: </label> ';
+												echo $user_data['contacts'];
+											}?>
+											<?php if ($user_data['mail'] != '') {
+												echo '<br/><label for="mail">Доп. почта: </label> ';
+												echo $user_data['mail'];
+											}?>
+											<?php if ($user_data['home'] != 0) {
+												echo '<br/><label for="address">Корпус: </label> ';
+												echo $user_data['home'];
+											}?>
+											<?php if ($user_data['room'] != 0) {
+												echo '<br/><label for="room">Комната: </label> ';
+												echo $user_data['room'];
+											}?>
 										</p>
 									</div>
 								</div>
@@ -115,9 +147,39 @@
 										</div>
 									</div>
 									<div class="control-group form-group">
+										<label for="patronymic">Отчество</label>
+										<div class="form-group">
+											<input id="patronymic" class="form-control" placeholder="Отчество"/>
+										</div>
+									</div>
+									<div class="control-group form-group">
 										<label for="surname">Фамилия</label>
 										<div class="form-group">
 											<input id="surname" class="form-control" placeholder="Фамилия"/>
+										</div>
+									</div>
+
+									<?php if ($user_data['role'] != 'local' && $user_data['role' != 'campus']) {
+										echo <<< EOT
+										<div class="control-group form-group">
+											<label for="post">Должность</label>
+											<div class="form-group">
+												<input id="post" class="form-control" placeholder="Должность"/>
+											</div>
+										</div>
+EOT;
+									}?>
+									<?php if ($user_data['role'] == 'local' || $user_data['role'] == 'campus') {
+									echo <<< EOT
+									<div class="control-group form-group">
+										<label for="patronymic">Пол</label>
+										<div class="controls">
+											<select id="gender" class="form-control">
+												<option value="" selected="selected">(Укажите свой пол)</option>
+												<option value="М">М</option>
+												<option value="Ж">Ж</option>
+												<option value="Асеев">АСЕЕВ</option>
+											</select>
 										</div>
 									</div>
 									<div class="control-group form-group">
@@ -131,13 +193,17 @@
 											</div>
 										</div>
 									</div>
+EOT;
+									}?>
 									<div class="control-group form-group">
 										<label for="contact">Контакты</label>
 										<div class="form-group">
 											<input type="tel" id="contact" class="form-control" placeholder="Контакты"/>
 										</div>
 									</div>
-									<div class="control-group">
+									<?php if ($user_data['role'] != 'local') {
+										echo <<< EOT
+								    <div class="control-group">
 										<label for="address">Адрес</label>
 										<div class="controls">
 											<select id="address" class="form-control">
@@ -156,6 +222,14 @@
 										<br/><label for="room">Номер комнаты (квартиры)</label>
 										<div class="form-group">
 											<input type="range min=1 max=400" id="room" class="form-control" placeholder="Номер комнаты"/>
+										</div>
+									</div>
+EOT;
+									}?>
+									<div class="control-group form-group">
+										<label for="mail">Дополнительная почта</label>
+										<div class="form-group">
+											<input id="mail" class="form-control" placeholder="Дополнительная почта"/>
 										</div>
 									</div>
 									<br/><button type="submit" class="btn btn-default">Сохранить изменения</button>
@@ -198,6 +272,9 @@
 					</div>
 					<div role="tabpanel" class="tab-pane" id="favourites">Здесь будут закладки</div>
 					<div role="tabpanel" class="tab-pane" id="myAds">Здесь будут объявления</div>
+					<?php if ($user_data['role'] == 'manage' || $user_data['role'] == 'moder') {
+						echo '<div role="tabpanel" class="tab-pane" id="tools">Здесь будут инструменты для регистрации</div>';
+					}?>
 				</div>
 			</div>
 		</div>
