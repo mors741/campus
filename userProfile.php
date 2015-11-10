@@ -55,6 +55,9 @@
 					<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Личная информация</a></li>
 					<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Редактировать</a></li>
 					<li role="presentation"><a href="#privacySettings" aria-controls="privacySettings" role="tab" data-toggle="tab">Настройки приватности</a></li>
+					<?php if ($user_data['role'] != 'local') {
+						echo '<li role="presentation"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Заявки</a></li>';
+					}?>
 					<li role="presentation"><a href="#favourites" aria-controls="favourites" role="tab" data-toggle="tab">Закладки</a></li>
 					<li role="presentation"><a href="#myAds" aria-controls="myAds" role="tab" data-toggle="tab">Мои объявления</a></li>
 					<?php if ($user_data['role'] == 'manage' || $user_data['role'] == 'moder') {
@@ -269,11 +272,15 @@ EOT;
 							</div>
 						</div>
 					</div>
+					<?php if ($user_data['role'] != 'local') {
+						echo '<div role="tabpanel" class="tab-pane" id="tools">Здесь будут отображены Заявки на услуги</div>';
+					}?>
 					<div role="tabpanel" class="tab-pane" id="favourites">Здесь будут закладки</div>
 					<div role="tabpanel" class="tab-pane" id="myAds">Здесь будут объявления</div>
 					<?php if ($user_data['role'] == 'manage' || $user_data['role'] == 'moder') {
 						echo '<div role="tabpanel" class="tab-pane" id="tools">Здесь будут инструменты для регистрации</div>';
 					}?>
+					
 				</div>
 			</div>
 		</div>
