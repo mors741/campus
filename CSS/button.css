@@ -1,132 +1,96 @@
-.button {
-    position: relative;
-    overflow: visible;
+.btn-custom.gradient {
+    background: -moz-linear-gradient(top,  #00CC00 50%, #009900 50%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#00CC00), color-stop(50%,#009900)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #00CC00 50%,#009900 50%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #00CC00 50%,#009900 50%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #00CC00 50%,#009900 50%); /* IE10+ */
+    background: linear-gradient(to bottom,  #00CC00 50%,#009900 50%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33a6cc', endColorstr='#0099cc',GradientType=0 ); /* IE6-9 */
+}
+
+.btn-custom.gradient:hover, .btn-custom.gradient:focus, .btn-custom.gradient:active, .btn-custom.gradient.active, .open > .dropdown-toggle.btn-custom {
+    background: -moz-linear-gradient(top,  #006600 50%, #003300 50%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#006600), color-stop(50%,#003300)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #006600 50%,#003300 50%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #006600 50%,#003300 50%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #006600 50%,#003300 50%); /* IE10+ */
+    background: linear-gradient(to bottom,  #006600 50%,#003300 50%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33a6cc', endColorstr='#0099cc',GradientType=0 ); /* IE6-9 */
+}
+
+.btn-custom.gradient:active, .btn-custom.gradient.active {
+    background: -moz-linear-gradient(top,  #006600 50%, #003300 50%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#006600), color-stop(50%,#003300)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #006600 50%,#003300 50%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #006600 50%,#003300 50%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #006600 50%,#003300 50%); /* IE10+ */
+    background: linear-gradient(to bottom,  #006600 50%,#003300 50%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33a6cc', endColorstr='#0099cc',GradientType=0 ); /* IE6-9 */
+}
+
+.btn-custom.gradient:disabled, .btn-custom.gradient.disabled {
+    background: -moz-linear-gradient(top,  #FF0000  50%, #980000  50%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%,#FF0000 ), color-stop(50%,#980000 )); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #FF0000  50%,#980000  50%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #FF0000  50%,#980000  50%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #FF0000  50%,#980000  50%); /* IE10+ */
+    background: linear-gradient(to bottom,  #FF0000  50%,#980000  50%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33a6cc', endColorstr='#0099cc',GradientType=0 ); /* IE6-9 */
+}
+
+.btn {
     display: inline-block;
-    padding: 0.5em 1em;
-	font-size: 16pt;
-    /*border: 1px solid #d4d4d4;
-    margin: 0;
-    text-decoration: none;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
     text-align: center;
-    text-shadow: 1px 1px 0 #fff;
-    font:15px/normal sans-serif;
-    color: #333;
     white-space: nowrap;
+    vertical-align: middle;
     cursor: pointer;
-    outline: none;
-    background-color: #ececec;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#ececec));
-    background-image: -moz-linear-gradient(#f4f4f4, #ececec);
-    background-image: -ms-linear-gradient(#f4f4f4, #ececec);
-    background-image: -o-linear-gradient(#f4f4f4, #ececec);
-    background-image: linear-gradient(#f4f4f4, #ececec);
-    -moz-background-clip: padding;
-    background-clip: padding-box;
-    border-radius: 0.35em;*/
-    /* IE hacks */
-    zoom: 1;
-    *display: inline;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    padding: 10px 16px;
 }
 
-.button:hover,
-.button:focus,
-.button:active,
-.button.active {
-    border-color: #3072b3;
-    border-bottom-color: #2a65a0;
-    text-decoration: none;
-    text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
+.btn-lg {
+    font-size: 18px;
+    line-height: 1.33;
+    border-radius: 6px;
+}
+
+.btn-custom {
+    margin-top: 2%;
     color: #fff;
-    background-color: #3c8dde;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#599bdc), to(#3072b3));
-    background-image: -moz-linear-gradient(#599bdc, #3072b3);
-    background-image: -o-linear-gradient(#599bdc, #3072b3);
-    background-image: linear-gradient(#599bdc, #3072b3);
+    background-color: green;
+    border-color: darkgreen;
 }
 
-.button:active,
-.button.active {
-    border-color: #2a65a0;
-    border-bottom-color: #3884cd;
-    background-color: #3072b3;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3072b3), to(#599bdc));
-    background-image: -moz-linear-gradient(#3072b3, #599bdc);
-    background-image: -ms-linear-gradient(#3072b3, #599bdc);
-    background-image: -o-linear-gradient(#3072b3, #599bdc);
-    background-image: linear-gradient(#3072b3, #599bdc);
-}
-
-
-/* overrides extra padding on button elements in Firefox */
-.button::-moz-focus-inner {
-    padding: 0;
-    border: 0;
-}
-
-/* Danger button
-   ========================================================================== */
-
-.button.danger {
-    color: #900;
-	font:12px/normal sans-serif;
-}
-
-.button.danger:hover,
-.button.danger:focus,
-.button.danger:active {
-    border-color: #b53f3a;
-    border-bottom-color: #a0302a;
+.btn-custom:hover,
+.btn-custom:focus,
+.btn-custom:active,
+.btn-custom.active,
+.open .dropdown-toggle.btn-custom {
     color: #fff;
-    background-color: #dc5f59;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#dc5f59), to(#b33630));
-    background-image: -moz-linear-gradient(#dc5f59, #b33630);
-    background-image: -ms-linear-gradient(#dc5f59, #b33630);
-    background-image: -o-linear-gradient(#dc5f59, #b33630);
-    background-image: linear-gradient(#dc5f59, #b33630);
+    background-color: green;
+    border-color: darkgreen;
 }
 
-.button.danger:active,
-.button.danger.active {
-    border-color: #a0302a;
-    border-bottom-color: #bf4843;
-    background-color: #b33630;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#b33630), to(#dc5f59));
-    background-image: -moz-linear-gradient(#b33630, #dc5f59);
-    background-image: -ms-linear-gradient(#b33630, #dc5f59);
-    background-image: -o-linear-gradient(#b33630, #dc5f59);
-    background-image: linear-gradient(#b33630, #dc5f59);
+
+.btn-custom {
+    background:green;
+    color: whitesmoke;
 }
-
-/* Primary button
-   ========================================================================== */
-
-.button.primary {
-    color: #090;
-	font:12px/normal sans-serif;
+.btn-custom:hover, .btn-custom:focus, .btn-custom:active, .btn-custom.active, .open > .dropdown-toggle.btn-custom {
+    background: darkgreen;
 }
-
-.button.primary:hover,
-.button.primary:focus,
-.button.primary:active {
-    border-color: #3ab53f;
-    border-bottom-color: #2aa030;
-    color: #fff;
-    background-color: #59dc5f;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#59dc5f), to(#30b336));
-    background-image: -moz-linear-gradient(#59dc5f, #30b336);
-    background-image: -ms-linear-gradient(#59dc5f, #30b336);
-    background-image: -o-linear-gradient(#59dc5f, #30b336);
-    background-image: linear-gradient(#59dc5f, #30b336);
-}
-
-.button.primary:active,
-.button.primary.active {
-    border-color: #2aa030;
-    border-bottom-color: #43bf48;
-    background-color: #30b336;
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#30b336), to(#59dc5f));
-    background-image: -moz-linear-gradient(#30b336, #59dc5f);
-    background-image: -ms-linear-gradient(#30b336, #59dc5f);
-    background-image: -o-linear-gradient(#30b336, #59dc5f);
-    background-image: linear-gradient(#30b336, #59dc5f);
+.btn-custom:active, .btn-custom.active {
+    background: darkgreen;
+    box-shadow: none;
 }

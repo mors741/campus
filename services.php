@@ -1,156 +1,117 @@
-﻿<html>
-    <head>
-        <title>Услуги патентного отдела</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf8"/>
-		<link rel="shortcut icon" href="Pictures/idea.ico">
-		
-        <script type="text/javascript" src="js/ajax.js"></script>
-		<script type="text/javascript" src="js/counter.js"></script>
-		<script type="text/javascript" src="js/jquery.min.js"></script>
-		<script type="text/javascript" src="js/dropdown.js"></script>
-		
-		<link rel="stylesheet" type="text/css" href="CSS/menu.css"/>
-		<link rel="stylesheet" type="text/css" href="CSS/button.css" />
-		<link rel="stylesheet" type="text/css" href="CSS/message.css"/>
-		<link rel="stylesheet" type="text/css" href="CSS/dropdown.css"/>	
-	</head>
-    <body>
-		<div id="menu">
-			<a href="index.php" class="logo" onclick="myFunction()" ><p id="counter"><?php echo $_COOKIE['count']; ?></p></a>
-			<a href="index.php"><img src="Pictures/Logo.png"></a> <br>
-			
-			<a href="index.php" class="button" />Главная</a>
-			<a href="services.php" class="button"/>Услуги</a>
-			<a href="news.php" class="button"/>Новости</a>
-			<a href="inventions.php" class="button"/>Изобретения</a>
-			<a href="registration.php" class="button"/>Регистрация</a>
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<title>.: ПОРТАЛ ОБЩЕЖИТИЯ НИЯУ МИФИ :. </title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- Le styles -->
+	<link href="CSS/bootstrap.css" rel="stylesheet">
+	<link href="CSS/content.css" rel="stylesheet">
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+
+	<!-- ... -->
+
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/moment-with-locales.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+	<link rel="stylesheet" href="CSS/bootstrap.min.css" />
+	<link rel="stylesheet" href="CSS/bootstrap-datetimepicker.min.css" />
+	<link rel="stylesheet" href="CSS/button.css" />
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			</button>
+			<a style="color: whitesmoke;" class="navbar-brand" href="index.html">Портал общежития НИЯУ МИФИ</a>
+		</div>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav navbar-left">
+				<li><a style="color: whitesmoke" href="index.php">ГЛАВНАЯ</a></li>
+				<li><a style="color: whitesmoke" href="dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a></li>
+				<li class="active"><a style="color: whitesmoke" href="services.php">УСЛУГИ</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<div class="container">
+	<div class="span3">
+			<div class="control-group">
+				<label for="address">Выберите тип оказываемой услуги</label>
+				<div class="controls">
+					<select id="address" class="form-control">
+						<option value="" selected="selected">Выберите услугу</option>
+						<option value="1">Сантехника</option>
+						<option value="2">Электрика</option>
+						<option value="3">Плотник</option>
+					</select>
+				</div>
+			</div>
+		<div class="form-group">
+			<br/><label for="comment">Комментарий к заявке</label>
+			<textarea class="form-control" rows="5" id="comment" placeholder="Комментарий к заявке"></textarea>
+		</div>
+		<div class="control-group form-group">
+			<label for="date">Выберите дату оказания услуги</label>
+			<div class="form-group">
+				<div class="input-group date" id="datetimepicker1">
+					<input type="text" class="form-control" />
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+				</div>
+			</div>
 		</div>
 
-       	<?php
-			session_start();
-			
-			if (isset($_SESSION['login'])){
-				if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $_SESSION['timeout'])) {
-					// last request was more than 2 minutes ago
-					session_unset();     // unset $_SESSION variable for the run-time 
-					session_destroy();   // destroy session data in storage
-					echo '<div class="m_auth m_error">Извините, время Вашей сессии истекло</div>';
-				}
-				$_SESSION['last_activity'] = time(); // update last activity time stamp
-			}
-			
-			$link = mysqli_connect('localhost','root','','patent') or die("Ошибка при соединении с базой данных.." . mysqli_error($link)); 
-			$query = "set character_set_results='utf8'" or die("Ошибка при изменении кодировки.." . mysqli_error($link)); 
-			$link->query($query);
-			if (isset($_SESSION['login'])) {
-				echo '	<div id="sign-out">
-							<div class="dropdown">
-								<a class="account button" style="font:12px/normal sans-serif;">'.$_SESSION["login"].'<img src="Pictures/arrow.png" style="margin-left: 7px;"/></a>
-				
-								<div class="submenu" style="display: none; ">
-									<ul class="root">
-										<li><a href="inventions.php">Мои изобретения</a></li>
-										<li><a href="patent.php">Новое изобретение</a></li>
-										<li>
-											<form method="post" action="index.php">
-												<input type="submit" name="logout" value="Выйти"/>
-											</form>
-										</li>
-									</ul>
-								</div>
-							</div>				
-						</div>';
-			}
-			if (isset($_SESSION['admin'])==1){
-				echo'<div id="right">
-						<h2>Найти плагиат</h2>
-						<form id="searchForm" name="searchForm" method="post" action="javascript:insertTask();">
-							<div class="searchInput">
-							<input name="searchq" type="text" id="searchq" size="30" class="inputs long" onkeyup="javascript:searchNameq()"/>
-						</form>
-					</div>
-					
-					<h2>Подсказки:</h2>
-					<div id="msg"></div>
-					<div id="search-result"></div>
-					</div>
-					<div id="left">
-						<h2>Удалить изобретение</h2>
-						<form method="get" action="services.php">
-							<input type="text" class="inputs long" name="inv"><br>
-							<br>
-							<input type="checkbox" name="del_user" value="true">Вместе с пользователем
-							<br><br>
-							<input type="submit" class="danger button" value="Удалить"/>
-						</form>
-					</div>';
-					if (isset($_GET['inv'])){
-						$del_inv = $_GET['inv'];
-						$query = "set names 'utf8'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
-						$link->query($query);
-						if (isset($_GET['del_user'])){
-							$query = "DELETE FROM users 
-										WHERE id = (SELECT author_id 
-													FROM inventions 
-													WHERE name = '$del_inv')" 
-										or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-							$result = $link->query($query);
-						} else {
-							$query="UPDATE users SET inv_count=inv_count - 1 WHERE id = (SELECT author_id 
-																							FROM inventions 
-																							WHERE name = '$del_inv');" 
-									or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
-							$result = $link->query($query);
-							
-							$query = "DELETE FROM inventions WHERE name ='$del_inv'" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-							$result = $link->query($query);
-						}
-						if ($link->affected_rows > 0){
-							echo ('<div class="m_success m_delete">Изобретение успешно удалено</div>');
-						} else {
-							echo ('<div class="m_delete m_error">Изобретения с таким названием не существует.</div>');
-						}
-					}
-			}
-			else {
-				echo'<div id="right">
-						<h2>Найти похожие изобретения</h2>
-						<form id="searchForm" name="searchForm" method="post" action="javascript:insertTask();">
-						<div class="searchInput">
-						<input name="searchq" type="text" id="searchq" class="inputs long" size="30" onkeyup="javascript:searchNameq()"/>
-					</div>
-				</form>
-				<h2>Результаты:</h2>
-				<div id="msg"></div>
-				<div id="search-result"></div>
-				</div>';        
-			}
-			 
-			$query = "SELECT name, description, photo, date, 
-						(SELECT CONCAT(fname,\" \", lname, \" \", patronymic) FROM users WHERE id = author_id) as author
-						FROM inventions
-						ORDER BY date DESC
-						LIMIT 10" 
-						or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
-			$result = $link->query($query);
-			$inv_data = mysqli_fetch_array($result);			
-			echo ('<div id="content">');
-			echo "<h1>Последние 10 зарегистрированных изобретений:</h1>";
-			do {
-				echo ('<div class="sector">
-							<h3>'.$inv_data['name'].'</h3>'
-							.'<center><img src="'.$inv_data['photo'].'" width="300" height="300"  class="f_image"/></center><br>'."\n"
-							.'<p>'.$inv_data['description']."</p>\n"
-							."<p>Автор: ".$inv_data['author']."</p>\n"
-							."<p>Зарегистрировано: ".$inv_data['date']."</p>\n"
-							//."<p><a href='http://www.finas.su/images/avtor/ouc131206author700kav.jpg'>Свидетельство</a></p>\n"
-						);
-				if (isset($_SESSION['admin'])==1){
-					echo ('<a href="services.php?inv='.$inv_data['name'].'" class="button danger" style="text-align:center;">Удалить</a><br><br>');
-				}
-				echo ('</div>');
-			} while ($inv_data=mysqli_fetch_array($result));
-			echo ('</div>');
-		?>
-	</body>
-</html>
+		<div class=" btn-group; data-toggle = "buttons";" data-toggle="buttons" >
+		<label for="time">Выберите удобный промежуток времени</label><br/>
+			<label class="btn btn-custom gradient active" style="width: 120px" >
+				<input type="radio" name="options" id="1" autocomplete="off" checked>9:00 - 9:45
+			</label>
+			<label class="btn btn-custom gradient disabled" style="width: 120px" >
+				<input type="radio" name="options" id="2" autocomplete="off" > 10:00 - 10:45
+			</label>
+			<label class="btn btn-custom gradient" style="width: 120px ; background-s" >
+				<input type="radio" name="options" id="3" autocomplete="off" > 11:00 - 11:45
+			</label>
+			<label class="btn btn-custom gradient" style="width: 120px" >
+			<input type="radio" name="options" id="4" autocomplete="off"> 12:00 - 10:45
+			</label>
+			<label class="btn btn-custom gradient" style="width: 120px" >
+			<input type="radio" name="options" id="5" autocomplete="off"> 14:00 - 14:45
+			</label>
+			<label class="btn btn-custom gradient" style="width: 120px" >
+			<input type="radio" name="options" id="6" autocomplete="off"> 15:00 - 15:45
+			</label>
+			<label class="btn btn-custom gradient" style="width: 120px" >
+			<input type="radio" name="options" id="7" autocomplete="off"> 16:00 - 16:45
+			</label>
+			<label class="btn btn-custom gradient" style="width: 120px" >
+			<input type="radio" name="options" id="8" autocomplete="off"> 17:00 - 17:45
+			</label>
+		</div>
+		<br/><button type="submit" class="btn btn-default">Отправить</button>
+</div>
+
+
+
+	</div>
+</div>
+<script src="js/bootstrap-tab.js"></script>
+
+<script type="text/javascript">
+	$(function () {
+		$('#datetimepicker1').datetimepicker({pickTime: false, language: 'ru',defaultDate:"09.01.2015", daysOfWeekDisabled: [0, 6]});
+	});
+</script>
+</body></html>
