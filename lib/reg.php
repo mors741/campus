@@ -12,7 +12,7 @@ if(isset($_POST['register'])){
 	if ($yes=="nouser") {
 		$home = 0;
 		$room = 0;
-                $user="user";
+                $user="local";
 	}
 	else
 	{
