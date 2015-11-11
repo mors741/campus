@@ -73,31 +73,31 @@
 			</div>
 		</div>
 
-		<div class=" btn-group; data-toggle = "buttons";" data-toggle="buttons" >
+		<div id="time" selectedValue="1" class=" btn-group; data-toggle = "buttons";" data-toggle="buttons" >
 		<label for="time">Выберите удобный промежуток времени</label><br/>
 			<label class="btn btn-custom gradient active" style="width: 120px" >
-				<input type="radio" name="options" id="1" autocomplete="off" checked>9:00 - 9:45
+				<input type="radio" name="options" id="1" autocomplete="off" onchange="document.getElementById('time').setAttribute('selectedValue', this.id)">9:00 - 9:45
 			</label>
 			<label class="btn btn-custom gradient disabled" style="width: 120px" >
-				<input type="radio" name="options" id="2" autocomplete="off" > 10:00 - 10:45
+				<input type="radio" name="options" id="2" autocomplete="off"> 10:00 - 10:45
 			</label>
 			<label class="btn btn-custom gradient" style="width: 120px ; background-s" >
-				<input type="radio" name="options" id="3" autocomplete="off" > 11:00 - 11:45
+				<input type="radio" name="options" id="3" autocomplete="off" onchange="document.getElementById('time').setAttribute('selectedValue', this.id)"> 11:00 - 11:45
 			</label>
 			<label class="btn btn-custom gradient" style="width: 120px" >
-			<input type="radio" name="options" id="4" autocomplete="off"> 12:00 - 10:45
+			<input type="radio" name="options" id="4" autocomplete="off" onchange="document.getElementById('time').setAttribute('selectedValue', this.id)"> 12:00 - 10:45
 			</label>
 			<label class="btn btn-custom gradient" style="width: 120px" >
-			<input type="radio" name="options" id="5" autocomplete="off"> 14:00 - 14:45
+			<input type="radio" name="options" id="5" autocomplete="off" onchange="document.getElementById('time').setAttribute('selectedValue', this.id)"> 14:00 - 14:45
 			</label>
 			<label class="btn btn-custom gradient" style="width: 120px" >
-			<input type="radio" name="options" id="6" autocomplete="off"> 15:00 - 15:45
+			<input type="radio" name="options" id="6" autocomplete="off" onchange="document.getElementById('time').setAttribute('selectedValue', this.id)"> 15:00 - 15:45
 			</label>
 			<label class="btn btn-custom gradient" style="width: 120px" >
-			<input type="radio" name="options" id="7" autocomplete="off"> 16:00 - 16:45
+			<input type="radio" name="options" id="7" autocomplete="off" onchange="document.getElementById('time').setAttribute('selectedValue', this.id)"> 16:00 - 16:45
 			</label>
 			<label class="btn btn-custom gradient" style="width: 120px" >
-			<input type="radio" name="options" id="8" autocomplete="off"> 17:00 - 17:45
+			<input type="radio" name="options" id="8" autocomplete="off" onchange="document.getElementById('time').setAttribute('selectedValue', this.id)"> 17:00 - 17:45
 			</label>
 		</div>
 		<br/><button type="submit" class="btn btn-default">Отправить</button>
