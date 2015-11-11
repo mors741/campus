@@ -67,38 +67,39 @@ footer {
     box-shadow:0 1px 4px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
 .row {
-    
-    max-width: 100%;
+    margin-left: -20px;
 }
 
 .span4 {
-    width: 49%;
+    width: 560px;
     background-color: #eeeeee;
     float: left;
     padding: 10px;
-    margin-left: 1%;
+    min-height: 1px;
+    margin-left: 20px;
     border-radius: 6px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    
 }
 
-.span2 {
-     width: 49%;
+.span3 {
+    padding: 40px;
+    margin-bottom: 40px;
     background-color: #eeeeee;
-    float: left;
-    padding: 10px;
-    margin-left: 1%;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
     border-radius: 6px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    
 }
-.span3 {
-    max-width:100%;
-    height:680px;
+
+.span5 {
+    padding: 10px;
+    background-color: #eeeeee;
+    width: 300px;
+}
+
+.span6 {
     padding: 40px;
-    margin-left: 70px;
-        margin-right: 70px;
-        margin-bottom: 70px;
+    margin-bottom: 40px;
     background-color: #eeeeee;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
@@ -137,6 +138,36 @@ footer {
     color: #E0E0E0;
 }
 
-.error {
+label.error {
     color:red;
+    display:block;
+    width: 450px;
+    height: 18px;
+    padding-left:16px;
+    background: transparent url('../Pictures/cross.png') no-repeat scroll 0% 0%;
+}
+
+label.valid {
+    display: block;
+    width: 450px;
+    height: 18px;
+    padding-left:16px;
+    background: transparent url('../Pictures/true.gif') no-repeat scroll 0% 0%;
+}
+
+.span6 {
+    padding: 40px;
+    margin-bottom: 40px;
+    background-color: #eeeeee;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin-left: 8%;
+    margin-right: 8%;
+}
+
+.pstrength-minchar {
+font-size : 8px;
+height:10px;
 }

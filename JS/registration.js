@@ -1,46 +1,46 @@
 $(document).ready(function () {
-var login_correct = false;
+    var login_correct = false;
     $.validator.addMethod(
-    'userUnique',
-    function (value, element) {
-    if (element.value !== "")
-    {
-    var founded = value.substr('campus.mephi.ru');
-    if (founded)
-   { 
-        $.ajax({
-            type: "POST",
-            url: "Other/check.php",
-            data: "login=" + value,
-            dataType: "html",
-            cache: false,
-            success: function (response)
-            {
-                
-                if (response == "1") {
-                    login_correct=false;
-                    $('#login_error').css('display', 'inline');
-                    $('#login_error').css('color', 'red');
-                    return false;
-                } 
-                if (response == "0") 
+            'userUnique',
+            function (value, element) {
+                if (element.value !== "")
                 {
-                    $('#login_error').css('display', 'none');
-                    login_correct=true;
-                    return true;
-            }
-            }
-  
-        });
-    }
-    $('#login_error').css('display', 'none');
-    }
-    $('#login_error').css('display', 'none');
-    return true;
-   
-    });
+                    var founded = value.substr('campus.mephi.ru');
+                    if (founded)
+                    {
+                        $.ajax({
+                            type: "POST",
+                            url: "Other/check.php",
+                            data: "login=" + value,
+                            dataType: "html",
+                            cache: false,
+                            success: function (response)
+                            {
 
-    
+                                if (response == "1") {
+                                    login_correct = false;
+                                    $('#login-error').attr('class', 'error');
+                                    $('#login-error').text('Извините, но этот логин занят');
+                                    return false;
+                                }
+                                if (response == "0")
+                                {
+                                    
+                                    login_correct = true;
+                                    return true;
+                                }
+                            }
+
+                        });
+                    }
+                    
+                }
+               
+                return true;
+
+            });
+
+
 
     $.validator.addMethod(
             'mephiEmail',
@@ -71,6 +71,38 @@ var login_correct = false;
             'Только латинские и русские буквы и символы \' _ -'
             );
 
+    $.validator.addMethod(
+            'correctName',
+            function (value, element) {
+                var reg = /[A-Za-zа-яёА-ЯЁ'_-]{1,64}/g;
+                var res = value.match(reg);
+                if (res === null || res.length > 1) {
+                    return false;//return false
+                }
+                return true;
+            },
+            'Только латинские и русские буквы и символы \' _ -'
+            );
+
+    $.validator.addMethod(
+            'passCheck',
+            function (value, element) {
+                var res = value;
+
+                res = res.match(/[0-9A-Za-z_-]/);
+                if (res === null || res.length > 1) {
+                    return false;
+                }
+                return true;
+            },
+            'Только строчные латинские буквы, цифры и знаки подчеркивания'
+            );
+jQuery.validator.setDefaults({
+   debug: true,
+   success: "valid"
+    
+});
+
     $("#register-form").validate({
         rules: {
             login: {
@@ -78,6 +110,7 @@ var login_correct = false;
                 required: true,
                 email: true,
                 mephiEmail: true
+                
             },
             name: {
                 required: true,
@@ -88,8 +121,10 @@ var login_correct = false;
                 correctName: true
             },
             pass: {
+                passCheck: true,
                 required: true,
-                minlength: 5
+                minlength: 6,
+                maxlength: 16
             },
             rpass: {
                 equalTo: "#pass",
@@ -100,11 +135,13 @@ var login_correct = false;
                         required: true
                     },
             home: {
-                digits: true,
-                range: [0, 4]
+                required:true,
+                range: [1,7]
             },
             room: {
-                digits: true
+                digits: true,
+                required: true
+             
             },
             agree: {
                 required: true
@@ -127,8 +164,10 @@ var login_correct = false;
                 correctName: "Только латинские и русские буквы и символы \' _ -"
             },
             pass: {
+                passCheck: "Только строчные латинские буквы, цифры и символы _-",
                 required: "Пожалуйста, введите пароль",
-                minlength: "Минимальная длина пароля - 5 символов"
+                minlength: "Пароль должен быть не меньше 6 символов",
+                maxlength: "Пароль должен быть не больше 16 символов"
             },
             rpass: {
                 equalTo: "Пароли должны совпадать",
@@ -138,18 +177,19 @@ var login_correct = false;
                 required: "Ответьте на вопрос!"
             },
             home: {
-                digits: "Только в числовом виде",
-                range: "Только от 1 до 4"
+               range: "Выберите общежитие!"
 
             },
             room: {
-                digits: "Только в числовом виде"
+                digits: "Только в числовом виде",
+                required: "Заполните поле!"
             },
             agree: {
                 required: "Вы не приняли соглашение"
             }
 
         },
+      
         submitHandler: function (form) {
             if (login_correct)
                 form.submit();
@@ -163,10 +203,9 @@ var login_correct = false;
             $("#user").css('display', 'inline-block');
             $("#home").css('display', 'inline-block');
             $("#room").css('display', 'inline-block');
-            $("#home").attr('type', 'text');
+            $("#home").prop("disabled", false);
             $("#room").attr('type', 'text');
-            $("#room").attr('value', '');
-            $("#home").attr('value', '');
+            $("#home [value='0']").attr('selected', 'selected');
         }
 
     });
@@ -174,13 +213,18 @@ var login_correct = false;
     $("#no").click(function () {
         if ($("input:checked").val() === "nouser") {
             $("#user").css('display', 'none');
-            $("#home").attr('type', 'hidden');
+            $("#home [value='0']").attr('selected', 'selected');
+            $("#home :first").attr('selected', 'selected');
+            $("#home").prop("disabled", true);
             $("#room").attr('type', 'hidden');
             $("#room").attr('value', '');
-            $("#home").attr('value', '');
+
         }
 
     });
+    
+    $('#pass').pstrength();
+
 
 
 });

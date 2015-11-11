@@ -128,7 +128,7 @@
             <h2>Широкие возможности</h2>
             <p> Регистрируйся и получай доступ к таким сервисам как объявления и услуги а также оценка услуг.</p>     
         </div>
-        <div class="span2">
+        <div class="span4">
             <h2>Эффективная полезность</h2>
             <p>Сервис полезен для студентов и сотрудников МИФИ,  также администрации и персонала общежития</p>
         </div>
@@ -161,10 +161,9 @@
 <script src="js/bootstrap-popover.js"></script>
 <script src="js/bootstrap-button.js"></script>
 <script src="js/bootstrap-collapse.js"></script>
-<script src="js/bootstrap-carousel"></script>
 <script src="js/bootstrap-typeahead.js"></script>
 <script src="js/bootstrap.min.js"></script> 
-<script scr="js/jquery-2.1.4.js"></script>
+<script scr="js/jquery2.4.1.js"></script>
 <script language="javascript" src="js/dropdown.js"></script>
 
 

@@ -9,16 +9,19 @@ if(isset($_POST['register'])){
 	$name=$_POST['name'];
 	$surname=$_POST['surname'];
 	$yes=$_POST['yes'];
-	if ($yes=="no") {
+	if ($yes=="nouser") {
 		$home = 0;
 		$room = 0;
                 $user="user";
 	}
 	else
 	{
+            if(isset($_POST['home']))
+            {
 		$home=$_POST['home'];
 		$room=$_POST['room'];
                 $user="campus";
+            }
 	}
       $query="SET NAMES 'utf8'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
       $res = $link->query($query);

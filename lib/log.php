@@ -2,7 +2,7 @@
                     $link = mysqli_connect('localhost', 'root', '', 'campus') or die("Error " . mysqli_error($link));
                     session_start();
 
-                    $_SESSION['timeout'] = 120;  //Поменьше
+                    $_SESSION['timeout'] = 1200;  //Поменьше
 
                     if (isset($_SESSION['login'])) {
                         if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $_SESSION['timeout'])) {
@@ -36,6 +36,14 @@
                     }
 
                     if (isset($_SESSION['login'])) {
+                        $query="SET NAMES 'utf8'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
+                        $res = $link->query($query);
+                        $query="SET CHARACTERS SET 'utf8'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
+                        $res = $link->query($query);
+                        $query = "SELECT u.*, s.post FROM users as u, staff as s WHERE login='" . $_SESSION['login'] . "';" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+                        $result = $link->query($query);
+                        $user_data = mysqli_fetch_array($result);
+                        $result->close();
                         echo '<div id="sign-out">
 								<div class="dropdown">
 									<ul class="nav navbar-nav navbar-right">
@@ -45,7 +53,7 @@
 									</ul>
 									<div class="submenu" style="display: none; ">
 										<ul class="root">
-											<li><a href="inventions.php">Личный кабинет</a></li>
+											<li><a href="userProfile.php">Личный кабинет</a></li>
 											<li>
 												<form method="post" action="index.php">
 													<input type="submit" name="logout" value="Выйти"/>

@@ -1,17 +1,8 @@
-# campus
+# Campus - портал общежития НИЯУ МИФИ
 
-[git]: http://git-scm.com/book/ru/v1 
-[Скачать]: http://git-scm.com/downloads
-## Использование [git] (авторская инструкция от Стасика)
+Добавлены нектороые тупые пояснялки в [Wiki] (https://github.com/mors741/campus/wiki)
 
---
-1. Открыть cmd (или git-cmd)
-2. Перейти в Вашей ОС в директорию, путь к которой желательно содержит только латинские буквы
-3. ``` git pull origin master``` - скачать свежую версию с hub
-4. Добавьте новые файлы или измените существующие
-5. ``` git status ```  - посмотреть неотслеженные файлы 
-6. ``` git add [Ivanov_file_name.txt]  ```  - индексируем  неотслеживаемые ранее файлы
-7. ``` git commit -m "your comment here" ``` - коммитим изменения
-8. ``` git push -u origin master ``` - заливаем на hub
-
-Таким образом заливаем файлы, берем на исправление, снова отправляем.
+Все документы по проетку складываем на [Google Drive] (https://drive.google.com/drive/folders/0B1rrFpKD8cccUDZoa0xfUG5SNmc)
+  - [Документация] (https://docs.google.com/document/d/1mcob_wS_7j8WWO84SIrdOItTnU5N0LhjZnuTEW870m0/edit?usp=sharing)
+  - [Сущности БД] (https://docs.google.com/document/d/1wVzQtdXiuSjvk7jiD1jmVDaMS4uPZnGbNp2XK_GoXyk/edit?usp=sharing)
+  - [План разработки] (https://docs.google.com/document/d/1w_0DW95Yw32iX_aCiLyD1toTf5Ocyx89lsEuuWy19Ec/edit?usp=sharing)

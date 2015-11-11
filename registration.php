@@ -13,9 +13,11 @@
   
 
          <script src="js/jquery.js"></script>
+         <script src="js/jquery2.4.1.js"></script>
 	  <script src="js/jquery.validate.js"></script>
 	  <script src="js/registration.js"></script>
           <script src="js/bootstrap.min.js"></script> 
+          <script src="js/jquery.pstrength-min.1.2.js"></script>
           
 
     </head>
@@ -111,15 +113,16 @@ include('/lib/reg.php');
 					<label for="login">Логин (email НИЯУ МИФИ)</label>
 					<div class="form-group">
 						<input type="text" name="login" id="login" class="form-control" placeholder="email"/>
-                                                <label id="login_error" style="display:none">Извините, но этот логин занят</label>
+                                               
 							</div>
 </div>
 
 				<div class="control-group form-group">
 					<label for="password">Пароль</label>
 					<div class="form-group">
-						<input type="password" name="pass" id="pass" class="form-control"  placeholder="Пароль"/>
-					</div>
+						<input type="password" name="pass" id="pass" class="form-control"  placeholder="Пароль" rel='tooltip'/>
+                                               
+                                        </div>
 				</div>
 
 				<div class="control-group form-group">
@@ -155,12 +158,22 @@ include('/lib/reg.php');
 					</div>
 				</div>
 <div id="user" style="display:none; width:100%">
-				<div class="control-group form-group" >
-					<label for="home">Корпус</label>
-					<div class="form-group">
-						<input type="text"  value="" name="home" id="home" class="form-control"/>
-					</div>
-				</div>
+    <div class="control-group form-group">
+										<label for="home">Адрес</label>
+										<div class="form group">
+											<select name="home" id="home" class="form-control">
+												<option value="0" selected="selected">(Выберите корпус общежития)</option>
+												<option value="1">ул. Москворечье д.2 корп 1</option>
+												<option value="2">ул. Москворечье д.2 корп 2</option>
+												<option value="3">ул. Москворечье, д.19 корп 3</option>
+												<option value="4">ул. Москворечье, д.19 корп 4</option>
+												<option value="5">ул. Кошкина д.11 корп. 1</option>
+												<option value="6">ул. Шкулева д.27 ст 2</option>
+												<option value="7">ул. Пролетарский проспект д. 8 корп. 2</option>
+											</select>
+										</div>
+									</div>
+				
 
 				<div class="control-group form-group" >
 					<label for="room">Квартира</label>
@@ -171,7 +184,7 @@ include('/lib/reg.php');
 </div>
     </div>
                             <br>
-                            <div style="margin-top: 470px; ">
+                            <div style="margin-top: 480px; ">
                                 <hr>
                                 <div class="control-group form-group" >
                                     <label><input type="checkbox"  value="agree" name="agree" />  Я прочитал и согласен с правилами пользовательского соглашения</label>
