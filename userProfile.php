@@ -7,18 +7,14 @@
 	<meta name="author" content="">
 
 	<!-- Le styles -->
+	<link rel="stylesheet" type="text/css" href="CSS/dropdown.css" />	
 	<link href="CSS/bootstrap.css" rel="stylesheet">
 	<link href="CSS/content.css" rel="stylesheet">
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
+	<link rel="stylesheet" href="CSS/bootstrap-datetimepicker.min.css" />
 	<!-- ... -->
 
-	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="js/moment-with-locales.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
-	<link rel="stylesheet" href="CSS/bootstrap.min.css" />
-	<link rel="stylesheet" href="CSS/bootstrap-datetimepicker.min.css" />
 </head>
 
 <body>
@@ -29,7 +25,7 @@
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 			</button>
-			<a style="color: whitesmoke;" class="navbar-brand" href="index.html">Портал общежития НИЯУ МИФИ</a>
+			<a style="color: whitesmoke;" class="navbar-brand" href="index.php">Портал общежития НИЯУ МИФИ</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -97,10 +93,6 @@
 											<?php if ($user_data['contacts'] != '') {
 												echo '<br/><label for="contacts">Контакты: </label> ';
 												echo $user_data['contacts'];
-											}?>
-											<?php if ($user_data['mail'] != '') {
-												echo '<br/><label for="mail">Доп. почта: </label> ';
-												echo $user_data['mail'];
 											}?>
 											<?php if ($user_data['home'] != 0) {
 												echo '<br/><label for="address">Корпус: </label> ';
@@ -228,12 +220,6 @@ EOT;
 									</div>
 EOT;
 									}?>
-									<div class="control-group form-group">
-										<label for="mail">Дополнительная почта</label>
-										<div class="form-group">
-											<input id="mail" class="form-control" placeholder="Дополнительная почта"/>
-										</div>
-									</div>
 									<br/><button type="submit" class="btn btn-default">Сохранить изменения</button>
 								</div>
 							</div>
@@ -287,7 +273,12 @@ EOT;
 	</div>
 </div>
 </div>
-<script src="js/bootstrap-tab.js"></script>
+	<script src="js/bootstrap-tab.js"></script>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/moment-with-locales.min.js"></script>
+	<script src="js/dropdown.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-datetimepicker.min.js"></script>
 
 <script type="text/javascript">
 	$(function () {

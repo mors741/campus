@@ -25,7 +25,7 @@
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></button>
-                    <a class="navbar-brand" href="index.html">Портал общежития НИЯУ МИФИ</a>
+                    <a class="navbar-brand" href="index.php">Портал общежития НИЯУ МИФИ</a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -163,8 +163,8 @@
 <script src="js/bootstrap-collapse.js"></script>
 <script src="js/bootstrap-typeahead.js"></script>
 <script src="js/bootstrap.min.js"></script> 
-<script scr="js/jquery2.4.1.js"></script>
-<script language="javascript" src="js/dropdown.js"></script>
+<script src="js/jquery2.4.1.js"></script>
+<script src="js/dropdown.js"></script>
 
 
 <script>

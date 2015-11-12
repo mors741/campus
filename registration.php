@@ -36,7 +36,7 @@ include('/lib/reg.php');
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 					
 				</button>
-				<a class="navbar-brand" href="index.html">Портал общежития НИЯУ МИФИ</a>
+				<a class="navbar-brand" href="index.php">Портал общежития НИЯУ МИФИ</a>
                                 
             
                                 

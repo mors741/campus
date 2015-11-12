@@ -31,7 +31,7 @@
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 			</button>
-			<a style="color: whitesmoke;" class="navbar-brand" href="index.html">Портал общежития НИЯУ МИФИ</a>
+			<a style="color: whitesmoke;" class="navbar-brand" href="index.php">Портал общежития НИЯУ МИФИ</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -51,8 +51,8 @@
 				<div class="controls">
 					<select id="address" class="form-control">
 						<option value="" selected="selected">Выберите услугу</option>
-						<option value="1">Сантехника</option>
-						<option value="2">Электрика</option>
+						<option value="1">Сантехник</option>
+						<option value="2">Электрик</option>
 						<option value="3">Плотник</option>
 					</select>
 				</div>
@@ -85,7 +85,7 @@
 				<input type="radio" name="options" id="3" autocomplete="off" onchange="document.getElementById('time').setAttribute('selectedValue', this.id)"> 11:00 - 11:45
 			</label>
 			<label class="btn btn-custom gradient" style="width: 120px" >
-			<input type="radio" name="options" id="4" autocomplete="off" onchange="document.getElementById('time').setAttribute('selectedValue', this.id)"> 12:00 - 10:45
+			<input type="radio" name="options" id="4" autocomplete="off" onchange="document.getElementById('time').setAttribute('selectedValue', this.id)"> 12:00 - 12:45
 			</label>
 			<label class="btn btn-custom gradient" style="width: 120px" >
 			<input type="radio" name="options" id="5" autocomplete="off" onchange="document.getElementById('time').setAttribute('selectedValue', this.id)"> 14:00 - 14:45
