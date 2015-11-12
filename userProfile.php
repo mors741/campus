@@ -259,7 +259,76 @@ EOT;
 						</div>
 					</div>
 					<?php if ($user_data['role'] != 'local') {
-						echo '<div role="tabpanel" class="tab-pane" id="tools">Здесь будут отображены Заявки на услуги</div>';
+						echo '<div role="tabpanel" class="tab-pane" id="tools">';
+						if ($user_data['role'] == 'admin' or $user_data['role'] == 'manage' or $user_data['role'] == 'moder') {
+							echo "<h1>Все заявки на услуги:</h1>";
+							$query = "SELECT id, owner, description, serv, ordate, timeint, state, ts,
+										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
+										(SELECT name FROM service WHERE id = serv) as category,
+										(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
+											FROM address, users
+											WHERE users.id = owner AND home = address.id) as address
+										FROM orders
+										ORDER BY ts DESC" 
+										or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
+						}
+						if ($user_data['role'] == 'staff') {
+							echo "<h1>Ваши заявки на услуги:</h1>";
+							$query = "SELECT id, owner, description, serv, ordate, timeint, state, ts,
+										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
+										(SELECT name FROM service WHERE id = serv) as category,
+										(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
+											FROM address, users
+											WHERE users.id = owner AND home = address.id) as address
+										FROM orders
+										ORDER BY ts DESC" 
+										or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
+						}
+						if ($user_data['role'] == 'campus') {
+							echo "<h1>Мои заявки на услуги:</h1>";
+							$query = "SELECT id, owner, description, serv, ordate, timeint, state, ts,
+										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
+										(SELECT name FROM service WHERE id = serv) as category,
+										(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
+											FROM address, users
+											WHERE users.id = owner AND home = address.id) as address
+										FROM orders
+										WHERE owner = " .$user_data['id'].
+										" ORDER BY ts DESC" 
+										or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
+						}
+						$result = $link->query($query);
+						$ord_data = mysqli_fetch_array($result);			
+						echo ('<div id="content">');
+						switch ($ord_data['timeint']) {
+							case 1: $timeint = "9:00-9:45"; break;
+							case 2: $timeint = "10:00-10:45"; break;
+							case 3: $timeint = "11:00-11:45"; break;
+							case 4: $timeint = "12:00-10:45"; break;
+							case 5: $timeint = "14:00-14:45"; break;
+							case 6: $timeint = "15:00-15:45"; break;
+							case 7: $timeint = "16:00-16:45"; break;
+							case 8: $timeint = "17:00-17:45"; break;
+						}
+						
+						do {
+							echo ('<div style="background-color:white" class="sector">
+
+										<p>Категория: '.$ord_data['category']."</p>\n"
+										."<p>Описание: ".$ord_data['description']."</p>\n"
+										."<p>Дата и время обслуживания: ".$ord_data['ordate']." ".$timeint."</p>\n"
+										."<p>Адрес: ".$ord_data['address']."</p>\n"
+										."<p>Автор заявки: ".$ord_data['author']."</p>\n"
+										."<p>Дата и время добавления заявки: ".$ord_data['ts']."</p>\n"
+										."<p>Состояние заказа: ".$ord_data['state']."</p>\n"
+										
+									);
+								//echo ('<a href="services.php?inv='.$ord_data['id'].'" class="button danger" style="text-align:center;">Удалить</a><br><br>');
+
+							echo ('</div>');
+						} while ($ord_data=mysqli_fetch_array($result));
+						echo ('</div>');
+						echo '</div>';
 					}?>
 					<div role="tabpanel" class="tab-pane" id="favourites">Здесь будут закладки</div>
 					<div role="tabpanel" class="tab-pane" id="myAds">Здесь будут объявления</div>
