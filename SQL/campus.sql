@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2015 at 05:58 PM
+-- Generation Time: Nov 12, 2015 at 12:04 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -153,23 +153,25 @@ CREATE TABLE IF NOT EXISTS `favorite` (
 CREATE TABLE IF NOT EXISTS `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `owner` int(11) NOT NULL,
+  `performer` int(11) NOT NULL COMMENT 'Ссылка на типа, который это будет делать',
   `description` text NOT NULL,
   `serv` int(11) NOT NULL,
   `ordate` date DEFAULT NULL,
   `timeint` tinyint(4) DEFAULT NULL,
   `state` varchar(16) NOT NULL DEFAULT 'waiting',
-  `ts` time NOT NULL,
+  `date_create` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `ord_fkey` (`owner`),
-  KEY `serv_fkey` (`serv`)
+  KEY `serv_fkey` (`serv`),
+  KEY `perf_fkey` (`performer`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `owner`, `description`, `serv`, `ordate`, `timeint`, `state`, `ts`) VALUES
-(1, 2, 'Потек унитаз', 1, '2015-11-11', 1, 'waiting', '16:05:26');
+INSERT INTO `orders` (`id`, `owner`, `performer`, `description`, `serv`, `ordate`, `timeint`, `state`, `date_create`) VALUES
+(1, 2, 1, 'Потек унитаз', 1, '2015-11-11', 1, 'waiting', '2015-11-12 16:05:26');
 
 -- --------------------------------------------------------
 
@@ -247,7 +249,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `patronymic` varchar(64) DEFAULT NULL,
   `login` varchar(64) NOT NULL,
   `passwd` varchar(64) NOT NULL,
-  `mail` varchar(64) NOT NULL,
   `home` int(11) NOT NULL,
   `room` int(11) DEFAULT NULL,
   `role` varchar(16) NOT NULL DEFAULT 'user',
@@ -258,22 +259,23 @@ CREATE TABLE IF NOT EXISTS `users` (
   `contacts` varchar(64) DEFAULT NULL COMMENT 'Телефонный номер (номера) пользователя',
   PRIMARY KEY (`id`),
   KEY `users_home_id_fkey` (`home`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `surname`, `patronymic`, `login`, `passwd`, `mail`, `home`, `room`, `role`, `bdate`, `floor`, `gender`, `picture`, `contacts`) VALUES
-(1, 'Админ', 'Админов', 'Админович', 'admin@campus.mephi.ru', '21232f297a57a5a743894a0e4a801fc3', 'admin@campus.mephi.ru', 1, 1, 'admin', NULL, NULL, 'М', NULL, NULL),
-(2, 'Олежка', 'Судаков', NULL, 'campus@campus.mephi.ru', '162832ab572046b2dd00c343cf5096c7', 'campus@campus.mephi.ru', 2, 2, 'campus', NULL, NULL, NULL, NULL, NULL),
-(3, 'Иван', 'Макеев', 'Станиславович', 'local@campus.mephi.ru', 'f5ddaf0ca7929578b408c909429f68f2', 'local@campus.mephi.ru', 0, 0, 'local', '1995-02-24', NULL, 'М', NULL, NULL),
-(4, 'Настя', 'Косткина', 'Дмитриевна', 'moder@campus.mephi.ru', '9ab97e0958c6c98c44319b8d06b29c94', 'moder@campus.mephi.ru', 4, 4, 'moder', NULL, NULL, 'Ж', NULL, NULL),
-(5, 'Илью-сантехник', 'Романов', NULL, 'staff@campus.mephi.ru', '1253208465b1efa876f982d8a9e73eef', 'staff@campus.mephi.ru', 0, 0, 'staff', NULL, NULL, 'М', NULL, NULL),
-(6, 'Женька', 'Харитонов', 'Александрович', 'manage@campus.mephi.ru', '70682896e24287b0476eff2a14c148f0', 'manage@campus.mephi.ru', 4, 7, 'manage', NULL, NULL, 'М', NULL, NULL),
-(7, 'Саня', 'Нестеров', NULL, 'campus1@campus.mephi.com', '162832ab572046b2dd00c343cf5096c7', 'campus1@campus.mephi.com', 3, 33, 'campus', NULL, NULL, 'М', NULL, NULL),
-(8, 'Диман', 'Коротких', NULL, 'staff1@campus.mephi.ru', '1253208465b1efa876f982d8a9e73eef', 'staff1@campus.mephi.ru', 1, 10, 'staff', NULL, NULL, NULL, NULL, NULL),
-(9, 'Саня', 'Савельев', NULL, 'staff2@campus.mephi.ru', '1253208465b1efa876f982d8a9e73eef', 'staff2@campus.mephi.ru', 6, 6, 'staff', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` (`id`, `name`, `surname`, `patronymic`, `login`, `passwd`, `home`, `room`, `role`, `bdate`, `floor`, `gender`, `picture`, `contacts`) VALUES
+(1, 'Админ', 'Админов', 'Админович', 'admin@campus.mephi.ru', '21232f297a57a5a743894a0e4a801fc3', 1, 1, 'admin', NULL, NULL, 'М', NULL, NULL),
+(2, 'Олежка', 'Судаков', NULL, 'campus@campus.mephi.ru', '162832ab572046b2dd00c343cf5096c7', 2, 2, 'campus', NULL, NULL, NULL, NULL, NULL),
+(3, 'Иван', 'Макеев', 'Станиславович', 'local@campus.mephi.ru', 'f5ddaf0ca7929578b408c909429f68f2', 0, 0, 'local', '1995-02-24', NULL, 'М', NULL, NULL),
+(4, 'Настя', 'Косткина', 'Дмитриевна', 'moder@campus.mephi.ru', '9ab97e0958c6c98c44319b8d06b29c94', 4, 4, 'moder', NULL, NULL, 'Ж', NULL, NULL),
+(5, 'Илью-сантехник', 'Романов', NULL, 'staff@campus.mephi.ru', '1253208465b1efa876f982d8a9e73eef', 0, 0, 'staff', NULL, NULL, 'М', NULL, NULL),
+(6, 'Женька', 'Харитонов', 'Александрович', 'manage@campus.mephi.ru', '70682896e24287b0476eff2a14c148f0', 4, 7, 'manage', NULL, NULL, 'М', NULL, NULL),
+(7, 'Саня', 'Нестеров', NULL, 'campus1@campus.mephi.com', '162832ab572046b2dd00c343cf5096c7', 3, 33, 'campus', NULL, NULL, 'М', NULL, NULL),
+(8, 'Диман', 'Коротких', NULL, 'staff1@campus.mephi.ru', '1253208465b1efa876f982d8a9e73eef', 1, 10, 'staff', NULL, NULL, NULL, NULL, NULL),
+(9, 'Саня', 'Савельев', NULL, 'staff2@campus.mephi.ru', '1253208465b1efa876f982d8a9e73eef', 6, 6, 'staff', NULL, NULL, NULL, NULL, NULL),
+(10, 'Анита', 'Баландина', 'Ивановна', 'staff3@campus.mephi.ru', '1253208465b1efa876f982d8a9e73eef', 3, 6, 'staff', NULL, NULL, 'Ж', NULL, NULL);
 
 --
 -- Constraints for dumped tables
@@ -283,62 +285,63 @@ INSERT INTO `users` (`id`, `name`, `surname`, `patronymic`, `login`, `passwd`, `
 -- Constraints for table `ad`
 --
 ALTER TABLE `ad`
-  ADD CONSTRAINT `owner_fkey` FOREIGN KEY (`owner`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `ads_location_fkey` FOREIGN KEY (`location`) REFERENCES `address` (`id`);
+  ADD CONSTRAINT `ads_location_fkey` FOREIGN KEY (`location`) REFERENCES `address` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `owner_fkey` FOREIGN KEY (`owner`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `ad_cat`
 --
 ALTER TABLE `ad_cat`
-  ADD CONSTRAINT `c_fkey` FOREIGN KEY (`cat`) REFERENCES `category` (`id`),
-  ADD CONSTRAINT `a_fkey` FOREIGN KEY (`ad`) REFERENCES `ad` (`id`);
+  ADD CONSTRAINT `c_fkey` FOREIGN KEY (`cat`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `a_fkey` FOREIGN KEY (`ad`) REFERENCES `ad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `area`
 --
 ALTER TABLE `area`
-  ADD CONSTRAINT `afs_key` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`),
-  ADD CONSTRAINT `afa_key` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`);
+  ADD CONSTRAINT `afa_key` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `afs_key` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comments_uid_fkey` FOREIGN KEY (`uid`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `comments_aid_fkey` FOREIGN KEY (`aid`) REFERENCES `ad` (`id`);
+  ADD CONSTRAINT `comments_uid_fkey` FOREIGN KEY (`uid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `comments_aid_fkey` FOREIGN KEY (`aid`) REFERENCES `ad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `favorite`
 --
 ALTER TABLE `favorite`
-  ADD CONSTRAINT `fus_fkey` FOREIGN KEY (`uid`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `fad_fkey` FOREIGN KEY (`aid`) REFERENCES `ad` (`id`);
+  ADD CONSTRAINT `fus_fkey` FOREIGN KEY (`uid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fad_fkey` FOREIGN KEY (`aid`) REFERENCES `ad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `ord_fkey` FOREIGN KEY (`owner`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `serv_fkey` FOREIGN KEY (`serv`) REFERENCES `service` (`id`);
+  ADD CONSTRAINT `serv_fkey` FOREIGN KEY (`serv`) REFERENCES `service` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ord_fkey` FOREIGN KEY (`owner`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `perf_fkey` FOREIGN KEY (`performer`) REFERENCES `staff` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `photo`
 --
 ALTER TABLE `photo`
-  ADD CONSTRAINT `p_fkey` FOREIGN KEY (`ad`) REFERENCES `ad` (`id`);
+  ADD CONSTRAINT `p_fkey` FOREIGN KEY (`ad`) REFERENCES `ad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `staff`
 --
 ALTER TABLE `staff`
-  ADD CONSTRAINT `staff_uid_fkey` FOREIGN KEY (`uid`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `staff_sid_fkey` FOREIGN KEY (`sid`) REFERENCES `service` (`id`);
+  ADD CONSTRAINT `staff_sid_fkey` FOREIGN KEY (`sid`) REFERENCES `service` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `staff_uid_fkey` FOREIGN KEY (`uid`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `users_home_id_fkey` FOREIGN KEY (`home`) REFERENCES `address` (`id`);
+  ADD CONSTRAINT `users_home_id_fkey` FOREIGN KEY (`home`) REFERENCES `address` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
