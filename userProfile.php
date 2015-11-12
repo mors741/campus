@@ -52,7 +52,7 @@
 					<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Редактировать</a></li>
 					<li role="presentation"><a href="#privacySettings" aria-controls="privacySettings" role="tab" data-toggle="tab">Настройки приватности</a></li>
 					<?php if ($user_data['role'] != 'local') {
-						echo '<li role="presentation"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Заявки</a></li>';
+						echo '<li role="presentation"><a href="#services" aria-controls="services" role="tab" data-toggle="tab">Заявки</a></li>';
 					}?>
 					<li role="presentation"><a href="#favourites" aria-controls="favourites" role="tab" data-toggle="tab">Закладки</a></li>
 					<li role="presentation"><a href="#myAds" aria-controls="myAds" role="tab" data-toggle="tab">Мои объявления</a></li>
@@ -259,42 +259,52 @@ EOT;
 						</div>
 					</div>
 					<?php if ($user_data['role'] != 'local') {
-						echo '<div role="tabpanel" class="tab-pane" id="tools">';
+						echo '<div role="tabpanel" class="tab-pane" id="services">';
 						if ($user_data['role'] == 'admin' or $user_data['role'] == 'manage' or $user_data['role'] == 'moder') {
 							echo "<h1>Все заявки на услуги:</h1>";
-							$query = "SELECT id, owner, description, serv, ordate, timeint, state, ts,
+							$query = "SELECT id, /*owner, performer,*/ description, serv, ordate, timeint, state, date_create,
 										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
 										(SELECT name FROM service WHERE id = serv) as category,
 										(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
 											FROM address, users
-											WHERE users.id = owner AND home = address.id) as address
+											WHERE users.id = owner AND home = address.id) as address,
+										(SELECT CONCAT(name,\" \", surname)
+											FROM staff, users
+											WHERE orders.performer = staff.id and staff.uid = users.id) as performer
 										FROM orders
-										ORDER BY ts DESC" 
+										ORDER BY date_create DESC" 
 										or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 						}
 						if ($user_data['role'] == 'staff') {
-							echo "<h1>Ваши заявки на услуги:</h1>";
-							$query = "SELECT id, owner, description, serv, ordate, timeint, state, ts,
+							echo "<h1>Заявки для выполнения:</h1>";
+							$query = "SELECT orders.id as id, /*owner, performer,*/ description, serv, ordate, timeint, state, date_create,
 										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
 										(SELECT name FROM service WHERE id = serv) as category,
 										(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
 											FROM address, users
-											WHERE users.id = owner AND home = address.id) as address
-										FROM orders
-										ORDER BY ts DESC" 
+											WHERE users.id = owner AND home = address.id) as address,
+										(SELECT CONCAT(name,\" \", surname)
+											FROM staff, users
+											WHERE orders.performer = staff.id and staff.uid = users.id) as performer
+										FROM orders, staff, users
+										WHERE  orders.performer = staff.id and staff.uid = users.id and users.id = ".$user_data['id']."
+										ORDER BY date_create DESC" 
 										or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 						}
 						if ($user_data['role'] == 'campus') {
 							echo "<h1>Мои заявки на услуги:</h1>";
-							$query = "SELECT id, owner, description, serv, ordate, timeint, state, ts,
+							$query = "SELECT id, /*owner, performer,*/ description, serv, ordate, timeint, state, date_create,
 										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
 										(SELECT name FROM service WHERE id = serv) as category,
 										(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
 											FROM address, users
-											WHERE users.id = owner AND home = address.id) as address
+											WHERE users.id = owner AND home = address.id) as address,
+										(SELECT CONCAT(name,\" \", surname)
+											FROM staff, users
+											WHERE orders.performer = staff.id and staff.uid = users.id) as performer
 										FROM orders
 										WHERE owner = " .$user_data['id'].
-										" ORDER BY ts DESC" 
+										" ORDER BY date_create DESC" 
 										or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 						}
 						$result = $link->query($query);
@@ -319,8 +329,9 @@ EOT;
 										."<p>Дата и время обслуживания: ".$ord_data['ordate']." ".$timeint."</p>\n"
 										."<p>Адрес: ".$ord_data['address']."</p>\n"
 										."<p>Автор заявки: ".$ord_data['author']."</p>\n"
-										."<p>Дата и время добавления заявки: ".$ord_data['ts']."</p>\n"
+										."<p>Дата и время добавления заявки: ".$ord_data['date_create']."</p>\n"
 										."<p>Состояние заказа: ".$ord_data['state']."</p>\n"
+										."<p>Исполнитель заказа: ".$ord_data['performer']."</p>\n"
 										
 									);
 								//echo ('<a href="services.php?inv='.$ord_data['id'].'" class="button danger" style="text-align:center;">Удалить</a><br><br>');
