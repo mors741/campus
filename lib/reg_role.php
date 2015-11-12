@@ -45,7 +45,6 @@ if(isset($_POST['register'])){
 alert("Ваш аккаунт успешно создан!")
 </script>
 <script>
-document.location.replace("http://localhost/campus/");
 </script>
 _END;
 			die();
