@@ -100,7 +100,17 @@
 			<form action="" method="post" id="register-form">
 				<div class="span-reg">
 					<div class="control-group form-group">
-						<label for="login">Логин (email НИЯУ МИФИ)</label>
+						<?php
+							if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
+								echo '
+									<label for="login">Логин (email)</label>
+									';
+							} else {
+								echo '
+									<label for="login">Логин (email НИЯУ МИФИ)</label>
+									';
+							}
+						?>
 						<div class="form-group">
 							<input type="text" name="login" id="login" class="form-control" placeholder="email"/>
 
@@ -172,18 +182,30 @@
 					</div>
 					<?php
 					if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
-						echo '
+						echo <<<END
 						<hr>
 						<div class="control-group form-group">
 						<label For="role">Роль</label>
-						<select Class="form-control" Id="select_role" Name ="select_role">
+						<select Class="form-control" Id="select_role" Name ="select_role"  onchange = "if (this.options[this.selectedIndex].value === 'staff') $('#staff').css('display', 'inline-block'); else $('#staff').css('display', 'none');">
 						<option Value="admin">Администратор сайта</option>
 						<option Value="moder">Модератор сайта</option>
 						<option Value="manage">Администрация общежития</option>
 						<option Value="staff">Персонал общежития</option>
 						</select>
 						</div>
-						';
+						<div id="staff" style="display:none; width:100%">
+						<div class="control-group form-group">
+						<label for="post">Должность</label>
+						<div class="form group">
+						<select Class="form-control" name="select_post" id="select_post">
+						<option value="1">Сантехник</option>
+						<option value="2">Электрик</option>
+						<option value="3">Плотник</option>
+						</select>
+						</div>
+						</div>
+						</div>
+END;
 					}
 					?>
 				</div>

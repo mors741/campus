@@ -39,6 +39,20 @@ if(isset($_POST['register'])){
 
 		$query = "INSERT INTO users(login,passwd,name,surname,role,home,room) VALUES('$login','$password','".$name."','$surname','$user','$home','$room')" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
 		$result1 = $link->query($query);
+		if ($result1 == true && $user == 'staff'){
+			$sid = $_POST['select_post'];
+			$query = "SELECT id FROM users WHERE login='$login'" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+			$result = $link->query($query);
+			$myrow = mysqli_fetch_array($result);
+			if (!empty($myrow['id'])) {
+				$uid = $myrow['id'];
+				$query = "INSERT INTO staff(uid,sid) VALUES('$uid','$sid')" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+				$result1 = $link->query($query);
+			} 
+			else {
+				$result1 = false;
+			}
+		}
 		if ($result1 == true){
 			echo <<<_END
 			<script>
