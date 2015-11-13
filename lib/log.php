@@ -44,6 +44,8 @@
                         $result = $link->query($query);
                         $user_data = mysqli_fetch_array($result);
                         $result->close();
+                        $_SESSION['role'] = $user_data['role'];
+                        // echo '<script> alert("$_SESSION["role"] = $user_data["role"];") </script>';
                         echo '<div id="sign-out">
 								<div class="dropdown">
 									<ul class="nav navbar-nav navbar-right">

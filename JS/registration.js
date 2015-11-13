@@ -213,6 +213,7 @@ jQuery.validator.setDefaults({
     $("#no").click(function () {
         if ($("input:checked").val() === "nouser") {
             $("#user").css('display', 'none');
+            //$("#home").css('display', 'none');
             $("#home [value='0']").attr('selected', 'selected');
             $("#home :first").attr('selected', 'selected');
             $("#home").prop("disabled", true);

@@ -395,99 +395,18 @@ EOT;
 							echo '</div>';
 					}?>
 					<div role="tabpanel" class="tab-pane" id="favourites">Здесь будут закладки</div>
-					<div role="tabpanel" class="tab-pane" id="myAds">Здесь будут объявления</div>
+					<div role="tabpanel" class="tab-pane" id="myAds">
+					</div>
 					<?php if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder') {
 						echo '<div role="tabpanel" class="tab-pane" id="tools">';
 						// include "registration_role.php";
-						echo '<div Class="panel-heading"><h4 Class="modal-title">Добавление нового пользователя</h4></div>
-						<form Action="" Method="post" Id="register-form">
-						<div Class="span-reg">
-						<div Class="control-group Form-group">
-						<label For="login">Логин (email НИЯУ МИФИ)</label>
-						<div Class="form-group">
-						<input Type="text" Name="login" Id="login" Class="form-control" Placeholder="email"/>
-
-						</div>
-						</div>
-
-						<div Class="control-group Form-group">
-						<label For="password">Пароль</label>
-						<div Class="form-group">
-						<input Type="password" Name="pass" Id="pass" Class="form-control"  Placeholder="пароль" Rel="tooltip"/>
-
-						</div>
-						</div>
-
-						<div Class="control-group Form-group">
-						<label For="password">Подтвердите пароль</label>
-						<div Class="form-group">
-						<input Type="password" Name="rpass" Id="rpass" Class="form-control"  Placeholder="пароль"/>
-						</div>
-						</div>
-
-
-						<div Class="control-group Form-group">
-						<label For="surname">Фамилия</label>
-						<div Class="form-group">
-						<input Type="text" Name="surname" Id="surname" Class="form-control" Placeholder="фамилия"/>
-						</div>
-						</div>
-
-						<div Class="control-group Form-group">
-						<label For="name">Имя</label>
-						<div Class="form-group">
-						<input Type="text" Name="name" Id="name" Class="form-control" Placeholder="имя"/>
-						</div>
-						</div>
-						<div Class="control-group Form-group" >
-						<label For="yes">Проживаете в общежитии?</label>
-						<div Class="form-group">
-						<label><input Type="radio" Name="yes" Id="yes" Value="user"  Title="да"/>Да</label>
-						<label><input Type="radio" Name="yes" Id="no" Value="nouser"  Title="нет"/>Нет</label>
-						<br>
-						<label For="yes" Class="error" Generated="true" Style="display:none"></label>
-						</div>
-						</div>
-						<div Id="user" Style="display:none">
-						<div Class="control-group Form-group">
-						<label For="home">Адрес</label>
-						<div Class="form Group">
-						<select Name="home" Id="home" Class="form-control">
-						<option Value="0" Selected="selected">(выберите Корпус Общежития)</option>
-						<option Value="1">ул. Москворечье Д.2 Корп 1</option>
-						<option Value="2">ул. Москворечье Д.2 Корп 2</option>
-						<option Value="3">ул. Москворечье, Д.19 Корп 3</option>
-						<option Value="4">ул. Москворечье, Д.19 Корп 4</option>
-						<option Value="5">ул. Кошкина Д.11 Корп. 1</option>
-						<option Value="6">ул. Шкулева Д.27 Ст 2</option>
-						<option Value="7">ул. Пролетарский Проспект Д. 8 Корп. 2</option>
-						</select>
-						</div>
-						</div>
-
-
-						<div Class="control-group Form-group" >
-						<label For="room">Квартира</label>
-						<div Class="form-group">
-						<input Type="text"  Value="" Name="room" Id="room" Class="form-control"/>
-						</div>
-						</div>
-						</div>
-						<label For="role">Роль:</label>
-						<select Class="form-control" Id="role" Name ="select_role">
-						<option Value="admin">Администратор</option>
-						<option Value="staff">Персонал</option>
-						</select>
-
-						<br>
-						<hr>
-						<div Class="control-group Form-group">
-						<input Type="submit"  Class="btn Btn-primary" Value="зарегистрироваться" Name="register"/>
-						</div>
-						</div>
-						</form>
-						</div>';
-						echo '</div>';
+						echo <<<END
+							<div Class="panel-heading"><h4 Class="modal-title">Добавление нового пользователя</h4></div>
+								<div class="container">
+									<input type="submit" Class="btn Btn-primary" value="Зарегистрировать нового пользователя" onclick=" location.href='registration.php'  ">
+								</div>
+							</div>'
+END;
 					}?>
 					
 				</div>
