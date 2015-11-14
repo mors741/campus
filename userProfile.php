@@ -266,7 +266,7 @@ EOT;
 					<?php if ($user_data['role'] != 'local') {
 						echo '<div role="tabpanel" class="tab-pane" id="services">';
 						if ($user_data['role'] == 'admin' or $user_data['role'] == 'manage' or $user_data['role'] == 'moder') {
-							echo "<h1>Все заявки на услуги</h1>";
+							echo "<h3><strong>Все заявки на услуги</strong></h3><br/>";
 							$check_query = "SELECT count(id) as count,
 										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
 										(SELECT name FROM service WHERE id = serv) as category,
@@ -297,7 +297,7 @@ EOT;
 							}
 						}
 						if ($user_data['role'] == 'staff') {
-							echo "<h1>Заявки для выполнения</h1>";
+							echo "<h3><strong>Заявки для выполнения</strong></h3><br/>";
 							$check_query = "SELECT count(orders.id) as count,
 										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
 										(SELECT name FROM service WHERE id = serv) as category,
@@ -330,7 +330,7 @@ EOT;
 							}
 						}
 						if ($user_data['role'] == 'campus') {
-							echo "<h1>Мои заявки на услуги</h1>";
+							echo "<h3><strong>Мои заявки на услуги</strong></h3><br/>";
 							$check_query = "SELECT count(id) as count, 
 										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
 										(SELECT name FROM service WHERE id = serv) as category,
@@ -379,16 +379,16 @@ EOT;
 							}
 							
 							do {
-								echo ('<div style="background-color:white" class="sector">
+								echo ('<div class="form-group">
 
-											<p>Категория: '.$ord_data['category']."</p>\n"
-											."<p>Описание: ".$ord_data['description']."</p>\n"
-											."<p>Дата и время обслуживания: ".$ord_data['ordate']." ".$timeint."</p>\n"
-											."<p>Адрес: ".$ord_data['address']."</p>\n"
-											."<p>Автор заявки: ".$ord_data['author']."</p>\n"
-											."<p>Дата и время добавления заявки: ".$ord_data['date_create']."</p>\n"
-											."<p>Состояние заказа: ".$ord_data['state']."</p>\n"
-											."<p>Исполнитель заказа: ".$ord_data['performer']."</p>\n"
+											<p><strong>Категория: </strong>'.$ord_data['category']."</p>\n"
+											."<p><strong>Описание: </strong>".$ord_data['description']."</p>\n"
+											."<p><strong>Дата и время обслуживания:</strong> ".$ord_data['ordate']." ".$timeint."</p>\n"
+											."<p><strong>Адрес:</strong> ".$ord_data['address']."</p>\n"
+											."<p><strong>Автор заявки:</strong> ".$ord_data['author']."</p>\n"
+											."<p><strong>Дата и время добавления заявки:</strong> ".$ord_data['date_create']."</p>\n"
+											."<p><strong>Состояние заказа:</strong> ".$ord_data['state']."</p>\n"
+											."<p><strong>Исполнитель заказа:</strong> ".$ord_data['performer']."</p>\n"
 											
 										);
 									//echo ('<a href="services.php?inv='.$ord_data['id'].'" class="button danger" style="text-align:center;">Удалить</a><br><br>');
@@ -410,7 +410,7 @@ EOT;
 								<div class="container">
 									<input type="submit" Class="btn Btn-primary" value="Зарегистрировать нового пользователя" onclick=" location.href='registration.php'  ">
 								</div>
-							</div>'
+							</div>
 END;
 					}?>
 					
