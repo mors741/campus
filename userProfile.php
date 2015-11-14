@@ -44,7 +44,7 @@
 <div class="container">
 <div class="span3">
 
-	<div class="row" style="width: 200%">
+	<div class="row" style="width: 210%">
 		<div class="col-md-6">
 			<div class="card">
 				<ul class="nav nav-tabs" role="tablist">
@@ -55,9 +55,14 @@
 						echo '<li role="presentation"><a href="#services" aria-controls="services" role="tab" data-toggle="tab">Заявки</a></li>';
 					}?>
 					<li role="presentation"><a href="#favourites" aria-controls="favourites" role="tab" data-toggle="tab">Закладки</a></li>
-					<li role="presentation"><a href="#myAds" aria-controls="myAds" role="tab" data-toggle="tab">Мои объявления</a></li>
-					<?php if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder') {
+					<?php if ($user_data['role'] != 'staff') {
+						echo '<li role="presentation"><a href="#myAds" aria-controls="myAds" role="tab" data-toggle="tab">Мои объявления</a></li>';
+					}?>
+					<?php if ($user_data['role'] == 'moder') {
 						echo '<li role="presentation"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Инструменты модератора</a></li>';
+					}
+					if ($user_data['role'] == 'admin') {
+						echo '<li role="presentation"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Инструменты администратора</a></li>';
 					}?>
 				</ul>
 				<!-- Tab panes -->
@@ -77,7 +82,7 @@
 												echo $user_data['patronymic'];
 											}?>
 											<br/><label for="surname">Фамилия: </label> <?php echo $user_data['surname'] ?>
-											<?php if (($user_data['role'] != 'local') && ($user_data['role'] != 'campus')) {
+											<?php if ($user_data['role'] == 'staff') {
 												echo '<br/><label for="post">Должность: </label> ';
 												echo $user_data['post'];
 											}?>
