@@ -64,7 +64,7 @@ $active = false;
 	while ($time_data=mysqli_fetch_array($result1)){
 		$hour = $time_data['timeint'] + 8;
 		echo '<label class="btn btn-custom gradient';
-		if ($time_data['perfcount'] < 1) {
+		if ($time_data['perfcount'] < $staffcount) {
 			if (!$active) {
 				echo ' active';
 				$active = true;

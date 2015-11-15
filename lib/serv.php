@@ -13,7 +13,7 @@ if(isset($_POST['add_order']) && isset($_SESSION['login'])) {
 		echo '<script> alert("Такого быть не должно!") </script>';
 	}
 	$owner = $myrow['id'];
-	$serv = $_POST['address'];
+	$serv = $_POST['service'];
 	$description = $_POST['comment'];
 	$ordate = date('Y-m-d',strtotime($_POST['ordate']));
 	$timeint = $_POST['timeint'];
