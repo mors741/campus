@@ -61,18 +61,7 @@ $(document).ready(function () {
             'Должна быть указана почта МИФИ'
             );
 
-    $.validator.addMethod(
-            'correctName',
-            function (value, element) {
-                var reg = /[a-zа-яё'_-]{1,64}/g;
-                var res = value.match(reg);
-                if (res === null || res.length > 1) {
-                    return false;//return false
-                }
-                return true;
-            },
-            'Только латинские и русские буквы и символы \' _ -'
-            );
+
 
     $.validator.addMethod(
             'correctName',
@@ -92,7 +81,7 @@ $(document).ready(function () {
             function (value, element) {
                 var res = value;
 
-                res = res.match(/[0-9A-Za-z_-]/);
+                res = res.match(/[0-9a-z_-]/);
                 if (res === null || res.length > 1) {
                     return false;
                 }
