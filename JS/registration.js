@@ -66,8 +66,8 @@ $(document).ready(function () {
     $.validator.addMethod(
             'correctName',
             function (value, element) {
-                         var res = /[!%&*?\/;~`$^:=+()#@№"0-9]/g;
-                var reg2 = /[a-zA-Zа-яЁА-ЯЁ'_-]/g;                  
+                      var res = /[!%\./\,/\{/\}/<>"&*?\\//\]/\[/\|/;~`$^:=+\(/\)/#@№"0-9]/g;
+                var reg2 = /[a-zA-Zа-яёА-ЯЁ'_-]/g;                  
                 var result = res.test(value);
                 var result2 = reg2.test(value);
                 if (result === true && result2===true) {
@@ -86,31 +86,17 @@ $(document).ready(function () {
     $.validator.addMethod(
             'passCheck',
             function (value, element) {
-                var res = /[!%&*?\/;~`$^:=+()#'@№"А-ЯЁа-яё]/g;
+               var res = /[!%\./\,/\{/\}/<>"&*?\\//\]/\[/\|/;~`$^:=+\(/\)/#@№"\'/]/g;
                 var reg2 = /[0-9a-z_-]/g;
-                var reg3 =/[A-Z]/g;
+                var reg3 =/[а-яёА-ЯЁA-Z]/g;
                    
                 var result = res.test(value);
                 var result2 = reg2.test(value);
                 var result3=reg3.test(value);
-                if (result === true && result2===true && result3==true) {
-                    return false;
-                }
-                if (result === true && result2===false && result3==true) {
-                    return false;
-                }
-                if (result === true && result2===true && result3==false) {
-                    return false;
-                }
-                if (result === true && result2===false && result3==false) {
-                    return false;
-                }
-                if (result === false && result2===false && result3==true) {
-                    return false;
-                }
-                if (result === false && result2===true && result3==true) {
-                    return false;
-                }
+               
+                if (result===false && result2===true && result3===false){
+                return true;
+            }
                 
                 return true;
             },

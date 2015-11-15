@@ -2,13 +2,17 @@
      $.validator.addMethod(
             'passCheck',
             function (value, element) {
-                var res = value;
-
-                res = res.match(/[0-9A-Za-z_-]/);
-                if (res === null || res.length > 1) {
-                    return false;
-                }
+            var res = /[!%\./\,/\{/\}/<>"&*?\\//\]/\[/\|/;~`$^:=+\(/\)/#@№"\'/]/g;
+                var reg2 = /[0-9a-z_-]/g;
+                var reg3 =/[а-яёА-ЯЁA-Z]/g;
+                   
+                var result = res.test(value);
+                var result2 = reg2.test(value);
+                var result3=reg3.test(value);
+               
+                if (result===false && result2===true && result3===false){
                 return true;
+            }
             },
             'Только строчные латинские буквы, цифры и знаки подчеркивания'
             );

@@ -1,21 +1,29 @@
 $(document).ready(function () {
 
     function isCorrectName(value) {
-        var reg = /[a-zа-яё'_-]{1,64}/g;
-        var res = value.match(reg);
-        if (res === null || res.length > 1) {
-            return false;//return false
-        }
-        return true;
+              var res = /[!%\./\,/\{/\}/<>"&*?\\//\]/\[/\|/;~`$^:=+\(/\)/#@№"0-9]/g;
+                var reg2 = /[a-zA-Zа-яЁА-ЯЁ'_-]/g;                  
+                var result = res.test(value);
+                var result2 = reg2.test(value);
+
+                if (result === false && result2===true) {
+                    return true;
+                }
+
     }
 
     function isCorrectRoom(value) {
-        var reg = /[0-9]{1,4}/g;
-        var res = value.match(reg);
-        if (res === null || res.length > 1) {
-            return false;//return false
-        }
-        return true;
+         var res = /[!%\./\,/\{/\}/<>"&*?\\//\]/\[/\|/;~`$^:=+\(/\)/#@№"']/g;
+                var reg2 = /[0-9]{1,4}/g;
+                var reg3 =/[а-яёА-ЯЁA-Za-z]/g;
+                   
+                var result = res.test(value);
+                var result2 = reg2.test(value);
+                var result3=reg3.test(value);
+               
+                if (result===false && result2===true && result3===false){
+                return true;
+            }
     }
 
     $('#password').blur(function ()
