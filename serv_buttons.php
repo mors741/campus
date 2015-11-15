@@ -73,7 +73,7 @@ $active = false;
 			echo ' disabled';
 		}
 		echo '" style="width: 120px" >
-			<input type="radio" name="options" id="'.$time_data["timeint"].'" autocomplete="off" onchange="document.getElementById("timeint").setAttribute("value", this.id)"> '.$hour.':00 - '.$hour.':45
+			<input type="radio" name="options" id="'.$time_data["timeint"].'" autocomplete="off" onchange="document.getElementById(\'timeint\').setAttribute(\'value\', this.id)"> '.$hour.':00 - '.$hour.':45
 		</label>';
 	};
 mysqli_close($con);
