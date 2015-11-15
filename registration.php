@@ -181,14 +181,20 @@
 						</div>
 					</div>
 					<?php
-					if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
+					if (isset($_SESSION['role']) && ($_SESSION['role'] == "admin" || $_SESSION['role'] == "moder")) {
 						echo <<<END
 						<hr>
 						<div class="control-group form-group">
 						<label For="role">Роль</label>
 						<select Class="form-control" Id="select_role" Name ="select_role"  onchange = "if (this.options[this.selectedIndex].value === 'staff') $('#staff').css('display', 'inline-block'); else $('#staff').css('display', 'none');">
-						<option Value="admin">Администратор сайта</option>
-						<option Value="moder">Модератор сайта</option>
+END;
+						if ($_SESSION['role'] == "admin") {			
+							echo <<<END
+							<option Value="admin">Администратор сайта</option>
+							<option Value="moder">Модератор сайта</option>
+END;
+						}
+						echo <<<END
 						<option Value="manage">Администрация общежития</option>
 						<option Value="staff">Персонал общежития</option>
 						</select>
