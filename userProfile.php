@@ -193,12 +193,14 @@ if ($user_data['room'] != 0) {
                                                     </div>
                                                 </fieldset>
                                                 <br>
-                                                 <fieldset>
-                                                    <legend>Дополнительная информация</legend>
-                                                <?php
-                                                if ($user_data['role'] != 'local' && $user_data['role' != 'campus']) {
+												
+												<?php
+                                                if ($user_data['role'] == 'staff') {
                                                     $role = $user_data['role'];
                                                     echo <<< EOT
+                                                 <fieldset>
+                                                    <legend>Дополнительная информация</legend>
+                                                
 										<div class="control-group form-group">
 											<label for="post">Должность</label>
 											<div class="form-group">
@@ -210,11 +212,15 @@ if ($user_data['room'] != 0) {
 EOT;
                                                 }
                                                 ?>
+												</fieldset>
+												
                                                 <?php
                                                 if ($user_data['role'] == 'local' || $user_data['role'] == 'campus') {
                                                     $gender = $user_data['gender'];
                                                     $bdate=$user_data['bdate'];
                                                     echo <<< EOT
+													<fieldset>
+                                                    <legend>Дополнительная информация</legend>
 									<div class="control-group form-group">
 										<label for="patronymic">Пол</label>
 										<div class="form-group">
