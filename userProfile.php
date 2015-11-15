@@ -48,26 +48,27 @@
         <div class="container">
             <div class="span3">
 
-                <div class="row" style="width: 200%">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Личная информация</a></li>
-                                <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Редактировать</a></li>
-                                <li role="presentation"><a href="#privacySettings" aria-controls="privacySettings" role="tab" data-toggle="tab">Настройки приватности</a></li>
-                                <?php
-                                if ($user_data['role'] != 'local') {
-                                    echo '<li role="presentation"><a href="#services" aria-controls="services" role="tab" data-toggle="tab">Заявки</a></li>';
-                                }
-                                ?>
-                                <li role="presentation"><a href="#favourites" aria-controls="favourites" role="tab" data-toggle="tab">Закладки</a></li>
-                                <li role="presentation"><a href="#myAds" aria-controls="myAds" role="tab" data-toggle="tab">Мои объявления</a></li>
-                                <?php
-                                if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder') {
-                                    echo '<li role="presentation"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Инструменты модератора</a></li>';
-                                }
-                                ?>
-                            </ul>
+	<div class="row" style="width: 210%">
+		<div class="col-md-6">
+			<div class="card">
+				<ul class="nav nav-tabs" role="tablist">
+					<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Личная информация</a></li>
+					<li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Редактировать</a></li>
+					<li role="presentation"><a href="#privacySettings" aria-controls="privacySettings" role="tab" data-toggle="tab">Настройки приватности</a></li>
+					<?php if ($user_data['role'] != 'local') {
+						echo '<li role="presentation"><a href="#services" aria-controls="services" role="tab" data-toggle="tab">Заявки</a></li>';
+					}?>
+					<li role="presentation"><a href="#favourites" aria-controls="favourites" role="tab" data-toggle="tab">Закладки</a></li>
+					<?php if ($user_data['role'] != 'staff') {
+						echo '<li role="presentation"><a href="#myAds" aria-controls="myAds" role="tab" data-toggle="tab">Мои объявления</a></li>';
+					}?>
+					<?php if ($user_data['role'] == 'moder') {
+						echo '<li role="presentation"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Инструменты модератора</a></li>';
+					}
+					if ($user_data['role'] == 'admin') {
+						echo '<li role="presentation"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Инструменты администратора</a></li>';
+					}?>
+				</ul>
                             <!-- Tab panes -->
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane active" id="home">
@@ -140,7 +141,7 @@ if ($user_data['room'] != 0) {
                                                     <div class="control-group form-group" style="margin-left: 40px">
 
                                                         <span class="btn btn-default btn-file">               
-                                                            Выбрать<input type="file"  id="js-upload-files"  name="datafile" onchange="fileUpload(this.form, 'lib/upload_file.php', 'upload'); return false;">
+                                                            Выбрать<input type="file"  id="js-upload-files"  name="datafile" onchange="fileUpload(this.form, 'upload_file.php', 'upload'); return false;">
                                                         </span>
                                                     </div>
                                                 </form>
@@ -282,50 +283,49 @@ EOT;
 ?>
                                                  </fieldset>
                                                 <br/><button type="" onclick="document.location.reload()" class="btn btn-default">Обновить информацию</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div role="tabpanel" class="tab-pane" id="privacySettings">
-                                    <div class="container">
-                                        <br/><label>Выберите личные данные, которые вы хотите скрыть от просмотра другими пользователями</label>
-                                        <div class="form-inline">
-                                            <br/><label for="login">E-Mail</label>
-                                            <label for="hide" style="margin-left: 200px"><input type="checkbox" value="">   Скрыть</label>
-                                        </div>
-                                        <div class="form-inline">
-                                            <br/><label for="name">Имя</label>
-                                            <label for="hide" style="margin-left: 214px"><input type="checkbox" value="">   Скрыть</label>
-                                        </div>
-                                        <div class="form-inline">
-                                            <br/><label for="surname">Фамилия</label>
-                                            <label for="hide" style="margin-left: 177px"><input type="checkbox" value="">   Скрыть</label>
-                                        </div>
-                                        <div class="form-inline">
-                                            <br/><label for="birthday">Дата рождения</label>
-                                            <label for="hide" style="margin-left: 136px"><input type="checkbox" value="">   Скрыть</label>
-                                        </div>
-                                        <div class="form-inline">
-                                            <br/><label for="contact">Контакты</label>
-                                            <label for="hide" style="margin-left: 178px"><input type="checkbox" value="">   Скрыть</label>
-                                        </div>
-                                        <div class="form-inline">
-                                            <br/><label for="address">Адрес</label>
-                                            <label for="hide" style="margin-left: 199px"><input type="checkbox" value="">   Скрыть</label>
-                                        </div>
-                                        <div class="form-inline">
-                                            <br/><label for="room">Комната</label>
-                                            <label for="hide" style="margin-left: 184px"><input type="checkbox" value="">   Скрыть</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php
-                                if ($user_data['role'] != 'local') {
-                                    echo '<div role="tabpanel" class="tab-pane" id="services">';
-                                    if ($user_data['role'] == 'admin' or $user_data['role'] == 'manage' or $user_data['role'] == 'moder') {
-                                        echo "<h1>Все заявки на услуги</h1>";
-                                        $check_query = "SELECT count(id) as count,
-										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
+                                           </div>
+							</div>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="privacySettings">
+						<div class="container">
+							<br/><label>Выберите личные данные, которые вы хотите скрыть от просмотра другими пользователями</label>
+							<div class="form-inline">
+								<br/><label for="login">E-Mail</label>
+								<label for="hide" style="margin-left: 200px"><input type="checkbox" value="">   Скрыть</label>
+							</div>
+							<div class="form-inline">
+								<br/><label for="name">Имя</label>
+								<label for="hide" style="margin-left: 214px"><input type="checkbox" value="">   Скрыть</label>
+							</div>
+							<div class="form-inline">
+								<br/><label for="surname">Фамилия</label>
+								<label for="hide" style="margin-left: 177px"><input type="checkbox" value="">   Скрыть</label>
+							</div>
+							<div class="form-inline">
+								<br/><label for="birthday">Дата рождения</label>
+								<label for="hide" style="margin-left: 136px"><input type="checkbox" value="">   Скрыть</label>
+							</div>
+							<div class="form-inline">
+								<br/><label for="contact">Контакты</label>
+								<label for="hide" style="margin-left: 178px"><input type="checkbox" value="">   Скрыть</label>
+							</div>
+							<div class="form-inline">
+								<br/><label for="address">Адрес</label>
+								<label for="hide" style="margin-left: 199px"><input type="checkbox" value="">   Скрыть</label>
+							</div>
+							<div class="form-inline">
+								<br/><label for="room">Комната</label>
+								<label for="hide" style="margin-left: 184px"><input type="checkbox" value="">   Скрыть</label>
+							</div>
+						</div>
+					</div>
+					<?php if ($user_data['role'] != 'local') {
+						echo '<div role="tabpanel" class="tab-pane" id="services">';
+						if ($user_data['role'] == 'admin' or $user_data['role'] == 'manage' or $user_data['role'] == 'moder') {
+							echo "<h3><strong>Все заявки на услуги</strong></h3><br/>";
+							$check_query = "SELECT count(id) as count,
+				(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
 										(SELECT name FROM service WHERE id = serv) as category,
 										(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
 											FROM address, users
@@ -351,13 +351,13 @@ EOT;
 											FROM staff, users
 											WHERE orders.performer = staff.id and staff.uid = users.id) as performer
 										FROM orders
-										ORDER BY date_create DESC"
-                                                    or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-                                        }
-                                    }
-                                    if ($user_data['role'] == 'staff') {
-                                        echo "<h1>Заявки для выполнения</h1>";
-                                        $check_query = "SELECT count(orders.id) as count,
+										ORDER BY date_create DESC" 
+										or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
+							}
+						}
+						if ($user_data['role'] == 'staff') {
+							echo "<h3><strong>Заявки для выполнения</strong></h3><br/>";
+							$check_query = "SELECT count(orders.id) as count,
 										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
 										(SELECT name FROM service WHERE id = serv) as category,
 										(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
@@ -385,14 +385,14 @@ EOT;
 												FROM staff, users
 												WHERE orders.performer = staff.id and staff.uid = users.id) as performer
 											FROM orders, staff, users
-											WHERE  orders.performer = staff.id and staff.uid = users.id and users.id = " . $user_data['id'] . "
-											ORDER BY date_create DESC"
-                                                    or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-                                        }
-                                    }
-                                    if ($user_data['role'] == 'campus') {
-                                        echo "<h1>Мои заявки на услуги</h1>";
-                                        $check_query = "SELECT count(id) as count, 
+											WHERE  orders.performer = staff.id and staff.uid = users.id and users.id = ".$user_data['id']."
+											ORDER BY date_create DESC" 
+											or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
+							}
+						}
+						if ($user_data['role'] == 'campus') {
+							echo "<h3><strong>Мои заявки на услуги</strong></h3><br/>";
+							$check_query = "SELECT count(id) as count, 
 										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
 										(SELECT name FROM service WHERE id = serv) as category,
 										(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
@@ -420,161 +420,69 @@ EOT;
 												FROM staff, users
 												WHERE orders.performer = staff.id and staff.uid = users.id) as performer
 											FROM orders
-											WHERE owner = " . $user_data['id'] .
-                                                    " ORDER BY date_create DESC"
-                                                    or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-                                        }
-                                    }
-                                    if ($ord_data['count'] != 0) {
-                                        $result = $link->query($query);
-                                        $ord_data = mysqli_fetch_array($result);
-                                        echo ('<div id="content">');
-                                        $timeint = "";
-                                        switch ($ord_data['timeint']) {
-                                            case 1: $timeint = "9:00-9:45";
-                                                break;
-                                            case 2: $timeint = "10:00-10:45";
-                                                break;
-                                            case 3: $timeint = "11:00-11:45";
-                                                break;
-                                            case 4: $timeint = "12:00-10:45";
-                                                break;
-                                            case 5: $timeint = "14:00-14:45";
-                                                break;
-                                            case 6: $timeint = "15:00-15:45";
-                                                break;
-                                            case 7: $timeint = "16:00-16:45";
-                                                break;
-                                            case 8: $timeint = "17:00-17:45";
-                                                break;
-                                        }
+								WHERE owner = " .$user_data['id'].
+											" ORDER BY date_create DESC" 
+											or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
+							}
+						}
+						if ($ord_data['count'] != 0) {
+							$result = $link->query($query);
+							$ord_data = mysqli_fetch_array($result);			
+							echo ('<div id="content">');
+							$timeint = "";
+							switch ($ord_data['timeint']) {
+								case 1: $timeint = "9:00-9:45"; break;
+								case 2: $timeint = "10:00-10:45"; break;
+								case 3: $timeint = "11:00-11:45"; break;
+								case 4: $timeint = "12:00-10:45"; break;
+								case 5: $timeint = "14:00-14:45"; break;
+								case 6: $timeint = "15:00-15:45"; break;
+								case 7: $timeint = "16:00-16:45"; break;
+								case 8: $timeint = "17:00-17:45"; break;
+							}
+							
+							do {
+								echo ('<div class="form-group">
 
-                                        do {
-                                            echo ('<div style="background-color:white" class="sector">
+											<p><strong>Категория: </strong>'.$ord_data['category']."</p>\n"
+											."<p><strong>Описание: </strong>".$ord_data['description']."</p>\n"
+											."<p><strong>Дата и время обслуживания:</strong> ".$ord_data['ordate']." ".$timeint."</p>\n"
+											."<p><strong>Адрес:</strong> ".$ord_data['address']."</p>\n"
+											."<p><strong>Автор заявки:</strong> ".$ord_data['author']."</p>\n"
+											."<p><strong>Дата и время добавления заявки:</strong> ".$ord_data['date_create']."</p>\n"
+											."<p><strong>Состояние заказа:</strong> ".$ord_data['state']."</p>\n"
+											."<p><strong>Исполнитель заказа:</strong> ".$ord_data['performer']."</p>\n"
+											
+										);
+									//echo ('<a href="services.php?inv='.$ord_data['id'].'" class="button danger" style="text-align:center;">Удалить</a><br><br>');
 
-											<p>Категория: ' . $ord_data['category'] . "</p>\n"
-                                            . "<p>Описание: " . $ord_data['description'] . "</p>\n"
-                                            . "<p>Дата и время обслуживания: " . $ord_data['ordate'] . " " . $timeint . "</p>\n"
-                                            . "<p>Адрес: " . $ord_data['address'] . "</p>\n"
-                                            . "<p>Автор заявки: " . $ord_data['author'] . "</p>\n"
-                                            . "<p>Дата и время добавления заявки: " . $ord_data['date_create'] . "</p>\n"
-                                            . "<p>Состояние заказа: " . $ord_data['state'] . "</p>\n"
-                                            . "<p>Исполнитель заказа: " . $ord_data['performer'] . "</p>\n"
-
-                                            );
-                                            //echo ('<a href="services.php?inv='.$ord_data['id'].'" class="button danger" style="text-align:center;">Удалить</a><br><br>');
-
-                                            echo ('</div>');
-                                        } while ($ord_data = mysqli_fetch_array($result));
-                                        echo ('</div>');
-                                    }
-                                    echo '</div>';
-                                }
-                                ?>
-                                <div role="tabpanel" class="tab-pane" id="favourites">Здесь будут закладки</div>
-                                <div role="tabpanel" class="tab-pane" id="myAds">Здесь будут объявления</div>
-                                <?php
-                                if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder') {
-                                    echo '<div role="tabpanel" class="tab-pane" id="tools">';
-                                    // include "registration_role.php";
-                                    echo '<div Class="panel-heading"><h4 Class="modal-title">Добавление нового пользователя</h4></div>
-						<form Action="" Method="post" Id="register-form">
-						<div Class="span-reg">
-						<div Class="control-group Form-group">
-						<label For="login">Логин (email НИЯУ МИФИ)</label>
-						<div Class="form-group">
-						<input Type="text" Name="login" Id="login" Class="form-control" Placeholder="email"/>
-
-						</div>
-						</div>
-
-						<div Class="control-group Form-group">
-						<label For="password">Пароль</label>
-						<div Class="form-group">
-						<input Type="password" Name="pass" Id="pass" Class="form-control"  Placeholder="пароль" Rel="tooltip"/>
-
-						</div>
-						</div>
-
-						<div Class="control-group Form-group">
-						<label For="password">Подтвердите пароль</label>
-						<div Class="form-group">
-						<input Type="password" Name="rpass" Id="rpass" Class="form-control"  Placeholder="пароль"/>
-						</div>
-						</div>
-
-
-						<div Class="control-group Form-group">
-						<label For="surname">Фамилия</label>
-						<div Class="form-group">
-						<input Type="text" Name="surname" Id="surname" Class="form-control" Placeholder="фамилия"/>
-						</div>
-						</div>
-
-						<div Class="control-group Form-group">
-						<label For="name">Имя</label>
-						<div Class="form-group">
-						<input Type="text" Name="name" Id="name" Class="form-control" Placeholder="имя"/>
-						</div>
-						</div>
-						<div Class="control-group Form-group" >
-						<label For="yes">Проживаете в общежитии?</label>
-						<div Class="form-group">
-						<label><input Type="radio" Name="yes" Id="yes" Value="user"  Title="да"/>Да</label>
-						<label><input Type="radio" Name="yes" Id="no" Value="nouser"  Title="нет"/>Нет</label>
-						<br>
-						<label For="yes" Class="error" Generated="true" Style="display:none"></label>
-						</div>
-						</div>
-						<div Id="user" Style="display:none">
-						<div Class="control-group Form-group">
-						<label For="home">Адрес</label>
-						<div Class="form Group">
-						<select Name="home" Id="home" Class="form-control">
-						<option Value="0" Selected="selected">(выберите Корпус Общежития)</option>
-						<option Value="1">ул. Москворечье Д.2 Корп 1</option>
-						<option Value="2">ул. Москворечье Д.2 Корп 2</option>
-						<option Value="3">ул. Москворечье, Д.19 Корп 3</option>
-						<option Value="4">ул. Москворечье, Д.19 Корп 4</option>
-						<option Value="5">ул. Кошкина Д.11 Корп. 1</option>
-						<option Value="6">ул. Шкулева Д.27 Ст 2</option>
-						<option Value="7">ул. Пролетарский Проспект Д. 8 Корп. 2</option>
-						</select>
-						</div>
-						</div>
-
-
-						<div Class="control-group Form-group" >
-						<label For="room">Квартира</label>
-						<div Class="form-group">
-						<input Type="text"  Value="" Name="room" Id="room" Class="form-control"/>
-						</div>
-						</div>
-						</div>
-						<label For="role">Роль:</label>
-						<select Class="form-control" Id="role" Name ="select_role">
-						<option Value="admin">Администратор</option>
-						<option Value="staff">Персонал</option>
-						</select>
-
-						<br>
-						<hr>
-						<div Class="control-group Form-group">
-						<input Type="submit"  Class="btn Btn-primary" Value="зарегистрироваться" Name="register"/>
-						</div>
-						</div>
-						</form>
-						</div>';
-                                    echo '</div>';
-                                }
-                                ?>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+								echo ('</div>');
+							} while ($ord_data=mysqli_fetch_array($result));
+							echo ('</div>');
+						}
+							echo '</div>';
+					}?>
+					<div role="tabpanel" class="tab-pane" id="favourites">Здесь будут закладки</div>
+					<div role="tabpanel" class="tab-pane" id="myAds">
+					</div>
+					<?php if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder') {
+						echo '<div role="tabpanel" class="tab-pane" id="tools">';
+						// include "registration_role.php";
+						echo <<<END
+							<div Class="panel-heading"><h4 Class="modal-title">Добавление нового пользователя</h4></div>
+								<div class="container">
+									<input type="submit" Class="btn Btn-primary" value="Зарегистрировать нового пользователя" onclick=" location.href='registration.php'  ">
+								</div>
+							</div>
+END;
+					}?>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
         <!--Обязательно указывайте исходные библиотеки jQuery над всеми остальными скриптами-->
         <script src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>

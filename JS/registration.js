@@ -45,6 +45,9 @@ $(document).ready(function () {
     $.validator.addMethod(
             'mephiEmail',
             function (value, element) {
+                if ($('a[class="account btn-group-au"]').text()) {
+                    return true;
+                }
                 var res = value.split('@');
                 if (res[1] !== 'campus.mephi.ru') {
                     return false;
@@ -213,6 +216,7 @@ jQuery.validator.setDefaults({
     $("#no").click(function () {
         if ($("input:checked").val() === "nouser") {
             $("#user").css('display', 'none');
+            //$("#home").css('display', 'none');
             $("#home [value='0']").attr('selected', 'selected');
             $("#home :first").attr('selected', 'selected');
             $("#home").prop("disabled", true);
@@ -222,10 +226,7 @@ jQuery.validator.setDefaults({
         }
 
     });
-    
+
     $('#pass').pstrength();
-
-
-
 });
 
