@@ -195,21 +195,7 @@ if ($user_data['room'] != 0) {
                                                 <br>
                                                  <fieldset>
                                                     <legend>Дополнительная информация</legend>
-                                                <?php
-                                                if ($user_data['role'] != 'local' && $user_data['role' != 'campus']) {
-                                                    $role = $user_data['role'];
-                                                    echo <<< EOT
-										<div class="control-group form-group">
-											<label for="post">Должность</label>
-											<div class="form-group">
-											<div id="post" class="editable">$role</div>
-										</div>
-                                                                                </br>
-                                                            
-										</div>
-EOT;
-                                                }
-                                                ?>
+                                              
                                                 <?php
                                                 if ($user_data['role'] == 'local' || $user_data['role'] == 'campus') {
                                                     $gender = $user_data['gender'];

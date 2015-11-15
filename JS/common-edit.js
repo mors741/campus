@@ -137,7 +137,6 @@ $(document).ready(function () {
                 submit: 'Сохранить',
                 type: 'masked',
                 mask: '8(999)999-99-99',
-                
                 indicator: '',
                 tooltip: "Щелкните, чтобы отредактировать контакты"
 
