@@ -22,7 +22,7 @@ if(isset($_POST['register'])){
 			$user="campus";
 		}
 	}
-	if (isset($_SESSION['role']) && $_SESSION['role'] == "admin") {
+	if (isset($_SESSION['role']) && ($_SESSION['role'] == "admin" || $_SESSION['role'] == "moder")) {
 		$user=$_POST["select_role"];
 	}
 	$query="SET NAMES 'utf8'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
@@ -59,7 +59,7 @@ if(isset($_POST['register'])){
 			alert("Ваш аккаунт успешно создан!")
 			</script>
 _END;
-			if (!isset($_SESSION['role']) || $_SESSION['role'] != "admin") {
+			if (!isset($_SESSION['role']) || $_SESSION['role'] != "admin" || $_SESSION['role'] != "moder") {
 				echo <<<_END
 				<script>
 				document.location.replace("http://localhost/campus/");

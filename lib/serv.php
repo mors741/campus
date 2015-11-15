@@ -15,10 +15,11 @@ if(isset($_POST['add_order']) && isset($_SESSION['login'])) {
 	$owner = $myrow['id'];
 	$serv = $_POST['address'];
 	$description = $_POST['comment'];
-	$ordate = $_POST['ordate'];
+	$ordate = date('Y-m-d',strtotime($_POST['ordate']));
 	$timeint = $_POST['timeint'];
 	$state = 'waiting';
 	$date_create = date("Y-m-d H:i:s");
+	echo '<script> alert($ordate) </script>';
 
 	$query="SET NAMES 'utf8'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 	$res = $link->query($query);
@@ -38,7 +39,7 @@ else {
 	echo '<script> alert("Зарегистрируйтесь.") </script>';
 }
 // НЕЛЬЗЯ ТАК ДЕЛАТЬ!!! КАК ПОТОМ ВЫХОДИТЬ НА УДАЛЕННЫЙ СЕРВЕР!!!
-echo '<script>
-		document.location.replace("http://localhost/campus/");
-	</script>';
+// echo '<script>
+// 		document.location.replace("http://localhost/campus/");
+// 	</script>';
 ?>
