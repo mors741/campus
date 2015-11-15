@@ -2492,21 +2492,19 @@ table th[class*="col-"] {
   }
 }
 fieldset {
-  min-width: 0;
-  padding: 0;
+  min-width: 1px;
+  padding: 5px;
   margin: 0;
-  border: 0;
+  border: 4;
 }
 legend {
   display: block;
-  width: 100%;
   padding: 0;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   font-size: 21px;
-  line-height: inherit;
   color: #333;
   border: 0;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 0 solid #e5e5e5;
 }
 label {
   display: inline-block;

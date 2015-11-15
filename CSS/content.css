@@ -171,3 +171,116 @@ label.valid {
 font-size : 8px;
 height:10px;
 }
+
+.editable, 
+.editable_select, 
+.editable_contact, 
+.editable_address,
+.editable_room 
+{
+     display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  border: 1px solid #656F7E;
+  border-radius: 4px;
+  background-color:#fff;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+
+.editable:hover,
+.editable_select:hover,
+.editable_contact:hover,
+.editable_address:hover,
+.editable_room:hover
+{
+background:url('../Pictures/edit.png') right no-repeat #80C8E5;
+cursor:pointer;
+ display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+
+
+
+.editable > form > input,
+.editable_address > form > select,
+.editable_select > form > select,
+.editable_contact > form > input,
+.editable_room >form > input
+{
+
+ display: block;
+  width: 100%;
+  height: 24px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  border-radius: 6px;
+  
+  
+}
+
+
+
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+    
+       #upload{
+  margin:10px 30px; padding:10px;
+  font-weight:bold; font-size:12px;
+  font-family:Arial, Helvetica, sans-serif;
+  text-align:center;
+  background:#f2f2f2;
+  color:#3366cc;
+  border:1px solid #ccc;
+  width:140px;
+  cursor:pointer !important;
+  -moz-border-radius:5px; -webkit-border-radius:5px;
+}
+.darkbg{
+  background:#ddd !important;
+}
+#status{
+  font-family:Arial; padding:5px;
+}
+ul#files{ list-style:none; padding:0; margin:0; }
+ul#files li{ padding:10px; margin-bottom:2px; width:200px; float:left; margin-right:10px;}
+ul#files li img{ max-width:160px; max-height:150px; }
+.success{}
