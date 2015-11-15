@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
         <link rel="stylesheet" href="CSS/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" href="CSS/button.css" />
 
 
     </head>
@@ -449,26 +450,35 @@ EOT;
 							
 							do {
 								echo ('<div class="form-group">
-
-											<p><strong>Категория: </strong>'.$ord_data['category']."</p>\n"
-											."<p><strong>Описание: </strong>".$ord_data['description']."</p>\n"
-											."<p><strong>Дата и время обслуживания:</strong> ".$ord_data['ordate']." ".$timeint."</p>\n"
-											."<p><strong>Адрес:</strong> ".$ord_data['address']."</p>\n"
-											."<p><strong>Автор заявки:</strong> ".$ord_data['author']."</p>\n"
-											."<p><strong>Дата и время добавления заявки:</strong> ".$ord_data['date_create']."</p>\n"
-											."<p><strong>Состояние заказа:</strong> ".$ord_data['state']."</p>\n"
-											."<p><strong>Исполнитель заказа:</strong> ".$ord_data['performer']."</p>\n"
-											
+									<div style="background-color: #eeeeee" class="panel panel-default">
+										<p><strong>Дата и время добавления заявки:</strong> '.$ord_data['date_create'].'</p>
+										<p><strong>Состояние заказа:</strong> '.$ord_data['state'].'</p>
+											<div class="panel-heading">
+											  <button type="button" class="btn btn-default btn-xs spoiler-trigger" data-toggle="collapse">Подробная информация о заявке</button>
+											</div>
+											 <div style="background-color: #eeeeee;" class="panel-collapse collapse out">
+												<div class="panel-body">
+													<p><strong>Категория: </strong>'.$ord_data['category']."</p>\n"
+													."<p><strong>Описание: </strong>".$ord_data['description']."</p>\n"
+													."<p><strong>Дата и время обслуживания:</strong> ".$ord_data['ordate']." ".$timeint."</p>\n"
+													."<p><strong>Адрес:</strong> ".$ord_data['address']."</p>\n"
+													."<p><strong>Автор заявки:</strong> ".$ord_data['author']."</p>\n"
+													."<p><strong>Дата и время добавления заявки:</strong> ".$ord_data['date_create']."</p>\n"
+													."<p><strong>Состояние заказа:</strong> ".$ord_data['state']."</p>\n"
+													."<p><strong>Исполнитель заказа:</strong> ".$ord_data['performer']."</p>\n<br/>"
 										);
 									//echo ('<a href="services.php?inv='.$ord_data['id'].'" class="button danger" style="text-align:center;">Удалить</a><br><br>');
-
+												echo('</div>');
+											echo ('</div>');
+									echo ('</div>');
 								echo ('</div>');
+								echo'<br/>';
 							} while ($ord_data=mysqli_fetch_array($result));
 							echo ('</div>');
 						}
 							echo '</div>';
 					}?>
-					<div role="tabpanel" class="tab-pane" id="favourites">Здесь будут закладки</div>
+					<div  role="tabpanel" class="tab-pane" id="favourites">Здесь будут закладки</div>
 					<div role="tabpanel" class="tab-pane" id="myAds">
 					</div>
 					<?php if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder') {
@@ -507,6 +517,11 @@ END;
         <script src="js/common-edit.js"></script>
         <script src="js/upload_avatar.js"></script>
 
+	<script>
+		$(".spoiler-trigger").click(function() {
+			$(this).parent().next().collapse('toggle');
+		});
+	</script>
 
 
 
