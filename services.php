@@ -14,6 +14,30 @@
 
 <!-- ... -->
 
+<script>
+function showButtons(serv, date) {
+    if (serv == "") {
+        document.getElementById("time").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("time").innerHTML = "<label for='time'>Выберите удобный промежуток времени</label><br/>"+xmlhttp.responseText;
+            }
+        };
+        xmlhttp.open("GET","serv_buttons.php?serv="+serv+"&date="+date.substr(6, 4)+"-"+date.substr(3, 2)+"-"+date.substr(0, 2),true); 
+		//alert("serv_buttons.php?serv="+serv+"&date="+date.substr(6, 4)+"-"+date.substr(3, 2)+"-"+date.substr(0, 2));
+        xmlhttp.send();
+    }
+}
+</script>
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -21,6 +45,9 @@
 <link rel="stylesheet" href="CSS/bootstrap.min.css" />
 <link rel="stylesheet" href="CSS/bootstrap-datetimepicker.min.css" />
 <link rel="stylesheet" href="CSS/button.css" />
+
+
+
 </head>
 
 <body>
@@ -48,9 +75,9 @@
 		<form method = "post" action = "./lib/serv.php">
 			<div class="span3">
 				<div class="control-group">
-					<label for="address">Выберите тип оказываемой услуги</label>
+					<label for="service">Выберите тип оказываемой услуги</label>
 					<div class="controls">
-						<select name="address" id="address" class="form-control">
+						<select name="service" id="service" class="form-control" onchange="showButtons(document.getElementById('service').value, $('#datetimepicker1').data('date'))">
 							<option value="" selected="selected">Выберите услугу</option>
 							<option value="1">Сантехник</option>
 							<option value="2">Электрик</option>
@@ -75,32 +102,8 @@
 				</div>
 
 				<input type="number" name="timeint" id="timeint" value="1" style="display:none"/> 
-				<div id="time" selectedValue="1" class=" btn-group; data-toggle = "buttons";" data-toggle="buttons" >
-					<label for="time">Выберите удобный промежуток времени</label><br/>
-					<label class="btn btn-custom gradient active" style="width: 120px" >
-						<input type="radio" name="options" id="1" autocomplete="off" onchange="document.getElementById('timeint').setAttribute('value', this.id)">9:00 - 9:45
-					</label>
-					<label class="btn btn-custom gradient disabled" style="width: 120px" >
-						<input type="radio" name="options" id="2" autocomplete="off"> 10:00 - 10:45
-					</label>
-					<label class="btn btn-custom gradient" style="width: 120px ; background-s" >
-						<input type="radio" name="options" id="3" autocomplete="off" onchange="document.getElementById('timeint').setAttribute('value', this.id)"> 11:00 - 11:45
-					</label>
-					<label class="btn btn-custom gradient" style="width: 120px" >
-						<input type="radio" name="options" id="4" autocomplete="off" onchange="document.getElementById('timeint').setAttribute('value', this.id)"> 12:00 - 12:45
-					</label>
-					<label class="btn btn-custom gradient" style="width: 120px" >
-						<input type="radio" name="options" id="5" autocomplete="off" onchange="document.getElementById('timeint').setAttribute('value', this.id)"> 14:00 - 14:45
-					</label>
-					<label class="btn btn-custom gradient" style="width: 120px" >
-						<input type="radio" name="options" id="6" autocomplete="off" onchange="document.getElementById('timeint').setAttribute('value', this.id)"> 15:00 - 15:45
-					</label>
-					<label class="btn btn-custom gradient" style="width: 120px" >
-						<input type="radio" name="options" id="7" autocomplete="off" onchange="document.getElementById('timeint').setAttribute('value', this.id)"> 16:00 - 16:45
-					</label>
-					<label class="btn btn-custom gradient" style="width: 120px" >
-						<input type="radio" name="options" id="8" autocomplete="off" onchange="document.getElementById('timeint').setAttribute('value', this.id)"> 17:00 - 17:45
-					</label>
+				<div id="time" selectedValue="1" class=" btn-group; data-toggle = "buttons";" data-toggle="buttons" >				
+
 				</div>
 				<br/>
 				<input Type="submit"  Class="btn Btn-primary" Value="Отправить" Name="add_order"/>
