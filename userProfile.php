@@ -194,15 +194,15 @@ if ($user_data['room'] != 0) {
                                                     </div>
                                                 </fieldset>
                                                 <br>
-                                                 <fieldset>
-                                                    <legend>Дополнительная информация</legend>
+                                             
 
                                                 <?php
                                                 if ($user_data['role'] == 'local' || $user_data['role'] == 'campus') {
                                                     $gender = $user_data['gender'];
                                                     $bdate=$user_data['bdate'];
                                                     echo <<< EOT
-													
+									<fieldset>
+                                                    <legend>Дополнительная информация</legend>				
 									<div class="control-group form-group">
 										<label for="patronymic">Пол</label>
 										<div class="form-group">
@@ -227,10 +227,11 @@ if ($user_data['room'] != 0) {
                                                                                 <br>
 										</div>
 									</div>
+                                                            </fieldset>
 EOT;
                                                 }
                                                 ?>
-                                                 </fieldset>
+                                        
                                                 <br>
                                                  <fieldset>
                                                     <legend>Связь с Вами</legend>
@@ -245,7 +246,7 @@ EOT;
                                                 </div>
                                                     
                     <?php
-                        if ($user_data['role'] != 'local') {
+                        if ($user_data['role'] != 'local' && $user_data['role'] != 'staff') {
                                          $room = $user_data['room'];
                                          $home = $user_data['home'];
                                                         echo <<< EOT

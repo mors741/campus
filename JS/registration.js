@@ -66,11 +66,18 @@ $(document).ready(function () {
     $.validator.addMethod(
             'correctName',
             function (value, element) {
-                var reg = /[A-Za-zа-яёА-ЯЁ'_-]{1,64}/g;
-                var res = value.match(reg);
-                if (res === null || res.length > 1) {
-                    return false;//return false
+                         var res = /[!%&*?\/;~`$^:=+()#@№"0-9]/g;
+                var reg2 = /[a-zA-Zа-яЁА-ЯЁ'_-]/g;                  
+                var result = res.test(value);
+                var result2 = reg2.test(value);
+                if (result === true && result2===true) {
+                    return false;
                 }
+                if (result === true && result2===false) {
+                    return false;
+                }
+
+                
                 return true;
             },
             'Только латинские и русские буквы и символы \' _ -'
@@ -79,12 +86,32 @@ $(document).ready(function () {
     $.validator.addMethod(
             'passCheck',
             function (value, element) {
-                var res = value;
-
-                res = res.match(/[0-9a-z_-]/);
-                if (res === null || res.length > 1) {
+                var res = /[!%&*?\/;~`$^:=+()#'@№"А-ЯЁа-яё]/g;
+                var reg2 = /[0-9a-z_-]/g;
+                var reg3 =/[A-Z]/g;
+                   
+                var result = res.test(value);
+                var result2 = reg2.test(value);
+                var result3=reg3.test(value);
+                if (result === true && result2===true && result3==true) {
                     return false;
                 }
+                if (result === true && result2===false && result3==true) {
+                    return false;
+                }
+                if (result === true && result2===true && result3==false) {
+                    return false;
+                }
+                if (result === true && result2===false && result3==false) {
+                    return false;
+                }
+                if (result === false && result2===false && result3==true) {
+                    return false;
+                }
+                if (result === false && result2===true && result3==true) {
+                    return false;
+                }
+                
                 return true;
             },
             'Только строчные латинские буквы, цифры и знаки подчеркивания'
