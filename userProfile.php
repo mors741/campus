@@ -202,8 +202,7 @@ if ($user_data['room'] != 0) {
                                                     $gender = $user_data['gender'];
                                                     $bdate=$user_data['bdate'];
                                                     echo <<< EOT
-													<fieldset>
-                                                    <legend>Дополнительная информация</legend>
+													
 									<div class="control-group form-group">
 										<label for="patronymic">Пол</label>
 										<div class="form-group">
