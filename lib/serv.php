@@ -20,13 +20,40 @@ if(isset($_POST['add_order']) && isset($_SESSION['login'])) {
 	$state = 'waiting';
 	$date_create = date("Y-m-d H:i:s");
 	echo '<script> alert($ordate) </script>';
+	
+	$query =
+	"SELECT staff_id
+	FROM
+		`area` AS A
+		JOIN `staff` AS S
+		ON A.staff_id = S.id
+	WHERE
+		A.address_id = (SELECT home FROM users WHERE login = '".$_SESSION['login']."') AND
+		S.sid = ".$_POST['service']." AND
+		staff_id NOT IN
+			(
+				SELECT performer
+				FROM `orders`
+				WHERE
+					ordate = '".$_POST['ordate']."' AND
+					timeint = ".$_POST['timeint']."
+			)
+	ORDER BY RAND() LIMIT 1;";
+	
+	$result = $link->query($query);
+	$freestuff = mysqli_fetch_array($result);
+	$performer = $freestuff['staff_id'];
+	$result->close();
+	echo $performer;
 
 	$query="SET NAMES 'utf8'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 	$res = $link->query($query);
 	$query="SET CHARACTERS SET 'utf8'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 	$res = $link->query($query);
+	
+	
 
-	$query = "INSERT INTO orders(owner,performer,description,serv,ordate,timeint,state,date_create) VALUES('$owner','1','$description','$serv','$ordate','$timeint','$state','$date_create')" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+	$query = "INSERT INTO orders(owner,performer,description,serv,ordate,timeint,state,date_create) VALUES('$owner','$performer','$description','$serv','$ordate','$timeint','$state','$date_create')" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
 	$result1 = $link->query($query);
 	if ($result1 == true){
 		echo '<script> alert("Ваша заявка добавлена.") </script>';
@@ -39,7 +66,7 @@ else {
 	echo '<script> alert("Зарегистрируйтесь.") </script>';
 }
 // НЕЛЬЗЯ ТАК ДЕЛАТЬ!!! КАК ПОТОМ ВЫХОДИТЬ НА УДАЛЕННЫЙ СЕРВЕР!!!
-// echo '<script>
-// 		document.location.replace("http://localhost/campus/");
-// 	</script>';
+echo '<script>
+ 		document.location.replace("http://localhost/campus/");
+ 	</script>';
 ?>
