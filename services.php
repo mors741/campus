@@ -106,7 +106,7 @@ function showButtons(serv, date) {
 
 				</div>
 				<br/>
-				<input Type="submit"  Class="btn Btn-primary" Value="Отправить" Name="add_order"/>
+				<input Type="submit"  Class="btn btn-default" Value="Отправить" Name="add_order"/>
 			</div>
 		</form>
 	</div>

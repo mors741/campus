@@ -469,7 +469,7 @@ EOT;
 						echo <<<END
 							<div Class="panel-heading"><h4 Class="modal-title">Добавление нового пользователя</h4></div>
 								<div class="container">
-									<input type="submit" Class="btn Btn-primary" value="Зарегистрировать нового пользователя" onclick=" location.href='registration.php'  ">
+									<input type="submit" Class="btn btn-default" value="Зарегистрировать нового пользователя" onclick=" location.href='registration.php'  ">
 								</div>
 							</div>
 END;
