@@ -40,7 +40,16 @@
                         $res = $link->query($query);
                         $query="SET CHARACTERS SET 'utf8'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
                         $res = $link->query($query);
-                        $query = "SELECT u.*, s.post FROM users as u, staff as s WHERE login='" . $_SESSION['login'] . "';" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+						$query = 
+							"SELECT
+								u.*,
+								s.post
+							FROM
+								users as u
+								INNER JOIN staff as s
+								ON u.id = uid
+							WHERE login='" . $_SESSION['login'] . "';";
+                        //$query = "SELECT u.*, s.post FROM users as u, staff as s WHERE login='" . $_SESSION['login'] . "';" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
                         $result = $link->query($query);
                         $user_data = mysqli_fetch_array($result);
                         $result->close();
