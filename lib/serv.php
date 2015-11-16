@@ -21,8 +21,8 @@ if(isset($_POST['add_order']) && isset($_SESSION['login'])) {
 	$state = 'waiting';
 	$date_create = date("Y-m-d H:i:s");
 	echo '<script> alert($ordate) </script>';
-	
-	$query =
+	// с привязкой к адресу по area
+	/*$query =
 	"SELECT staff_id
 	FROM
 		`area` AS A
@@ -39,7 +39,25 @@ if(isset($_POST['add_order']) && isset($_SESSION['login'])) {
 					ordate = '".$ordate."' AND
 					timeint = ".$timeint."
 			)
+	ORDER BY RAND() LIMIT 1;";*/
+	
+	//  без привязки к адресу по area
+	$query =
+	"SELECT id AS staff_id
+	FROM
+		`staff`
+	WHERE
+		sid = ".$serv." AND
+		id NOT IN
+			(
+				SELECT performer
+				FROM `orders`
+				WHERE
+					ordate = '".$ordate."' AND
+					timeint = ".$timeint."
+			)
 	ORDER BY RAND() LIMIT 1;";
+	//echo $query;
 	
 	$result = $link->query($query);
 	$freestuff = mysqli_fetch_array($result);
