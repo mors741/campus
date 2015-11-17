@@ -46,7 +46,7 @@
 								s.post
 							FROM
 								users as u
-								INNER JOIN staff as s
+								LEFT JOIN staff as s
 								ON u.id = uid
 							WHERE login='" . $_SESSION['login'] . "';";
                         //$query = "SELECT u.*, s.post FROM users as u, staff as s WHERE login='" . $_SESSION['login'] . "';" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
