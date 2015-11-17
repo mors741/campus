@@ -5,13 +5,7 @@
                     $_SESSION['timeout'] = 1200;  //Поменьше
 
                     if (isset($_SESSION['login'])) {
-                        if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > $_SESSION['timeout'])) {
-                            // last request was more than 2 minutes ago
-                            session_unset();     // unset $_SESSION variable for the run-time 
-                            session_destroy();   // destroy session data in storage
-                            echo '<div class="m_auth m_error">Извините, время Вашей сессии истекло</div>';
-                        }
-                        $_SESSION['last_activity'] = time(); // update last activity time stamp
+                         $_SESSION['last_activity'] = time(); // update last activity time stamp
                     }
 
                     if (isset($_POST['enter'])) {
@@ -40,7 +34,16 @@
                         $res = $link->query($query);
                         $query="SET CHARACTERS SET 'utf8'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
                         $res = $link->query($query);
-                        $query = "SELECT u.*, s.post FROM users as u, staff as s WHERE login='" . $_SESSION['login'] . "';" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+						$query = 
+							"SELECT
+								u.*,
+								s.post
+							FROM
+								users as u
+								LEFT JOIN staff as s
+								ON u.id = uid
+							WHERE login='" . $_SESSION['login'] . "';";
+                        //$query = "SELECT u.*, s.post FROM users as u, staff as s WHERE login='" . $_SESSION['login'] . "';" or die("Ошибка при выполнении запроса.." . mysqli_error($link));
                         $result = $link->query($query);
                         $user_data = mysqli_fetch_array($result);
                         $result->close();
