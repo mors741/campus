@@ -36,6 +36,7 @@
     background: -ms-linear-gradient(top,  #FF0000  50%,#980000  50%); /* IE10+ */
     background: linear-gradient(to bottom,  #FF0000  50%,#980000  50%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33a6cc', endColorstr='#0099cc',GradientType=0 ); /* IE6-9 */
+	border-color: #400303;
 }
 
 .btn {
