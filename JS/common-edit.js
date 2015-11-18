@@ -1,29 +1,29 @@
 $(document).ready(function () {
 
     function isCorrectName(value) {
-              var res = /[!%\./\,/\{/\}/<>"&*?\\//\]/\[/\|/;~`$^:=+\(/\)/#@№"0-9]/g;
-                var reg2 = /[a-zA-Zа-яЁА-ЯЁ'_-]/g;                  
-                var result = res.test(value);
-                var result2 = reg2.test(value);
+        var res = /[!%\./\,/\{/\}/<>"&*?\\//\]/\[/\|/;~`$^:=+\(/\)/#@№"0-9]/g;
+        var reg2 = /[a-zA-Zа-яЁА-ЯЁ'_-]/g;
+        var result = res.test(value);
+        var result2 = reg2.test(value);
 
-                if (result === false && result2===true) {
-                    return true;
-                }
+        if (result === false && result2 === true) {
+            return true;
+        }
 
     }
 
     function isCorrectRoom(value) {
-         var res = /[!%\./\,/\{/\}/<>"&*?\\//\]/\[/\|/;~`$^:=+\(/\)/#@№"']/g;
-                var reg2 = /[0-9]{1,4}/g;
-                var reg3 =/[а-яёА-ЯЁA-Za-z]/g;
-                   
-                var result = res.test(value);
-                var result2 = reg2.test(value);
-                var result3=reg3.test(value);
-               
-                if (result===false && result2===true && result3===false){
-                return true;
-            }
+        var res = /[!%\./\,/\{/\}/<>"&*?\\//\]/\[/\|/;~`$^:=+\(/\)/#@№"']/g;
+        var reg2 = /[0-9]{1,4}/g;
+        var reg3 = /[а-яёА-ЯЁA-Za-z]/g;
+
+        var result = res.test(value);
+        var result2 = reg2.test(value);
+        var result3 = reg3.test(value);
+
+        if (result === false && result2 === true && result3 === false) {
+            return true;
+        }
     }
 
     $('#password').blur(function ()
@@ -61,9 +61,9 @@ $(document).ready(function () {
         });
 
     });
-    
-    
-    $(".editable").editable("http://localhost/campus/lib/edit.php",
+
+
+    $(".editable").editable("../campus/lib/edit.php",
             {
                 cancel: 'Отмена',
                 submit: 'Сохранить',
@@ -76,8 +76,8 @@ $(document).ready(function () {
                     if (isCorrectName(original)) {
                         $("#name-error").text('');
                         $("#name-error").attr('class', 'valid');
-                         $("#name-error").css('display', 'inline-block');
-                        
+                        $("#name-error").css('display', 'inline-block');
+
                         input.css('border-color', '#008800').css('color', '#fff');
                         return true;
                     } else {
@@ -91,8 +91,8 @@ $(document).ready(function () {
 
             }
     );
-    
-    $(".editable_select").editable("http://localhost/campus/lib/edit.php", {
+
+    $(".editable_select").editable("../campus/lib/edit.php", {
         data: "{'М':'Мужской','Ж':'Женский'}",
         type: "select",
         cancel: 'Отмена',
@@ -103,8 +103,8 @@ $(document).ready(function () {
 
 
 
-    $('#datetimepicker1').datetimepicker({pickTime: false, language: 'ru',  format: 'YYYY-MM-DD', daysOfWeekDisabled: [0, 6]});
-    
+    $('#datetimepicker1').datetimepicker({pickTime: false, language: 'ru', format: 'YYYY-MM-DD', daysOfWeekDisabled: [0, 6]});
+
     $('#datetimepicker1').change(function ()
     {
         var value = ($("#bdate").val());
@@ -139,7 +139,7 @@ $(document).ready(function () {
     });
 
 
-    $(".editable_contact").editable("http://localhost/campus/lib/edit.php",
+    $(".editable_contact").editable("../campus/lib/edit.php",
             {
                 cancel: 'Отмена',
                 submit: 'Сохранить',
@@ -153,8 +153,8 @@ $(document).ready(function () {
     );
 
 
-    $(".editable_address").editable("http://localhost/campus/lib/edit.php", {
-        data: "{'1':'ул. Москворечье д.2 корп 1','2':'ул. Москворечье д.2 корп 2','3':'ул. Москворечье, д.19 корп 3','4':'ул. Москворечье, д.19 корп 4','5':'ул. Кошкина д.11 корп. 1','6':'ул. Шкулева д.27 ст 2','7':'ул. Пролетарский проспект д. 8 корп. 2'}",
+    $(".editable_address").editable("../campus/lib/edit.php", {
+        data: "{'0':'Я больше не проживаю в общежитии','1':'ул. Москворечье д.2 корп 1','2':'ул. Москворечье д.2 корп 2','3':'ул. Москворечье, д.19 корп 3','4':'ул. Москворечье, д.19 корп 4','5':'ул. Кошкина д.11 корп. 1','6':'ул. Шкулева д.27 ст 2','7':'ул. Пролетарский проспект д. 8 корп. 2'}",
         type: "select",
         cancel: 'Отмена',
         submit: 'Сохранить',
@@ -162,7 +162,7 @@ $(document).ready(function () {
     });
 
 
-    $(".editable_room").editable("http://localhost/campus/lib/edit.php",
+    $(".editable_room").editable("../campus/lib/edit.php",
             {
                 cancel: 'Отмена',
                 submit: 'Сохранить',
@@ -194,10 +194,6 @@ $(document).ready(function () {
     $("#bdate").mask("9999-99-99", {placeholder: "____-__-__"});
 
 
-    });/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+});
 
 
