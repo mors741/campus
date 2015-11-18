@@ -67,6 +67,9 @@ function showButtons(serv, date) {
 					<li><a style="color: whitesmoke" href="dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a></li>
 					<li class="active"><a style="color: whitesmoke" href="services.php">УСЛУГИ</a></li>
 				</ul>
+				<?php
+                    include("/lib/log.php");
+                ?>
 			</div>
 		</div>
 	</nav>

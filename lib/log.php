@@ -2,6 +2,12 @@
                     $link = mysqli_connect('localhost', 'root', '', 'campus') or die("Error " . mysqli_error($link));
                     session_start();
 
+                    if ((!isset($_SESSION['login'])) && $_SERVER['REQUEST_URI'] <> "/campus/index.php") {
+                        echo "<script>alert(\"Для доступа к данной странице необходимо авторизироваться.\");</script>"; 
+                        echo "<script>setTimeout(\"location.href = '/campus/index.php';\",500);</script>";
+                        exit();
+                    }
+
                     $_SESSION['timeout'] = 1200;  //Поменьше
 
                     if (isset($_SESSION['login'])) {
