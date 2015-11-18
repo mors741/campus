@@ -7,8 +7,10 @@
 <meta name="author" content="">
 
 <!-- Le styles -->
+<link rel="stylesheet" type="text/css" href="CSS/dropdown.css" />	
 <link href="CSS/bootstrap.css" rel="stylesheet">
 <link href="CSS/content.css" rel="stylesheet">
+<link rel="stylesheet" href="CSS/bootstrap-datetimepicker.min.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
 
@@ -130,4 +132,10 @@ function showButtons(serv, date) {
 			});
 		});
 	</script>
+	<script src="js/bootstrap-tab.js"></script>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/moment-with-locales.min.js"></script>
+	<script src="js/dropdown.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-datetimepicker.min.js"></script>
 </body></html>
