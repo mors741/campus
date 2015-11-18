@@ -100,7 +100,8 @@
   text-overflow: ellipsis;
   white-space: pre-line;
   height: 60px;
-  row-span: 10;
+  width: 120px;
+
 }
 .bootgrid-table th > .column-header-anchor > .icon {
   display: block;
