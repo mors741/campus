@@ -70,6 +70,28 @@ footer {
     margin-left: -20px;
 }
 
+.span-index1 {
+    width: 46%;
+    background-color: #eeeeee;
+    float:left;
+    padding: 10px;
+    min-height: 1px;
+    margin: 2%;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.span-index2 {
+    width: 46%;
+    background-color: #eeeeee;
+    float:right;
+    padding: 10px;
+    min-height: 1px;
+    margin: 2%;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
 .span4 {
     width: 560px;
     background-color: #eeeeee;

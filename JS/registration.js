@@ -97,8 +97,6 @@ $(document).ready(function () {
                 if (result===false && result2===true && result3===false){
                 return true;
             }
-                
-                return true;
             },
             'Только строчные латинские буквы, цифры и знаки подчеркивания'
             );
