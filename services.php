@@ -7,8 +7,10 @@
 <meta name="author" content="">
 
 <!-- Le styles -->
+<link rel="stylesheet" type="text/css" href="CSS/dropdown.css" />	
 <link href="CSS/bootstrap.css" rel="stylesheet">
 <link href="CSS/content.css" rel="stylesheet">
+<link rel="stylesheet" href="CSS/bootstrap-datetimepicker.min.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.min.css" />
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
 
@@ -67,6 +69,12 @@ function showButtons(serv, date) {
 					<li><a style="color: whitesmoke" href="dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a></li>
 					<li class="active"><a style="color: whitesmoke" href="services.php">УСЛУГИ</a></li>
 				</ul>
+				<?php
+                    include("/lib/log.php");
+                ?>
+                <?php
+                    include("/lib/check_serv.php");
+                ?>
 			</div>
 		</div>
 	</nav>
@@ -87,7 +95,7 @@ function showButtons(serv, date) {
 				</div>
 				<div class="form-group">
 					<br/><label for="comment">Комментарий к заявке</label>
-					<textarea class="form-control" rows="5" name="comment" id="comment" placeholder="Комментарий к заявке"></textarea>
+					<textarea class="form-control" rows="4" name="comment" id="comment" placeholder="Комментарий к заявке"></textarea>
 				</div>
 				<div class="control-group form-group">
 					<label for="date">Выберите дату оказания услуги</label>
@@ -106,16 +114,28 @@ function showButtons(serv, date) {
 
 				</div>
 				<br/>
-				<input Type="submit"  Class="btn Btn-primary" Value="Отправить" Name="add_order"/>
+				<input Type="submit"  Class="btn btn-default" Value="Отправить" Name="add_order"/>
 			</div>
 		</form>
 	</div>
 </div>
 <script src="js/bootstrap-tab.js"></script>
-
-<script type="text/javascript">
-$(function () {
-	$('#datetimepicker1').datetimepicker({pickTime: false, language: 'ru',defaultDate:"09.01.2015", daysOfWeekDisabled: [0, 6]});
-});
-</script>
+	<script>
+		$(function () {
+			$('#datetimepicker1').datetimepicker({
+				pickTime: false,
+				language: 'ru',
+				defaultDate: moment().add('d', 1).toDate(),
+				daysOfWeekDisabled: [0, 6],
+				minDate: moment().add('d', 1).toDate(),
+				maxDate: moment().add('d', 30).toDate()
+			});
+		});
+	</script>
+	<script src="js/bootstrap-tab.js"></script>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/moment-with-locales.min.js"></script>
+	<script src="js/dropdown.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-datetimepicker.min.js"></script>
 </body></html>

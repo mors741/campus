@@ -16,7 +16,8 @@ if (!$con) {
 }
 
 mysqli_select_db($con,"campus");
-$sql=
+//  с привязкой к адресу по area
+/*$sql=
 "SELECT COUNT(*) AS staffcount
 	FROM
 		`area` AS A
@@ -24,7 +25,14 @@ $sql=
 		ON A.staff_id = S.id
 	WHERE
 		S.sid = ".$q." AND
-		A.address_id = (SELECT home FROM users WHERE login = '".$_SESSION['login']."');";
+		A.address_id = (SELECT home FROM users WHERE login = '".$_SESSION['login']."');";*/
+		
+//  без привязки к адресу по area
+$sql=
+"SELECT COUNT(*) AS staffcount
+	FROM `staff`
+	WHERE sid = ".$q.";";
+//echo '<br>'.$sql;
 $result = mysqli_query($con,$sql);
 $myrow = mysqli_fetch_array($result);
 $staffcount = $myrow['staffcount'];
@@ -59,6 +67,7 @@ $sql=
 ) AS t1
 GROUP BY timeint
 ORDER BY timeint";
+//echo '<br>'.$sql;
 $result1 = mysqli_query($con,$sql);
 $active = false;
 	while ($time_data=mysqli_fetch_array($result1)){

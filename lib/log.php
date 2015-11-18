@@ -5,12 +5,12 @@ $link = mysqli_connect('localhost', 'root', '', 'campus')
 
 session_start();
 
-
 if ((!isset($_SESSION['login'])) && ($_SERVER['REQUEST_URI'] <> "/campus/index.php") && ($_SERVER['REQUEST_URI'] <> "/campus/registration.php")) {
     echo "<script>alert(\"Для доступа к данной странице необходимо авторизироваться.\");</script>";
     echo "<script>setTimeout(\"location.href = '/campus/index.php';\",500);</script>";
     exit();
 }
+
 
 if (isset($_POST['enter'])) {
     $query = "SELECT passwd AS password FROM users WHERE login='" . $_POST['login'] . "';" 
@@ -91,4 +91,5 @@ if (isset($_SESSION['login']) || (isset($_COOKIE['login']) && !empty($_COOKIE['l
             </li>
 	</ul>';
 }
+
                     

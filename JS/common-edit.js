@@ -1,4 +1,4 @@
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     function isCorrectName(value) {
         var res = /[!%\./\,/\{/\}/<>"&*?\\//\]/\[/\|/;~`$^:=+\(/\)/#@№"0-9]/g;
@@ -103,9 +103,17 @@ $(document).ready(function () {
 
 
 
-    $('#datetimepicker1').datetimepicker({pickTime: false, language: 'ru', format: 'YYYY-MM-DD', daysOfWeekDisabled: [0, 6]});
 
-    $('#datetimepicker1').change(function ()
+    $('#datetimepicker2').datetimepicker({
+        pickTime: false,
+        language: 'ru',
+        defaultDate: moment(),
+        minDate: "1930-01-10",
+        format : 'YYYY-MM-DD',
+        maxDate : moment()
+    });
+    
+    $('#datetimepicker2').change(function ()
     {
         var value = ($("#bdate").val());
         var id = "bdate";
@@ -137,6 +145,11 @@ $(document).ready(function () {
 
 
     });
+
+			
+
+
+			
 
 
     $(".editable_contact").editable("../campus/lib/edit.php",

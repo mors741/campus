@@ -12,6 +12,7 @@ if(isset($_POST['add_order']) && isset($_SESSION['login'])) {
 	if (empty($myrow['id'])) {
 		echo '<script> alert("Такого быть не должно!") </script>';
 	}
+	$login = $_SESSION['login'];
 	$owner = $myrow['id'];
 	$serv = $_POST['service'];
 	$description = $_POST['comment'];
@@ -20,31 +21,48 @@ if(isset($_POST['add_order']) && isset($_SESSION['login'])) {
 	$state = 'waiting';
 	$date_create = date("Y-m-d H:i:s");
 	echo '<script> alert($ordate) </script>';
-	
-	$query =
+	// с привязкой к адресу по area
+	/*$query =
 	"SELECT staff_id
 	FROM
 		`area` AS A
 		JOIN `staff` AS S
 		ON A.staff_id = S.id
 	WHERE
-		A.address_id = (SELECT home FROM users WHERE login = '".$_SESSION['login']."') AND
-		S.sid = ".$_POST['service']." AND
+		A.address_id = (SELECT home FROM users WHERE login = '".$login."') AND
+		S.sid = ".$serv." AND
 		staff_id NOT IN
 			(
 				SELECT performer
 				FROM `orders`
 				WHERE
-					ordate = '".$_POST['ordate']."' AND
-					timeint = ".$_POST['timeint']."
+					ordate = '".$ordate."' AND
+					timeint = ".$timeint."
+			)
+	ORDER BY RAND() LIMIT 1;";*/
+	
+	//  без привязки к адресу по area
+	$query =
+	"SELECT id AS staff_id
+	FROM
+		`staff`
+	WHERE
+		sid = ".$serv." AND
+		id NOT IN
+			(
+				SELECT performer
+				FROM `orders`
+				WHERE
+					ordate = '".$ordate."' AND
+					timeint = ".$timeint."
 			)
 	ORDER BY RAND() LIMIT 1;";
+	//echo $query;
 	
 	$result = $link->query($query);
 	$freestuff = mysqli_fetch_array($result);
 	$performer = $freestuff['staff_id'];
 	$result->close();
-	echo $performer;
 
 	$query="SET NAMES 'utf8'" or die("Ошибка при выполнении запроса.." . mysqli_error($link)); 
 	$res = $link->query($query);
