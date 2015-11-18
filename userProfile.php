@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta charset="utf-8">
@@ -36,10 +37,7 @@
                         <li><a style="color: whitesmoke" href="services.php">УСЛУГИ</a></li>
                     </ul>
                     <?php
-                    include("/lib/log.php");
-                    ?>
-                    <?php
-                    include('/lib/update_pass.php');
+                    include("lib/log.php");
                     ?>
 
                 </div>
@@ -158,7 +156,7 @@ if ($user_data['room'] != 0) {
                                                             <input type="password" id="password" class="form-control"  placeholder="Старый пароль"/>
                                                         </div>
                                                     </div>
-                                                    <form id="check_passwd" action="" method="POST">
+                                                    <form id="check_passwd" action="lib/update_pass.php" method="POST">
                                                         <div class="control-group form-group">
                                                             <label for="passwd">Новый пароль</label>
                                                             <div class="form-group">
@@ -246,7 +244,7 @@ EOT;
                                                 </div>
                                                     
                     <?php
-                        if ($user_data['role'] != 'local' && $user_data['role'] != 'staff') {
+                        if ($user_data['home'] != '0' && $user_data['role'] != 'staff') {
                                          $room = $user_data['room'];
                                          $home = $user_data['home'];
                                                         echo <<< EOT
