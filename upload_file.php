@@ -1,5 +1,10 @@
 <?php
 
+if ($_FILES["datafile"]["size"] > 500000) {
+  echo "<script>alert(\"Размер файла превышает 500 килобайт. Выберите другой файл.\");</script>"; 
+  $uploadOk = 0;
+} else {
+
 function translit ($text)
 
       {
@@ -35,7 +40,7 @@ $ext = substr(translit($_FILES['datafile']['name']),strpos(translit($_FILES['dat
 $filetypes = array('.jpg','.gif','.bmp','.png','.JPG','.BMP','.GIF','.PNG','.jpeg','.JPEG');
  
 if(!in_array($ext,$filetypes)){
-  echo "<p>Данный формат файлов не поддерживается</p>";}
+  echo "<script>alert(\"Формат файла не поддерживается. Допустимые форматы: .jpg, .gif, .bmp, .png.\");</script>";}
 else{ 
   if (move_uploaded_file($_FILES['datafile']['tmp_name'], $file)) { 
     $session = $_COOKIE['login'];
@@ -46,5 +51,6 @@ else{
   } else {
     echo "error";
   }
+}
 }
 ?>

@@ -142,7 +142,7 @@ if ($user_data['room'] != 0) {
                                                     <div class="control-group form-group" style="margin-left: 40px">
 
                                                         <span class="btn btn-default btn-file">               
-                                                            Выбрать<input type="file"  id="js-upload-files"  name="datafile" onchange="fileUpload(this.form, 'upload_file.php', 'upload'); return false;">
+                                                            Выбрать<input type="file"  id="js-upload-files"  name="datafile" onchange="fileUpload(this.form, 'upload_file.php', 'upload')">
                                                         </span>
                                                     </div>
                                                 </form>
