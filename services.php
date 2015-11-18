@@ -115,10 +115,16 @@ function showButtons(serv, date) {
 	</div>
 </div>
 <script src="js/bootstrap-tab.js"></script>
-
-<script type="text/javascript">
-$(function () {
-	$('#datetimepicker1').datetimepicker({pickTime: false, language: 'ru',defaultDate:"09.01.2015", daysOfWeekDisabled: [0, 6]});
-});
-</script>
+	<script>
+		$(function () {
+			$('#datetimepicker1').datetimepicker({
+				pickTime: false,
+				language: 'ru',
+				defaultDate: moment().add('d', 1).toDate(),
+				daysOfWeekDisabled: [0, 6],
+				minDate: moment().add('d', 1).toDate(),
+				maxDate: moment().add('d', 30).toDate()
+			});
+		});
+	</script>
 </body></html>
