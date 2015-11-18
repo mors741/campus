@@ -215,7 +215,7 @@ if ($user_data['room'] != 0) {
 									<div class="control-group form-group">
 										<label for="birthday">Дата рождения</label>
 										<div class="form-group">
-											<div class="input-group date" id="datetimepicker1">
+											<div class="input-group date" id="datetimepicker2">
 												<input type="text" class="form-control" name="bdate" id="bdate" value="$bdate" />
 												<span class="input-group-addon">
 													<span class="glyphicon glyphicon-calendar"></span>
