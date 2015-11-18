@@ -70,6 +70,9 @@ function showButtons(serv, date) {
 				<?php
                     include("/lib/log.php");
                 ?>
+                <?php
+                    include("/lib/check_serv.php");
+                ?>
 			</div>
 		</div>
 	</nav>
