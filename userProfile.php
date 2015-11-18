@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker3.min.css" />
         <link rel="stylesheet" href="CSS/bootstrap-datetimepicker.min.css" />
 		<link rel="stylesheet" href="CSS/button.css" />
+    <link rel="stylesheet" href="CSS/jquery.bootgrid.css" />
 
 
     </head>
@@ -380,7 +381,7 @@ EOT;
 							}
 						}
 						if ($user_data['role'] == 'campus') {
-							echo "<h3><strong>Мои заявки на услуги</strong></h3><br/>";
+							echo "<h3><strong>Мои заявки на услуги</strong></h3>";
 							$check_query = "SELECT count(id) as count, 
 										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
 										(SELECT name FROM service WHERE id = serv) as category,
@@ -429,34 +430,48 @@ EOT;
 								case 7: $timeint = "16:00-16:45"; break;
 								case 8: $timeint = "17:00-17:45"; break;
 							}
-							
+							echo('<table id="grid-basic" class="table table-hover table-responsive table-bordered" width="2000%">');
+                            echo('
+        <thead>
+        <th colspan="4" rowspan="3" data-column-id="category"><strong>Категория</strong></th>
+        <th  colspan="4" rowspan="3" data-column-id="description"><strong>Описание</strong></th>
+        <th colspan="4" rowspan="3" data-column-id="ordate"><strong>Дата и время обслуживания</strong></th>
+        <th colspan="4" rowspan="3" data-column-id="address"><strong>Адрес</strong></th>
+        <th colspan="4" rowspan="3" data-column-id="author"><strong>Автор заявки</strong></th>
+        <th colspan="4" rowspan="3" data-column-id="date_create"><strong>Дата и время добавления заявки</strong></th>
+        <th colspan="4" rowspan="3" data-column-id="state"><strong>Состояние заказа</strong> </th>
+        <th colspan="4" rowspan="3" data-column-id="performer"><strong>Исполнитель заказа</strong></th>
+
+        </thead>');
 							do {
-								echo ('<div class="form-group">
-									<div style="background-color: #eeeeee" class="panel panel-default">
-										<p><strong>Дата и время добавления заявки:</strong> '.$ord_data['date_create'].'</p>
-										<p><strong>Состояние заказа:</strong> '.$ord_data['state'].'</p>
-											<div class="panel-heading">
-											  <button type="button" class="btn btn-default btn-xs spoiler-trigger" data-toggle="collapse">Подробная информация о заявке</button>
-											</div>
-											 <div style="background-color: #eeeeee;" class="panel-collapse collapse out">
-												<div class="panel-body">
-													<p><strong>Категория: </strong>'.$ord_data['category']."</p>\n"
-													."<p><strong>Описание: </strong>".$ord_data['description']."</p>\n"
-													."<p><strong>Дата и время обслуживания:</strong> ".$ord_data['ordate']." ".$timeint."</p>\n"
-													."<p><strong>Адрес:</strong> ".$ord_data['address']."</p>\n"
-													."<p><strong>Автор заявки:</strong> ".$ord_data['author']."</p>\n"
-													."<p><strong>Дата и время добавления заявки:</strong> ".$ord_data['date_create']."</p>\n"
-													."<p><strong>Состояние заказа:</strong> ".$ord_data['state']."</p>\n"
-													."<p><strong>Исполнитель заказа:</strong> ".$ord_data['performer']."</p>\n<br/>"
+								echo ('<div class="container">
+
+        <tr >
+            <td><p>' .$ord_data['category']. "</p></td>
+            <td >"
+													. "<p>" .$ord_data['description']. "</p></td>
+            <td>"
+													. "<p>" .$ord_data['ordate']. " " .$timeint. "</p></td>
+            <td>"
+													. "<p>" .$ord_data['address']. "</p></td>
+            <td>"
+													. "<p>" .$ord_data['author']. "</p></td>
+            <td>"
+													. "<p>" .$ord_data['date_create']. "</p></td>
+            <td>"
+													. "<p>" .$ord_data['state']. "</p></td>
+            <td>"
+													. "<p>" .$ord_data['performer']. "</p></td>
+        </tr>"
+
+
 										);
 									//echo ('<a href="services.php?inv='.$ord_data['id'].'" class="button danger" style="text-align:center;">Удалить</a><br><br>');
-												echo('</div>');
-											echo ('</div>');
-									echo ('</div>');
 								echo ('</div>');
-								echo'<br/>';
 							} while ($ord_data=mysqli_fetch_array($result));
-							echo ('</div>');
+
+                            echo('</table>');
+                            echo ('</div>');
 						}
 							echo '</div>';
 					}?>
@@ -498,13 +513,17 @@ END;
         <script src="js/passvalid.js"></script>
         <script src="js/common-edit.js"></script>
         <script src="js/upload_avatar.js"></script>
+        <script src="JS/jquery.bootgrid.fa.js"></script>
+        <script src="JS/jquery.bootgrid.js"></script>
 
 	<script>
 		$(".spoiler-trigger").click(function() {
 			$(this).parent().next().collapse('toggle');
 		});
 	</script>
-
+  <script>
+      $("#grid-basic").bootgrid();
+  </script>
 
 
     </body></html>
