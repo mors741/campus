@@ -31,7 +31,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-left">
                         <li class="active"><a href="index.php">ГЛАВНАЯ</a></li>
-                        <li><a href="dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a></li>
+                        <li><a href="index.php">ДОСКА ОБЪЯВЛЕНИЙ</a></li>
                         <li><a href="services.php">УСЛУГИ</a></li>
                     </ul>
                     <?php
