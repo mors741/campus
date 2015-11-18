@@ -56,7 +56,7 @@ if(isset($_POST['register'])){
 		if ($result1 == true){
 			echo <<<_END
 			<script>
-			alert("Ваш аккаунт успешно создан!")
+			alert("Аккаунт успешно создан!")
 			</script>
 _END;
 			if (!isset($_SESSION['role']) || $_SESSION['role'] != "admin" || $_SESSION['role'] != "moder") {
