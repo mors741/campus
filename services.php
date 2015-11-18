@@ -93,7 +93,7 @@ function showButtons(serv, date) {
 				</div>
 				<div class="form-group">
 					<br/><label for="comment">Комментарий к заявке</label>
-					<textarea class="form-control" rows="5" name="comment" id="comment" placeholder="Комментарий к заявке"></textarea>
+					<textarea class="form-control" rows="4" name="comment" id="comment" placeholder="Комментарий к заявке"></textarea>
 				</div>
 				<div class="control-group form-group">
 					<label for="date">Выберите дату оказания услуги</label>
