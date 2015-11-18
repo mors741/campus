@@ -69,6 +69,9 @@
 					}
 					if ($user_data['role'] == 'admin') {
 						echo '<li role="presentation"><a href="#tools" aria-controls="tools" role="tab" data-toggle="tab">Инструменты администратора</a></li>';
+                    }
+                    if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder' || $user_data['role'] == 'manage' || $user_data['role'] == 'staff') {
+                        echo '<li role="presentation"><a href="#staff" aria-controls="staff" role="tab" data-toggle="tab">Персонал</a></li>';
 					}?>
 				</ul>
                             <!-- Tab panes -->
@@ -488,6 +491,12 @@ EOT;
 								</div>
 							</div>
 END;
+}
+                    if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder' || $user_data['role'] == 'manage' || $user_data['role'] == 'staff') {
+                        echo '<div role="tabpanel" class="tab-pane" id="staff">';
+                        echo ('<div id="content">');
+                        echo '</div>';
+                        echo '</div>';
 					}?>
 					
 				</div>
