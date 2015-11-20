@@ -159,9 +159,11 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `ordate` date DEFAULT NULL,
   `timeint` tinyint(4) DEFAULT NULL,
   `state` varchar(16) NOT NULL DEFAULT 'waiting',
+  `mark` int(11) NULL,
+  `comment` varchar(1000) NULL,
   `date_create` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `ord_fkey` (`owner`),
+  KEY `ord_fkey` (`owner`),	
   KEY `serv_fkey` (`serv`),
   KEY `perf_fkey` (`performer`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
