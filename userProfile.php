@@ -520,8 +520,8 @@ END;
         <script src="js/passvalid.js"></script>
         <script src="js/common-edit.js"></script>
         <script src="js/upload_avatar.js"></script>
-        <script src="JS/jquery.bootgrid.fa.js"></script>
-        <script src="JS/jquery.bootgrid.js"></script>
+        <script src="js/jquery.bootgrid.fa.js"></script>
+        <script src="js/jquery.bootgrid.js"></script>
 
 	<script>
 		$(".spoiler-trigger").click(function() {
