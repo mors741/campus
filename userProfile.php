@@ -554,6 +554,12 @@ END;
                             } while ($ord_data=mysqli_fetch_array($result));
 
                             echo('</table>');
+                            if ($user_data['role'] == 'admin' or $user_data['role'] == 'manage' or $user_data['role'] == 'moder') {
+                                echo('
+                                    <form action="staff.php">
+                                        <input type="submit" class = "btn btn-default" value="Рейтинг персонала">
+                                    </form>');
+                            }
                             echo ('</div>');
                         }
                         echo '</div>';
