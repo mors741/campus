@@ -372,6 +372,7 @@ EOT;
 							echo('<table id="grid-basic" class="table table-hover table-responsive table-bordered" width="2000%">');
                             echo('
         <thead>
+		<th data-visible="false" data-column-id="id"><strong>id</strong></th>
         <th colspan="4" rowspan="3" data-column-id="category"><strong>Категория</strong></th>
         <th  colspan="4" rowspan="3" data-column-id="description"><strong>Описание</strong></th>
         <th colspan="4" rowspan="3" data-column-id="ordate"><strong>Дата и время обслуживания</strong></th>
@@ -380,14 +381,17 @@ EOT;
         <th colspan="4" rowspan="3" data-column-id="date_create"><strong>Дата и время добавления заявки</strong></th>
         <th colspan="4" rowspan="3" data-column-id="state"><strong>Состояние заказа</strong> </th>
         <th colspan="4" rowspan="3" data-column-id="performer"><strong>Исполнитель заказа</strong></th>
+		<th colspan="4" rowspan="3" data-column-id="commands" data-formatter="commands" data-sortable="false">Действия</th>
 
         </thead>');
 							do {
 								echo ('<div class="container">
 
-        <tr >
-            <td><p>' .$ord_data['category']. "</p></td>
+        <tr id=\"'.$ord_data["id"].'\" >
+            <td><p>' .$ord_data['id']. "</p></td>
             <td >"
+													. "<p>" .$ord_data['category']. "</p></td>
+            <td>"
 													. "<p>" .$ord_data['description']. "</p></td>
             <td>"
 													. "<p>" .$ord_data['ordate']. " " .$timeint. "</p></td>
@@ -399,7 +403,7 @@ EOT;
 													. "<p>" .$ord_data['date_create']. "</p></td>
             <td>"
 													. "<p>" .$ord_data['state']. "</p></td>
-            <td>"
+			<td>"
 													. "<p>" .$ord_data['performer']. "</p></td>
         </tr>"
 
@@ -590,15 +594,31 @@ END;
         <script src="js/upload_avatar.js"></script>
         <script src="js/jquery.bootgrid.fa.js"></script>
         <script src="js/jquery.bootgrid.js"></script>
+		<script src="js/mark_and_comment.js"></script>
 
 	<script>
 		$(".spoiler-trigger").click(function() {
 			$(this).parent().next().collapse('toggle');
 		});
 	</script>
-  <script>
-      $("#grid-basic").bootgrid();
-  </script>
+	<script>
+		$("#grid-basic").bootgrid({
+			formatters: {
+				"commands": function(column, row)
+				{
+					<?php
+					if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder' || $user_data['role'] == 'manage') {
+						echo 'return "<button type=\"button\" onclick=\"deleteOrder($(this).data(\'row-id\',$(this)))\" style=\"margin-bottom: 3px; padding: 5px;\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\">Удалить</span></button><br> "';
+					} else if ($user_data['role'] == 'staff') {
+						echo 'return "<button type=\"button\" onclick=\"confirmOrder($(this).data(\'row-id\'), this)\" style=\"margin-bottom: 3px; padding: 5px;\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\">Выполнено</span></button><br> "';
+					} else if ($user_data['role'] == 'campus') {
+						echo 'return "<button type=\"button\" onclick=\"enterMark($(this).data(\'row-id\'))\" style=\"margin-bottom: 3px; padding: 5px;\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\">Выполнено</span></button><br> " + 
+							"<button type=\"button\" onclick=\"enterComment($(this).data(\'row-id\'))\" style=\"padding: 5px;\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-trash-o\">Пожаловаться</span></button>";';
+					}
+					?>
+				}
+			}});
+	</script>
 
 
     </body></html>
