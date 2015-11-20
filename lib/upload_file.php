@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 if ($_FILES["datafile"]["size"] > 500000) {
   echo "<script>alert(\"Размер файла превышает 500 килобайт. Выберите другой файл.\");</script>"; 
   $uploadOk = 0;
@@ -27,14 +27,15 @@ $host = "127.0.0.1";
     
     $PDO->query("SET NAMES 'utf8'");
     $PDO->query("SET CHARACTERS SET 'utf8'");
-    $name = $_COOKIE['login'];
-    
-    if (!file_exists("./uploads/$name")) {
-                    mkdir("./uploads/$name", 0700);
+    $name = $_SESSION['login'];
+    $root = $_SERVER['DOCUMENT_ROOT'];
+    if (!file_exists($root."campus/uploads/$name")) {
+                    mkdir($root."campus/uploads/$name", 0700);
                 }
-$uploaddir = "./uploads/".$name."/";
+$uploaddir = $root."campus/uploads/".$name."/";
 $filename=basename(str_replace("\\","/",translit($_FILES['datafile']['name'])));
-$file = $uploaddir . $filename; 
+$file = $uploaddir . $filename;
+$img = "./uploads/".$name."/".$filename;
  
 $ext = substr(translit($_FILES['datafile']['name']),strpos(translit($_FILES['datafile']['name']),'.'),strlen(translit($_FILES['datafile']['name']))-1); 
 $filetypes = array('.jpg','.gif','.bmp','.png','.JPG','.BMP','.GIF','.PNG','.jpeg','.JPEG');
@@ -43,11 +44,11 @@ if(!in_array($ext,$filetypes)){
   echo "<script>alert(\"Формат файла не поддерживается. Допустимые форматы: .jpg, .gif, .bmp, .png.\");</script>";}
 else{ 
   if (move_uploaded_file($_FILES['datafile']['tmp_name'], $file)) { 
-    $session = $_COOKIE['login'];
+    $session = $_SESSION['login'];
     $result = $PDO->prepare("UPDATE users SET picture= :img WHERE login= :login");
-    $result->execute(array(':login' => $session, ':img'=> $file));
+    $result->execute(array(':login' => $session, ':img'=> $img));
     
-    echo $file;
+    echo $img;
   } else {
     echo "error";
   }

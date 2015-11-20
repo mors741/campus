@@ -10,7 +10,7 @@ $(document).ready(function () {
                     {
                         $.ajax({
                             type: "POST",
-                            url: "Other/check.php",
+                            url: "lib/check.php",
                             data: "login=" + value,
                             dataType: "html",
                             cache: false,
@@ -216,7 +216,6 @@ jQuery.validator.setDefaults({
     $("#no").click(function () {
         if ($("input:checked").val() === "nouser") {
             $("#user").css('display', 'none');
-            //$("#home").css('display', 'none');
             $("#home [value='0']").attr('selected', 'selected');
             $("#home :first").attr('selected', 'selected');
             $("#home").prop("disabled", true);

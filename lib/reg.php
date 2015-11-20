@@ -57,7 +57,7 @@ _END;
             if (!isset($_SESSION['role']) || $_SESSION['role'] != "admin" || $_SESSION['role'] != "moder") {
                 echo <<<_END
 				<script>
-				document.location.replace("../campus/index.php");
+				document.location.replace("../index.php");
 				</script>
 _END;
             }

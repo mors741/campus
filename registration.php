@@ -39,7 +39,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-left">
-                        <li class="active">
+                        <li>
                             <a href="index.php">ГЛАВНАЯ</a>
                         </li>
                         <li>
@@ -125,7 +125,7 @@
 			<div class="control-group form-group">
                             <label for="password">Пароль</label>
                             <div class="form-group">
-                                <input type="text" name="pass" id="pass" class="form-control"  placeholder="Пароль" rel='tooltip'/>
+                                <input type="password" name="pass" id="pass" class="form-control"  placeholder="Пароль" rel='tooltip'/>
                             </div>
 			</div>
 			<div class="control-group form-group">
