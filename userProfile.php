@@ -145,13 +145,47 @@
         <script src="js/bootstrap-datetimepicker.min.js"></script>
         <script src="js/jquery.bootgrid.fa.js"></script>
         <script src="js/jquery.bootgrid.js"></script>
+	<script src="js/mark_and_comment.js"></script>
 	<script>
 		$(".spoiler-trigger").click(function() {
 			$(this).parent().next().collapse('toggle');
 		});
 	</script>
         <script>
-                $("#grid-basic").bootgrid('reload');
-        </script>
+                $("#grid-basic").bootgrid({
+                    formatters: {
+				"commands": function(column, row)
+				{
+					<?php
+					if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder' || $user_data['role'] == 'manage') {
+						echo 'return "<button type=\"button\" onclick=\"deleteOrder($(this).data(\'row-id\',$(this)))\" style=\"margin-bottom: 3px; padding: 5px;\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\">Удалить</span></button><br> "';
+					} else if ($user_data['role'] == 'staff') {
+						echo 'return "<button type=\"button\" onclick=\"confirmOrder($(this).data(\'row-id\'), this)\" style=\"margin-bottom: 3px; padding: 5px;\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\">Выполнено</span></button><br> "';
+					} else if ($user_data['role'] == 'campus') {
+						echo 'return "<button type=\"button\" onclick=\"enterMark($(this).data(\'row-id\'))\" style=\"margin-bottom: 3px; padding: 5px;\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\">Выполнено</span></button><br> " + 
+							"<button type=\"button\" onclick=\"enterComment($(this).data(\'row-id\'))\" style=\"padding: 5px;\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-trash-o\">Пожаловаться</span></button>";';
+					}
+					?>
+				}
+			}});
+                        
+		$("#grid-basic2").bootgrid({
+			formatters: {
+				"commands": function(column, row)
+				{
+					<?php
+					if ($user_data['role'] == 'admin' || $user_data['role'] == 'moder' || $user_data['role'] == 'manage') {
+						echo 'return "<button type=\"button\" onclick=\"deleteOrder($(this).data(\'row-id\',$(this)))\" style=\"margin-bottom: 3px; padding: 5px;\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\">Удалить</span></button><br> "';
+					} else if ($user_data['role'] == 'staff') {
+						echo 'return "<button type=\"button\" onclick=\"confirmOrder($(this).data(\'row-id\'), this)\" style=\"margin-bottom: 3px; padding: 5px;\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\">Выполнено</span></button><br> "';
+					} else if ($user_data['role'] == 'campus') {
+						echo 'return "<button type=\"button\" onclick=\"enterMark($(this).data(\'row-id\'))\" style=\"margin-bottom: 3px; padding: 5px;\" class=\"btn btn-xs btn-default command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\">Выполнено</span></button><br> " + 
+							"<button type=\"button\" onclick=\"enterComment($(this).data(\'row-id\'))\" style=\"padding: 5px;\" class=\"btn btn-xs btn-default command-delete\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-trash-o\">Пожаловаться</span></button>";';
+					}
+					?>
+				}
+			}});
+	</script>
     </body>
 </html>
+

@@ -1,27 +1,27 @@
 <?php
 
-if ($user_data['role'] != 'local') {
+if ($user_data['role'] != 'local' and $user_data['role'] != 'staff') {
     echo '<div role="tabpanel" class="tab-pane" id="services">';
-    if ($user_data['role'] == 'admin' or $user_data['role'] == 'manage' or $user_data['role'] == 'moder') {
-        echo "<h3><strong>Все заявки на услуги</strong></h3><br/>";
-        $check_query = "SELECT count(id) as count,
-				(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
-										(SELECT name FROM service WHERE id = serv) as category,
-										(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
-											FROM address, users
-											WHERE users.id = owner AND home = address.id) as address,
-										(SELECT CONCAT(name,\" \", surname)
-											FROM staff, users
-											WHERE orders.performer = staff.id and staff.uid = users.id) as performer
-										FROM orders
-										ORDER BY date_create DESC"
-                or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-        $result = $link->query($check_query);
-        $ord_data = mysqli_fetch_array($result);
-        if ($ord_data['count'] == 0) {
-            echo "Нет заявок";
-        } else {
-            $query = "SELECT id, /*owner, performer,*/ description, serv, ordate, timeint, state, date_create,
+    echo "<h3><strong>Мои заявки на услуги</strong></h3>";
+    $check_query = "SELECT count(id) as count, 
+									(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
+									(SELECT name FROM service WHERE id = serv) as category,
+									(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
+										FROM address, users
+										WHERE users.id = owner AND home = address.id) as address,
+									(SELECT CONCAT(name,\" \", surname)
+										FROM staff, users
+										WHERE orders.performer = staff.id and staff.uid = users.id) as performer
+									FROM orders
+									WHERE owner = " . $user_data['id'] .
+            " ORDER BY date_create DESC"
+            or die("Ошибка при выполнении запроса.." . mysqli_error($link));
+    $result = $link->query($check_query);
+    $ord_data = mysqli_fetch_array($result);
+    if ($ord_data['count'] == 0) {
+        echo "Нет заявок";
+    } else {
+        $query = "SELECT id, /*owner, performer,*/ description, serv, ordate, timeint, state, date_create,
 										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
 										(SELECT name FROM service WHERE id = serv) as category,
 										(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
@@ -31,80 +31,11 @@ if ($user_data['role'] != 'local') {
 											FROM staff, users
 											WHERE orders.performer = staff.id and staff.uid = users.id) as performer
 										FROM orders
-										ORDER BY date_create DESC"
-                    or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-        }
-    }
-    if ($user_data['role'] == 'staff') {
-        echo "<h3><strong>Заявки для выполнения</strong></h3><br/>";
-        $check_query = "SELECT count(orders.id) as count,
-										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
-										(SELECT name FROM service WHERE id = serv) as category,
-										(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
-											FROM address, users
-											WHERE users.id = owner AND home = address.id) as address,
-										(SELECT CONCAT(name,\" \", surname)
-											FROM staff, users
-											WHERE orders.performer = staff.id and staff.uid = users.id) as performer
-										FROM orders, staff, users
-										WHERE  orders.performer = staff.id and staff.uid = users.id and users.id = " . $user_data['id'] . "
-										ORDER BY date_create DESC"
-                or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-        $result = $link->query($check_query);
-        $ord_data = mysqli_fetch_array($result);
-        if ($ord_data['count'] == 0) {
-            echo "Нет заявок";
-        } else {
-            $query = "SELECT orders.id as id, /*owner, performer,*/ description, serv, ordate, timeint, state, date_create,
-											(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
-											(SELECT name FROM service WHERE id = serv) as category,
-											(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
-												FROM address, users
-												WHERE users.id = owner AND home = address.id) as address,
-											(SELECT CONCAT(name,\" \", surname)
-												FROM staff, users
-												WHERE orders.performer = staff.id and staff.uid = users.id) as performer
-											FROM orders, staff, users
-											WHERE  orders.performer = staff.id and staff.uid = users.id and users.id = " . $user_data['id'] . "
-											ORDER BY date_create DESC"
-                    or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-        }
-    }
-    if ($user_data['role'] == 'campus') {
-        echo "<h3><strong>Мои заявки на услуги</strong></h3>";
-        $check_query = "SELECT count(id) as count, 
-										(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
-										(SELECT name FROM service WHERE id = serv) as category,
-										(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
-											FROM address, users
-											WHERE users.id = owner AND home = address.id) as address,
-										(SELECT CONCAT(name,\" \", surname)
-											FROM staff, users
-											WHERE orders.performer = staff.id and staff.uid = users.id) as performer
-										FROM orders
-										WHERE owner = " . $user_data['id'] .
+							WHERE owner = " . $user_data['id'] .
                 " ORDER BY date_create DESC"
                 or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-        $result = $link->query($check_query);
-        $ord_data = mysqli_fetch_array($result);
-        if ($ord_data['count'] == 0) {
-            echo "Нет заявок";
-        } else {
-            $query = "SELECT id, /*owner, performer,*/ description, serv, ordate, timeint, state, date_create,
-											(SELECT CONCAT(name,\" \", surname) FROM users WHERE id = owner) as author,
-											(SELECT name FROM service WHERE id = serv) as category,
-											(SELECT CONCAT(city,\" \", street,\" \", house,\", комната \", room)
-												FROM address, users
-												WHERE users.id = owner AND home = address.id) as address,
-											(SELECT CONCAT(name,\" \", surname)
-												FROM staff, users
-												WHERE orders.performer = staff.id and staff.uid = users.id) as performer
-											FROM orders
-								WHERE owner = " . $user_data['id'] .
-                    " ORDER BY date_create DESC"
-                    or die("Ошибка при выполнении запроса.." . mysqli_error($link));
-        }
     }
+
     if ($ord_data['count'] != 0) {
         $result = $link->query($query);
         $ord_data = mysqli_fetch_array($result);
@@ -128,25 +59,30 @@ if ($user_data['role'] != 'local') {
             case 8: $timeint = "17:00-17:45";
                 break;
         }
-        echo('<table id="grid-basic" class="table table-hover table-responsive table-bordered">');
+        echo('<table id="grid-basic" class="table table-hover table-responsive table-bordered" width="100%">');
         echo('
         <thead>
-        <th colspan="4" rowspan="3" data-column-id="category"><strong>Категория</strong></th>
-        <th colspan="4" rowspan="3" data-column-id="description"><strong>Описание</strong></th>
-        <th colspan="4" rowspan="3" data-column-id="ordate"><strong>Дата и время обслуживания</strong></th>
-        <th colspan="4" rowspan="3" data-column-id="address"><strong>Адрес</strong></th>
-        <th colspan="4" rowspan="3" data-column-id="author"><strong>Автор заявки</strong></th>
-        <th colspan="4" rowspan="3" data-column-id="date_create"><strong>Дата и время добавления заявки</strong></th>
-        <th colspan="4" rowspan="3" data-column-id="state"><strong>Состояние заказа</strong> </th>
-        <th colspan="4" rowspan="3" data-column-id="performer"><strong>Исполнитель заказа</strong></th>
+	<th data-visible="false" data-column-id="id"><strong>id</strong></th>
+        <th rowspan="3" data-column-id="category"><strong>Категория</strong></th>
+        <th rowspan="3" data-column-id="description"><strong>Описание</strong></th>
+        <th rowspan="3" data-column-id="ordate"><strong>Дата и &shy; время &shy; обслужи&shy;вания</strong></th>
+        <th  rowspan="3" data-column-id="address"><strong>Адрес</strong></th>
+        <th rowspan="3" data-column-id="author"><strong>Автор заявки</strong></th>
+        <th rowspan="3" data-column-id="date_create"><strong>Дата и &shy; время &shy; добавле&shy;ния заявки</strong></th>
+        <th rowspan="3" data-column-id="state"><strong>Состояние заказа</strong> </th>
+        <th rowspan="3" data-column-id="performer"><strong>Исполни&shy;тель заказа</strong></th>
+        <th rowspan="3" data-column-id="commands" data-formatter="commands" data-sortable="false">Действия</th>
+	
 
         </thead>');
         do {
-            echo ('<div class="container">
+            echo ('<div class="content">
 
-        <tr >
-            <td><p>' . $ord_data['category'] . "</p></td>
+        <tr id=\"' . $ord_data["id"] . '\" >
+            <td><p>' . $ord_data['id'] . "</p></td>
             <td >"
+            . "<p>" . $ord_data['category'] . "</p></td>
+            <td>"
             . "<p>" . $ord_data['description'] . "</p></td>
             <td>"
             . "<p>" . $ord_data['ordate'] . " " . $timeint . "</p></td>
@@ -158,7 +94,7 @@ if ($user_data['role'] != 'local') {
             . "<p>" . $ord_data['date_create'] . "</p></td>
             <td>"
             . "<p>" . $ord_data['state'] . "</p></td>
-            <td>"
+			<td>"
             . "<p>" . $ord_data['performer'] . "</p></td>
         </tr>"
 
@@ -169,13 +105,7 @@ if ($user_data['role'] != 'local') {
         } while ($ord_data = mysqli_fetch_array($result));
 
         echo('</table>');
-                                    if ($user_data['role'] == 'admin' or $user_data['role'] == 'manage' or $user_data['role'] == 'moder') {
-                                echo '
-                                    <form action="staff.php">
-                                        <input type="submit" class = "btn btn-default" value="Рейтинг персонала">
-                                    </form>';                            }
         echo ('</div>');
     }
     echo '</div>';
-}
-?>
+}?>

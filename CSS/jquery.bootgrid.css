@@ -99,8 +99,9 @@
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   white-space: pre-line;
-  height: 60px;
-  width: 120px;
+  height: 80px;
+  width: 100%;
+
 
 }
 .bootgrid-table th > .column-header-anchor > .icon {

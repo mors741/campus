@@ -10,10 +10,10 @@ echo '<ul class="nav nav-tabs" role="tablist">
                                 <a href="#privacySettings" aria-controls="privacySettings" role="tab" data-toggle="tab">Настройки приватности</a>
                             </li>';
 
-if ($user_data['role'] != 'local') {
+if ($user_data['role'] != 'local' && $user_data['role'] != 'staff') {
     echo '
                             <li role="presentation">
-                                <a href="#services" aria-controls="services" role="tab" data-toggle="tab">Заявки</a>
+                                <a href="#services" aria-controls="services" role="tab" data-toggle="tab">Мои заявки</a>
                             </li>';
 }
 echo '
