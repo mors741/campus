@@ -18,7 +18,7 @@ function translit ($text)
         return $text;
 
       }
-$host = "127.0.0.1";
+$host = "localhost";
     $db_name = "campus";
     $login = "root";
     $password = "";
