@@ -1,5 +1,9 @@
 # Campus - портал общежития НИЯУ МИФИ
 
+[Удаленный сервер] (http://54.69.61.40/campus)
+
+Его [phpMyAdmin] (http://54.69.61.40/phpmyadmin)
+
 Добавлены некоторые тупые пояснялки в [Wiki] (https://github.com/mors741/campus/wiki)
 
 Все документы по проекту складываем на [Google Drive] (https://drive.google.com/drive/folders/0B1rrFpKD8cccUDZoa0xfUG5SNmc)
