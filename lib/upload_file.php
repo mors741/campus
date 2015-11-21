@@ -29,10 +29,10 @@ $host = "localhost";
     $PDO->query("SET CHARACTERS SET 'utf8'");
     $name = $_SESSION['login'];
     $root = $_SERVER['DOCUMENT_ROOT'];
-    if (!file_exists($root."campus/uploads/$name")) {
-                    mkdir($root."campus/uploads/$name", 0700);
+    if (!file_exists($root."/campus/uploads/$name")) {
+                    mkdir($root."/campus/uploads/$name", 0700);
                 }
-$uploaddir = $root."campus/uploads/".$name."/";
+$uploaddir = $root."/campus/uploads/".$name."/";
 $filename=basename(str_replace("\\","/",translit($_FILES['datafile']['name'])));
 $file = $uploaddir . $filename;
 $img = "./uploads/".$name."/".$filename;
