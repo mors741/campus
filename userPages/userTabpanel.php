@@ -4,23 +4,20 @@ echo '<ul class="nav nav-tabs" role="tablist">
                                 <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Личная информация</a>
                             </li>
                             <li role="presentation">
-                                <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Редактировать</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#privacySettings" aria-controls="privacySettings" role="tab" data-toggle="tab">Настройки приватности</a>
-                            </li>';
+                                <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Редактировать</a>'; 
 
-if ($user_data['role'] != 'local' && $user_data['role'] != 'staff') {
+if ($user_data['role'] != 'local') {
     echo '
                             <li role="presentation">
                                 <a href="#services" aria-controls="services" role="tab" data-toggle="tab">Мои заявки</a>
                             </li>';
 }
+if ($user_data['role'] != 'staff') {
 echo '
                             <li role="presentation">
                                 <a href="#favourites" aria-controls="favourites" role="tab" data-toggle="tab">Закладки</a>
                             </li>';
-
+}
 if ($user_data['role'] != 'staff') {
     echo '
                             <li role="presentation">
