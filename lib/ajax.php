@@ -21,15 +21,15 @@ function create_update($db, $table_name, $set, $constraint) {
 	$query = "UPDATE " . mysqli_real_escape_string($db, $table_name) . " SET ";
 	foreach ($set as $key => $value) {
 		$query .= " " . 
-			mysqli_real_escape_string($db, $key) . " = " . 
-			mysqli_real_escape_string($db, $value) . ", ";
+			mysqli_real_escape_string($db, $key) . " = '" . 
+			mysqli_real_escape_string($db, $value) . "', ";
 	}
 	$query = rtrim($query, ", ");
 	$query .= " WHERE";
 	foreach ($constraint as $key => $value) {
 		$query .= " " . 
-			mysqli_real_escape_string($db, $key) . " = " . 
-			mysqli_real_escape_string($db, $value) . ", ";
+			mysqli_real_escape_string($db, $key) . " = '" . 
+			mysqli_real_escape_string($db, $value) . "', ";
 	}
 	$query = rtrim($query, ", ");
 	$query .= ";";
@@ -41,14 +41,22 @@ $update_rating = function($req){
 	$db = get_db_connection();
 	$row_id = $req['row_id'];
 	$rating = $req['rating'];
+	$state = $req['state'];
+	$query = create_update($db, 'orders', ['mark' => $rating, 'state' => $state], ['id' => $row_id]);
 
-	$query = create_update($db, 'orders', ['mark' => $rating], ['id' => $row_id]);
 	$res = $db->query($query);
-	
+
 	$answer = [
-		'status' => 'OK',
-		'msg' => 'Спасибо. Ваш голос учтен',
+		'status' => 'ERR',
+		'msg' => 'Нет соединения с сервером',
 	];
+	if ($res == true) {
+		$answer = [
+			'status' => 'OK',
+			'msg' => 'Спасибо. Ваш голос учтен',
+			'state' => $state,
+		];
+	}
 	print(json_encode($answer));
 };
 

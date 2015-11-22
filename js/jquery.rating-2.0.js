@@ -206,6 +206,7 @@
                 'type' : 'update_rating',
                 'row_id' : 0,
                 'rating' : 0,
+                'state' : 'complited',
             };
             send_data.row_id = self._data.row_id;
             send_data.rating = self._data.score;
