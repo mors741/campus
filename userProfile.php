@@ -189,6 +189,34 @@
 				}
 			}});
 	</script>
+
+	 <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Сообщение</h4>
+      </div>
+      <div class="modal-body">
+      <form role="form" method="post">
+      
+        
+          <div class="form-group">
+            <label for="message-text" class="control-label"></label>
+            <textarea class="form-control" id="message-comment" name="message-comment"></textarea>
+          </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        <button type="submit" name="pass" class="btn btn-primary">Отправить</button>
+      </div>
+      	</form>
+      	</div>
+    </div>
+  </div>
+  </div>
+
+	
     </body>
 </html>
 

@@ -19,7 +19,26 @@ function enterMark(self, id) {
 }
 
 function enterComment(id) {
-	alert("enterComment\nid=" + id);
+	
+	$("#myModal").modal();
+
+    
+   $(function () { $('#myModal').on('submit', function () {
+    
+   var msg = $('#message-comment').val();
+   //alert(msg);	
+
+	$.ajax({
+	    type: "POST",
+        url: "lib/blame.php",
+        data: "msg=" + msg,
+        data:{'msg':msg,'id':id},
+	   success: function(data) {
+	        //alert(data);
+	   }
+	});   
+  
+   })});
 }
 
 function deleteOrder(id) {
