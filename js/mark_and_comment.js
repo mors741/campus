@@ -1,5 +1,21 @@
-function enterMark(id) {
-	alert("enterMark()\nid=" + id); 
+function enterMark(self, id) {
+	par = $(self).parent();
+	par.html("" + 
+		// "<text>Оцените</text>" +
+		"<div id=\"rating\">" +
+			// "<input type=\"hidden\" name=\"vote-id\" value=\"1\">" +
+		"</div>");
+	$('#rating').rating({
+		row_id: id,
+        fx: 'half',
+        image: 'images/stars.png',
+        loader: 'images/ajax-loader.gif',
+        url: 'lib/ajax.php',
+        callback: function(responce){
+        	console.log(responce);
+            this.vote_success.fadeOut(2000);
+        }
+    });
 }
 
 function enterComment(id) {
