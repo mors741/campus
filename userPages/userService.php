@@ -1,6 +1,6 @@
 <?php
 
-if ($user_data['role'] != 'local' and $user_data['role'] != 'staff') {
+if ($user_data['role'] != 'local') {
     echo '<div role="tabpanel" class="tab-pane" id="services">';
     echo "<h3><strong>Мои заявки на услуги</strong></h3>";
     $check_query = "SELECT count(id) as count, 
