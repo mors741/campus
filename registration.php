@@ -227,7 +227,7 @@ END;
                     <div style="margin-top: 480px; ">
                         <hr>
     <?php
-    if (!isset($_SESSION['role']) || $_SESSION['role'] != "admin") {
+    if ((!isset($_SESSION['role']) || $_SESSION['role'] != "admin" ) && (!isset($_SESSION['role']) || $_SESSION['role'] != "moder" )) {
 	echo '
                             <div class="control-group form-group" >
 				<label>
@@ -275,7 +275,7 @@ END;
                                     <p>4.8. Настоящее Соглашение может быть изменено Администрацией Портала в любое время без какого-либо специального уведомления. Новая редакция Соглашения вступает в силу с момента ее опубликования на Портале, если иное не предусмотрено новой редакцией Соглашения. </p>
                             </div>
                             <div class="control-group form-group">
-				<input type="submit"  class="btn btn-primary" value="Зарегистрироваться" name="register"/>
+				<input type="submit"  class="btn btn-primary" value="Зарегистрировать" name="register"/>
                             </div>
                     </div>
                     <!--Третий блок регистрации END-->
