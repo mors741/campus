@@ -28,6 +28,13 @@ function create_constraint($db, $constraint) {
 	return $query;
 }
 
+function create_delete($db, $table_name, $constraint){
+	$query = "DELETE FROM " . mysqli_real_escape_string($db, $table_name) . " ";
+	$query .= create_constraint($db, $constraint);
+	return $query;
+}
+
+
 function create_update($db, $table_name, $set, $constraint) {
 	$query = "UPDATE " . mysqli_real_escape_string($db, $table_name) . " SET ";
 	foreach ($set as $key => $value) {
@@ -38,6 +45,18 @@ function create_update($db, $table_name, $set, $constraint) {
 	$query = rtrim($query, ", ");
 	$query .= create_constraint($db, $constraint) . ";";
 	return $query;
+}
+
+function create_insert($db, $table_name, $set) {
+	$query = "INSERT INTO " . mysqli_real_escape_string($db, $table_name) . "(";
+	$value = "VALUES(";
+	foreach ($set as $key => $val) {
+		$query .= mysqli_real_escape_string($db, $key) . ", " ;
+		$value .= "'" . mysqli_real_escape_string($db, $val) . "', ";
+	}
+	$query = rtrim($query, ", ") . ") ";
+	$value = rtrim($value, ", ") . ") ";
+	return $query . $value . ";";
 }
 
 function create_select($db, $table_name, $val, $constraint){
