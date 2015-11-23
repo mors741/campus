@@ -12,11 +12,11 @@
 
 
         <!-- Стили-->
-        <link rel="stylesheet" type="text/css" href="CSS/dropdown.css" />	
-        <link rel="stylesheet" type="text/css" href="CSS/bootstrap.css" />
-        <link rel="stylesheet" type="text/css" href="CSS/content.css" >
-        <link rel="stylesheet" type="text/css" href="CSS/button.css" />
-        <link rel="stylesheet" type="text/css" href="CSS/message.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/dropdown.css" />	
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="/css/content.css" >
+        <link rel="stylesheet" type="text/css" href="/css/button.css" />
+        <link rel="stylesheet" type="text/css" href="/css/message.css"/>
         <!--Конец-->
     </head>
 
@@ -34,22 +34,22 @@
                         <span class="icon-bar"></span>
                     </button>
                     <!--Для мобильных устройств END-->
-                    <a class="navbar-brand" href="index.php">Портал общежития НИЯУ МИФИ</a>
+                    <a class="navbar-brand" href="/index.php">Портал общежития НИЯУ МИФИ</a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-left">
                         <li class="active">
-                            <a href="index.php">ГЛАВНАЯ</a>
+                            <a href="/index.php">ГЛАВНАЯ</a>
                         </li>
                         <li>
-                            <a href="dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a>
+                            <a href="/dashboard">ДОСКА ОБЪЯВЛЕНИЙ</a>
                         </li>
                         <li>
-                            <a href="services.php">УСЛУГИ</a>
+                            <a href="/services">УСЛУГИ</a>
                         </li>
                     </ul>
                     <?php
-                    include("lib/log.php"); //Включение кнопок авторизации и регистрации
+                    include("/lib/log.php"); //Включение кнопок авторизации и регистрации
                     ?>	
                 </div>
             </div>
@@ -111,21 +111,21 @@
                     <!-- Индикаторы END-->                   
                     <!-- Враппер для слайдов -->
                     <div class="carousel-inner">                       
-                        <div class="active item" data-slide-number="0"><img class="img-rounded" src="Pictures/1.jpg">
+                        <div class="active item" data-slide-number="0"><img class="img-rounded" src="/pictures/1.jpg">
                             <div class="carousel-caption" style='background: rgba(0, 0, 0, 0.4) none repeat scroll 0px 0px; border-radius: 6px' >
                                 <h2>Нужна тех. помощь?</h2>
                                 <p>Просто сделай заказ услуг</p>
                             </div>
                         </div>
 
-                        <div class="item" data-slide-number="1"><img class="img-rounded" src="Pictures/2.jpg">                
+                        <div class="item" data-slide-number="1"><img class="img-rounded" src="/pictures/2.jpg">                
                             <div class="carousel-caption" style='background: rgba(0, 0, 0, 0.4) none repeat scroll 0px 0px; border-radius: 6px' >
                                 <h2>Размещай объявления</h2>
                                 <p>И оценивай объявления других пользователей</p>
                             </div>
                         </div>
                         
-                        <div class="item" data-slide-number="2"><img class="img-rounded" src="Pictures/3.jpg">
+                        <div class="item" data-slide-number="2"><img class="img-rounded" src="/pictures/3.jpg">
                             <div class="carousel-caption" style='background: rgba(0, 0, 0, 0.4) none repeat scroll 0px 0px; border-radius: 6px'>
                                 <h2>Помогай администрации общежития</h2>
                                 <p>Оценивай качество исполнения услуг</p>
@@ -174,9 +174,9 @@
         </footer>
         <!-- Пол END-->
         <!-- JavaScript. Для быстрой загрзуки помещайте в конце страницы, указав в начале скрипт jQuery-->
-        <script src="js/jquery2.4.1.js"></script>
-        <script src="js/bootstrap.min.js"></script> 
-        <script src="js/dropdown.js"></script>
+        <script src="/js/jquery2.4.1.js"></script>
+        <script src="/js/bootstrap.min.js"></script> 
+        <script src="/js/dropdown.js"></script>
         <script>
             $('.carousel').carousel({
                 interval: 5000 
