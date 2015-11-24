@@ -28,8 +28,8 @@ $create = function($req) {
 	}
 	$ans['success'] = !$error; 
 	if ( !$error ) {
-		$query = create_insert($db, 'users', $req);
 		$req['passwd'] = md5($req['passwd']);
+		$query = create_insert($db, 'users', $req);
 		$res = $db->query($query);
 		if ( $res == false ) {
 			$ans['success'] = fasle;
