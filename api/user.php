@@ -83,15 +83,62 @@ $update = function($req){
 	return $ans;
 };
 
+$current = function($req){
+	$ans['login'] = $_SESSION['login'];
+	$ans['role'] = $_SESSION['role'];	
+	return $ans;
+};
+
+$login = function($req){
+	$ans = [];
+	$db = get_db_connection();
+	
+	$login = $req['login'];
+	$pass = md5($req['pass']);
+	$query = create_select($db, 'users', ['role' => 'role'], ['login' => $login, 'passwd' => $pass]);
+	$res = $db->query($query);
+	
+	if ( $res == false ) {
+		$ans['error'] = 'sql';
+		$ans['success'] = false;
+	} else {
+		$res = $res->fetch_array();
+		if ( empty($res) ) {
+			$ans['error'] = 'wrong login or passwd';
+			$ans['success']= false;
+		} else {
+			$ans['success']= true;
+			$ans['login']= $login;
+			$ans['role']= $res['role'];
+			
+			$_SESSION['login'] = $login;
+			$_SESSION['role'] = $res['role'];
+		}
+	}
+	return $ans;
+};
+
+$logout = function($req){
+	session_destroy();
+	$ans['success'] = true;
+	return $ans;
+};
 
 $handlers = [
 	'check_login' => $check_login,
 	'create' => $create,
 	'update' => $update,
 	'get' => $get,
+	'login' => $login,
+	'logout' => $logout,
+	'current' => $current,
 ];
 
 $req = get_json();
+if ( !array_key_exists('type', $req) ) {
+	die("no type");
+} 
+
 $type = $req['type'];
 unset($req['type']);
 if ( !array_key_exists($type, $handlers) ) {

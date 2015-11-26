@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+if ( !array_key_exists('login', $_SESSION) ) {
+	$_SESSION['login'] = 'guest';
+	$_SESSION['role'] = 'guest';
+}
+
 function get_json(){
 	$request = file_get_contents('php://input');
 	return (array)json_decode($request);
@@ -21,9 +27,9 @@ function create_constraint($db, $constraint) {
 		foreach ($constraint as $key => $value) {
 			$query .= " " . 
 			mysqli_real_escape_string($db, $key) . " = '" . 
-			mysqli_real_escape_string($db, $value) . "', ";
+			mysqli_real_escape_string($db, $value) . "' AND ";
 		}
-		$query = rtrim($query, ", ");
+		$query = rtrim($query, "AND ");
 	}
 	return $query;
 }
@@ -33,7 +39,6 @@ function create_delete($db, $table_name, $constraint){
 	$query .= create_constraint($db, $constraint);
 	return $query;
 }
-
 
 function create_update($db, $table_name, $set, $constraint) {
 	$query = "UPDATE " . mysqli_real_escape_string($db, $table_name) . " SET ";
