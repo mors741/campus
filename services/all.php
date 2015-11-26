@@ -69,48 +69,54 @@
             <a class="btn btn-default" href="../services/all.php">Просмотр всех заявок</a>
         </div>
         <br/>
-        <div class="content">
-            <form method="post" action="../lib/serv.php">
-                <div class="control-group">
-                    <label for="service">Выберите тип оказываемой услуги</label>
 
-                    <div class="controls">
-                        <select name="service" id="service" class="form-control"
-                                onchange="showButtons(document.getElementById('service').value, $('#datetimepicker1').data('date'))">
-                            <option value="" selected="selected">Выберите услугу</option>
-                            <option value="1">Сантехник</option>
-                            <option value="2">Электрик</option>
-                            <option value="3">Плотник</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <br/><label for="comment">Комментарий к заявке</label>
-                    <textarea class="form-control" rows="4" name="comment" id="comment"
-                              placeholder="Комментарий к заявке"></textarea>
-                </div>
-                <div class="control-group form-group">
-                    <label for="date">Выберите дату оказания услуги</label>
 
-                    <div class="form-group">
-                        <div class="input-group date" id="datetimepicker1">
-                            <input type="text" Name="ordate" Id="ordate" class="form-control"/>
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                        </div>
-                    </div>
-                </div>
+        <table id="grid-basic-all" class="table table-hover table-responsive table-bordered" width="100%">
+            <thead>
+            <th data-visible="false" data-column-id="id"><strong>id</strong></th>
+            <th rowspan="3" data-column-id="category"><strong>Категория</strong></th>
+            <th rowspan="3" data-column-id="description"><strong>Описание</strong></th>
+            <th rowspan="3" data-column-id="ordate"><strong>Дата и время обслуживания</strong></th>
+            <th rowspan="3" data-column-id="address"><strong>Адрес</strong></th>
+            <th rowspan="3" data-column-id="author"><strong>Автор заявки</strong></th>
+            <th rowspan="3" data-column-id="date_create"><strong>Дата и время добавления заявки</strong></th>
+            <th rowspan="3" data-column-id="state"><strong>Состояние заказа</strong></th>
+            <th rowspan="3" data-column-id="performer"><strong>Исполнитель заказа</strong></th>
+            <th rowspan="3" data-column-id="commands" data-formatter="commands" data-sortable="false">Действия</th>
+            </thead>
+            <tbody>
+            <tr id="1">
+                <td>
+                    <p>111</p>
+                </td>
+                <td>
+                    <p>111</p>
+                </td>
+                <td>
+                    <p>111</p>
+                </td>
+                <td>
+                    <p>111</p>
+                </td>
+                <td>
+                    <p>111</p>
+                </td>
+                <td>
+                    <p>111</p>
+                </td>
+                <td>
+                    <p>111</p>
+                </td>
+                <td>
+                    <p>111</p>
+                </td>
+                <td>
+                    <p>111</p>
+                </td>
+            </tr>
+            </tbody>
 
-                <input type="number" name="timeint" id="timeint" value="1" style="display:none"/>
-
-                <div id="time" selectedValue="1" class=" btn-group" data-toggle="buttons" data-toggle="buttons">
-                </div>
-                <br/>
-                <br/>
-                <input type="submit" class="btn btn-primary" value="Отправить" name="add_order"/>
-            </form>
-        </div>
+        </table>
     </div>
 </div>
 <!-- Контейнер. Центральная часть END-->
@@ -143,41 +149,12 @@
 <script src="../js/bootstrap-datetimepicker.min.js"></script>
 <script src="../js/bootstrap-tab.js"></script>
 <script src="../js/dropdown.js"></script>
+<script src="../js/jquery.bootgrid.js"></script>
+<script src="../js/jquery.rating-2.0.js"></script>
+
 <script>
-    $(function () {
-        $('#datetimepicker1').datetimepicker({
-            pickTime: false,
-            language: 'ru',
-            defaultDate: moment().add('d', 1).toDate(),
-            daysOfWeekDisabled: [0, 6],
-            minDate: moment().add('d', 1).toDate(),
-            maxDate: moment().add('d', 30).toDate()
-        });
-    });
+    $("#grid-basic-all").bootgrid();
 </script>
-<script>
-    function showButtons(serv, date) {
-        if (serv == "") {
-            document.getElementById("time").innerHTML = "";
-            return;
-        } else {
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                // code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    document.getElementById("time").innerHTML = "<label for='time'>Выберите удобный промежуток времени</label><br/>" + xmlhttp.responseText;
-                }
-            };
-            xmlhttp.open("GET", "../lib/serv_buttons.php?serv=" + serv + "&date=" + date.substr(6, 4) + "-" + date.substr(3, 2) + "-" + date.substr(0, 2), true);
-            //alert("serv_buttons.php?serv="+serv+"&date="+date.substr(6, 4)+"-"+date.substr(3, 2)+"-"+date.substr(0, 2));
-            xmlhttp.send();
-        }
-    }
-</script>
+
 </body>
 </html>

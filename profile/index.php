@@ -37,18 +37,18 @@
                 <span class="icon-bar"></span>
             </button>
             <!--Для мобильных устройств END-->
-            <a class="navbar-brand" href="index.php">Портал общежития НИЯУ МИФИ</a>
+            <a class="navbar-brand" href="../index.php">Портал общежития НИЯУ МИФИ</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
                 <li>
-                    <a href="index.php">ГЛАВНАЯ</a>
+                    <a href="../index.php">ГЛАВНАЯ</a>
                 </li>
                 <li>
-                    <a href="dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a>
+                   <a href="../dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a>
                 </li>
                 <li>
-                    <a href="services.php">УСЛУГИ</a>
+                    <a href="../services/index.php">УСЛУГИ</a>
                 </li>
             </ul>
             <?php
