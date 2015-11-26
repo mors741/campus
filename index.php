@@ -43,7 +43,7 @@
                     <a href="index.php">ГЛАВНАЯ</a>
                 </li>
                 <li>
-                    <a href="dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a>
+                    <a href="dashboard/index.php">ДОСКА ОБЪЯВЛЕНИЙ</a>
                 </li>
                 <li>
                     <a href="services/index.php">УСЛУГИ</a>
