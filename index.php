@@ -53,34 +53,32 @@
                 include("lib/log.php"); //Включение кнопок авторизации и регистрации
             ?>
             <div id="sign-out" style="display: none;">
-                <div class="dropdown">
-                  <ul class="nav navbar-nav navbar-right">
+                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                      <a class="account btn-group-au">
-                        <p id="login"></p>
-                      <img src="Pictures/arrow_w.png"/>
-                      </a>
+                        <a class="account btn-group-au">
+                            <p id="login"></p>
+                            <img src="Pictures/arrow_w.png"/>
+                        </a>
                     </li>
-                  </ul>
-                  <div class="submenu" style="display: none; ">
-                    <ul class="root">
-                      <li>
-                        <a href="/campus/profile/index.php">Личный кабинет</a>
-                      </li>
-                      <li>
-                          <input type="button" name="logout" onclick="logout()" value="Выйти"/>
-                      </li>
-                    </ul>
-                  </div>
-                </div>        
-              </div>
+                    <div class="submenu" style="display: none; ">
+                        <ul class="root">
+                            <li>
+                                <a href="/campus/profile/index.php">Личный кабинет</a>
+                            </li>
+                            <li>
+                                <input type="button" name="logout" onclick="logout()" value="Выйти"/>
+                            </li>
+                        </ul>
+                    </div>
+                </ul>
+            </div>
               <div id="auth_and_reg" style="display: none;">
               <ul class="nav navbar-nav navbar-right">
                         <li>
                 <a class="btn-group-au" href="/campus/registration/registration.php">РЕГИСТРАЦИЯ</a>
                         </li>
                         <li>
-                <button type="button" class="btn-group-au" data-toggle="modal" data-target="#myModal">АВТОРИЗАЦИЯ</button>
+                <a class="btn-group-au" data-toggle="modal" data-target="#myModal" href="#myModal">АВТОРИЗАЦИЯ</a>
                         </li>
               </ul>
               </div>
