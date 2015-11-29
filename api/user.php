@@ -45,22 +45,24 @@ $get = function($req) {
 	$ans = [];
 	$db = get_db_connection();
 	$login = $req['login'];
-	$fields = [	'id' => 'id',
-				'login' => 'login',
-				'role' => 'role',
+	$fields = [	'login' => 'login',
 				'name' => 'name',
 				'surname' => 'surname',
 				'patronymic' => 'patronymic',				
-				'home' => 'home',
-				'floor' => 'floor',
-				'room' => 'room',
+				'address' => 'address',
 				'contacts' => 'contacts',
-				'picture' => 'picture',
 				'bdate' => 'bdate',
 				'gender' => 'gender',
 	];
-	
-	$query = create_select($db, 'users', $fields, ['login' => $login]); 
+	if ( array_key_exists('raw', $req) && $req['raw'] ) {
+		$table = 'users';
+		unset($fields['address']);
+		$fields['home'] = 'home';
+		$fields['room'] = 'room';
+	} else {
+		$table = 'users_v';
+	}
+	$query = create_select($db, $table, $fields, ['login' => $login]); 
 	$res = $db->query($query) or die ("sql error");
 	$ans = $res->fetch_array(MYSQLI_ASSOC);
 	if ( empty($ans) ) {

@@ -9,16 +9,16 @@
     <meta name="description" content="Портал общежития НИЯУ МИФИ">
     <meta name="author" content="campus">
     <!--Конец-->
-
+я
     <!-- Стили-->
-    <link rel="stylesheet" type="text/css" href="../css/dropdown.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/content.css">
-    <link rel="stylesheet" type="text/css" href="../css/datepicker3.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap-datetimepicker.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/button.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/jquery.rating.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/jquery.bootgrid.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/dropdown.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/content.css">
+    <link rel="stylesheet" type="text/css" href="/campus/css/datepicker3.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/button.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/jquery.rating.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/jquery.bootgrid.css"/>
     <!--Конец-->
 
 </head>
@@ -37,18 +37,18 @@
                 <span class="icon-bar"></span>
             </button>
             <!--Для мобильных устройств END-->
-            <a class="navbar-brand" href="../index.php">Портал общежития НИЯУ МИФИ</a>
+            <a class="navbar-brand" href="/campus/index.php">Портал общежития НИЯУ МИФИ</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
                 <li>
-                    <a href="../index.php">ГЛАВНАЯ</a>
+                    <a href="/campus/index.php">ГЛАВНАЯ</a>
                 </li>
                 <li>
-                    <a href="../dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a>
+                    <a href="/campus/dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a>
                 </li>
                 <li>
-                    <a href="../services/index.php">УСЛУГИ</a>
+                    <a href="/campus/services/index.php">УСЛУГИ</a>
                 </li>
             </ul>
             <?php
@@ -63,9 +63,9 @@
     <div class="span3">
         <div class="row">
             <div class="card">
-                <a class="btn btn-default" href="../profile/index.php">Личные данные</a>
-                <a class="btn btn-default" href="../profile/userEdit.php">Редактирование данных</a>
-                <a class="btn btn-default" href="../profile/favs.php">Закладки</a>
+                <a class="btn btn-default" href="/campus/profile/index.php">Личные данные</a>
+                <a class="btn btn-default" href="/campus/profile/userEdit.php">Редактирование данных</a>
+                <a class="btn btn-default" href="/campus/profile/favs.php">Закладки</a>
             </div>
             <div class="content">
                 <div class="col-sm-2 col-md-2">
@@ -95,7 +95,7 @@
                                 <input type="password" id="password" class="form-control" placeholder="Старый пароль"/>
                             </div>
                         </div>
-                        <form id="check_passwd" action="../lib/update_pass.php" method="POST">
+                        <form id="check_passwd" action="/campus/lib/update_pass.php" method="POST">
                             <div class="control-group form-group">
                                 <label for="passwd">Новый пароль</label>
 
@@ -117,23 +117,22 @@
                             <label id="name-error" class="error" generated="true" style="display:none"></label>
                             <br/>
                             <label for="surname">Фамилия</label>
-
                             <div class="form-group">
-                                <div id="surname" class="editable"></div>
+                                <input id="surname" class="editable">
                             </div>
                         </div>
                         <div class="control-group form-group">
                             <label for="name">Имя</label>
 
                             <div class="form-group">
-                                <div id="name" class="editable"></div>
+                                <input id="name" class="editable">
                             </div>
                         </div>
                         <div class="control-group form-group">
                             <label for="patronymic">Отчество</label>
 
                             <div class="form-group">
-                                <div id="patronymic" class="editable"></div>
+                                <input id="patronymic" class="editable">
                             </div>
                         </div>
                     </fieldset>
@@ -144,7 +143,7 @@
                             <label for="gender">Пол</label>
 
                             <div class="form-group">
-                                <div id="gender" class="editable_select"></div>
+                                <input id="gender" class="editable_select">
                                 <br/>
                             </div>
                         </div>
@@ -170,14 +169,12 @@
                             <label for="contact">Контакты</label>
 
                             <div class="form-group">
-                                <div class="editable_contact" id="contacts"></div>
-                                <div id="contact_save"></div>
+                                <input class="editable_contact" id="contacts">
                                 <br/>
                             </div>
                         </div>
                         <div class="control-group form-group">
                             <label for="address">Адрес (корпус):</label>
-
                             <div class="form-group">
                                 <div id="home" name="home" class="editable_address"></div>
                                 <br/>
@@ -187,14 +184,14 @@
                             <label for="room">Номер комнаты (квартиры)</label>
 
                             <div class="form-group">
-                                <div id="room" class="editable_room"></div>
+                                <input id="room" class="editable_room">
                             </div>
                             <br/>
                             <label id="room-error" class="error valid" generated="true" style="display:none"></label>
                         </div>
                     </fieldset>
                     <br/>
-                    <button type="" onclick="document.location.reload()" class="btn btn-primary">Обновить информацию
+                    <button id="update" type="" onclick="document.location.reload()" class="btn btn-primary">Обновить информацию
                     </button>
                 </div>
             </div>
@@ -222,24 +219,26 @@
         <br>
     </font>
 </footer>
-<script src="../js/jquery2.4.1.js"></script>
-<script src="../js/jquery.validate.js"></script>
-<script src="../js/jquery.pstrength-min.1.2.js"></script>
-<script src="../js/jquery.jeditable.js"></script>
-<script src="../js/jquery.maskedinput.min.js"></script>
-<script src="../js/jquery.jeditable.masked.js"></script>
-<script src="../js/passvalid.js"></script>
-<script src="../js/common-edit.js"></script>
-<script src="../js/upload_avatar.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/moment-with-locales.min.js"></script>
-<script src="../js/bootstrap-tab.js"></script>
-<script src="../js/dropdown.js"></script>
-<script src="../js/bootstrap-datetimepicker.min.js"></script>
-<script src="../js/jquery.bootgrid.fa.js"></script>
-<script src="../js/jquery.bootgrid.js"></script>
-<script src="../js/mark_and_comment.js"></script>
-<script src="../js/jquery.rating-2.0.js"></script>
+<script src="/campus/js/jquery2.4.1.js"></script>
+<script src="/campus/js/jquery.validate.js"></script>
+<script src="/campus/js/jquery.pstrength-min.1.2.js"></script>
+<script src="/campus/js/jquery.jeditable.js"></script>
+<script src="/campus/js/jquery.maskedinput.min.js"></script>
+<script src="/campus/js/jquery.jeditable.masked.js"></script>
+<script src="/campus/js/passvalid.js"></script>
+<script src="/campus/js/common-edit.js"></script>
+<script src="/campus/js/upload_avatar.js"></script>
+<script src="/campus/js/bootstrap.min.js"></script>
+<script src="/campus/js/moment-with-locales.min.js"></script>
+<script src="/campus/js/bootstrap-tab.js"></script>
+<script src="/campus/js/dropdown.js"></script>
+<script src="/campus/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/campus/js/jquery.bootgrid.fa.js"></script>
+<script src="/campus/js/jquery.bootgrid.js"></script>
+<script src="/campus/js/mark_and_comment.js"></script>
+<script src="/campus/js/jquery.rating-2.0.js"></script>
+<script src="/campus/js/profile_edit.js"></script>
+
 </body>
 </html>
 
