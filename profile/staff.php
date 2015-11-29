@@ -64,7 +64,7 @@
                             <div class="submenu" style="display: none; ">
                                 <ul class="root" id="sign-out2" style="display: none;">
                                     <li>
-                                        <a href="../campus/profile/index.php">Личный кабинет</a>
+                                        <a href="/campus/profile/index.php">Личный кабинет</a>
                                     </li>
                                     <li>
                                         <input type="button" id="logout_btn" onclick="logout()" value="Выйти"/>
