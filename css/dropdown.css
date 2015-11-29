@@ -1,7 +1,7 @@
-div.dropdown {
+.dropdown {
 	color: #555;
 	position: relative;
-	height: 17px;
+	min-height: 17px;
 	text-align:left;
 }
 div.submenu
@@ -10,7 +10,7 @@ div.submenu
 	background: #fff;
 	position: absolute;
 	top: 38px;
-	right: -4px;
+	right: 10px;
 	z-index: 100;
 	width: 135px;
 	display: none;
@@ -18,7 +18,7 @@ div.submenu
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
 }
 
-.dropdown  li a {
+.root  li a {
 	color: #555555;
 	display: block;
 	padding: 6px 15px;
@@ -26,13 +26,13 @@ div.submenu
 	text-decoration:none;
 }
 
-.dropdown li a:hover{
+.root li a:hover{
     background:#599bdc;
     text-decoration: none;
 	color: #fff;
 }
 
-.dropdown  li input[type=submit] {
+.root  li input[type=submit] {
 	color: #a00;
 	background:#fff;
 	display: block;
@@ -44,7 +44,7 @@ div.submenu
 	width: 100%;
 }
 
-.dropdown li input[type=submit]:hover{
+.root li input[type=submit]:hover{
     background:#dc817d;
     text-decoration: none;
 	color: #fff;
@@ -52,6 +52,7 @@ div.submenu
 
 a.account {
 	z-index: 110;
+        cursor: pointer;
 }
 
 .root
