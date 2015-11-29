@@ -58,38 +58,6 @@ if (isset($_SESSION['login']) || (isset($_COOKIE['login']) && !empty($_COOKIE['l
     $result->close();
     $_SESSION['role'] = $user_data['role'];
     
-    echo '<div id="sign-out">
-            <div class="dropdown">
-		<ul class="nav navbar-nav navbar-right">
-                    <li>
-			<a class="account btn-group-au">' . $_SESSION["login"] . '&nbsp;&nbsp;
-                            <img src="Pictures/arrow_w.png"/>
-                        </a>
-                    </li>
-		</ul>
-		<div class="submenu" style="display: none; ">
-                    <ul class="root">
-			<li>
-                            <a href="userProfile.php">Личный кабинет</a>
-                        </li>
-			<li>
-                            <form method="post" action="index.php">
-				<input type="submit" name="logout" value="Выйти"/>
-                            </form>
-			</li>
-                    </ul>
-		</div>
-            </div>				
-	</div>';
-} else {
-    echo '<ul class="nav navbar-nav navbar-right">
-            <li>
-		<a class="btn-group-au" href="registration.php">РЕГИСТРАЦИЯ</a>
-            </li>
-            <li>
-		<button type="button" class="btn-group-au" data-toggle="modal" data-target="#myModal">АВТОРИЗАЦИЯ</button>
-            </li>
-	</ul>';
 }
 
                     

@@ -52,9 +52,41 @@
                 </li>
             </ul>
             <?php
-            include("../lib/log.php");
-            include("../lib/check_serv.php");
+                include("../lib/log.php");
+                include("../lib/check_serv.php");
             ?>
+            <div id="sign-out" style="display: none;">
+                <div class="dropdown">
+                  <ul class="nav navbar-nav navbar-right">
+                    <li>
+                      <a class="account btn-group-au">
+                        <p id="login"></p>
+                      <img src="/campus/pictures/arrow_w.png"/>
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="submenu" style="display: none; ">
+                    <ul class="root">
+                      <li>
+                        <a href="/campus/profile/index.php">Личный кабинет</a>
+                      </li>
+                      <li>
+                          <input type="button" name="logout" onclick="logout()" value="Выйти"/>
+                      </li>
+                    </ul>
+                  </div>
+                </div>        
+              </div>
+              <div id="auth_and_reg" style="display: none;">
+              <ul class="nav navbar-nav navbar-right">
+                        <li>
+                <a class="btn-group-au" href="/campus/registration/registration.php">РЕГИСТРАЦИЯ</a>
+                        </li>
+                        <li>
+                <button type="button" class="btn-group-au" data-toggle="modal" data-target="#myModal">АВТОРИЗАЦИЯ</button>
+                        </li>
+              </ul>
+              </div>
         </div>
     </div>
 </nav>
@@ -148,7 +180,7 @@
 <script src="../js/moment-with-locales.min.js"></script>
 <script src="../js/bootstrap-datetimepicker.min.js"></script>
 <script src="../js/bootstrap-tab.js"></script>
-<script src="../js/dropdown.js"></script>
+<script src="../js/right-bar.js"></script>
 <script src="../js/jquery.bootgrid.js"></script>
 <script src="../js/jquery.rating-2.0.js"></script>
 
