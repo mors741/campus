@@ -51,12 +51,16 @@ $(document).ready(
 
     function ans(data) {
       if (data.login != 'guest') {
-        document.getElementById('auth_and_reg').style.display="none";
-        document.getElementById('sign-out').style.display="block";
+        document.getElementById('auth_and_reg1').style.display="none";
+        document.getElementById('auth_and_reg2').style.display="none";
+        document.getElementById('sign-out1').style.display="block";
+        document.getElementById('sign-out2').style.display="block";
         document.getElementById('login').innerHTML = data.login;
       } else {
-        document.getElementById('auth_and_reg').style.display="block";
-        document.getElementById('sign-out').style.display="none";
+        document.getElementById('auth_and_reg1').style.display="block";
+        document.getElementById('auth_and_reg2').style.display="block";
+        document.getElementById('sign-out1').style.display="none";
+        document.getElementById('sign-out2').style.display="none";
       }
     }
 

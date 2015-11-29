@@ -32,7 +32,7 @@ div.submenu
 	color: #fff;
 }
 
-.root  li input[type=submit] {
+#logout_btn {
 	color: #a00;
 	background:#fff;
 	display: block;
@@ -44,7 +44,7 @@ div.submenu
 	width: 100%;
 }
 
-.root li input[type=submit]:hover{
+#logout_btn:hover {
     background:#dc817d;
     text-decoration: none;
 	color: #fff;
