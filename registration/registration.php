@@ -52,38 +52,34 @@
                 <?php
                     include("../lib/log.php"); 
                 ?>	
-                <div id="sign-out" style="display: none;">
-                <div class="dropdown">
-                  <ul class="nav navbar-nav navbar-right">
-                    <li>
-                      <a class="account btn-group-au">
-                        <p id="login"></p>
-                      <img src="/campus/pictures/arrow_w.png"/>
-                      </a>
+                <ul class="nav navbar-nav navbar-right">
+                    <li  id="sign-out1" style="display: none;">
+                        <a type=button class="account btn-group-au">
+                            <span id="login"></span>
+                            <img src="/campus/pictures/arrow_w.png"/>
+                        </a>
                     </li>
-                  </ul>
-                  <div class="submenu" style="display: none; ">
-                    <ul class="root">
-                      <li>
-                        <a href="/campus/profile/index.php">Личный кабинет</a>
-                      </li>
-                      <li>
-                          <input type="button" name="logout" onclick="logout()" value="Выйти"/>
-                      </li>
-                    </ul>
-                  </div>
-                </div>        
-              </div>
-              <div id="auth_and_reg" style="display: none;">
-              <ul class="nav navbar-nav navbar-right">
-                        <li>
-                <a class="btn-group-au" href="/campus/registration/registration.php">РЕГИСТРАЦИЯ</a>
-                        </li>
-                        <li>
-                <button type="button" class="btn-group-au" data-toggle="modal" data-target="#myModal">АВТОРИЗАЦИЯ</button>
-                        </li>
-              </ul>
-              </div>
+                    <li>
+                        <div class="submenu" style="display: none; ">
+                            <ul class="root" id="sign-out2" style="display: none;">
+                                <li>
+                                    <a href="../campus/profile/index.php">Личный кабинет</a>
+                                </li>
+                                <li>
+                                    <input type="button" id="logout_btn" onclick="logout()" value="Выйти"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="auth_and_reg1" style="display: none;">
+                        <a class="btn-group-au" href="/campus/registration/registration.php">РЕГИСТРАЦИЯ</a>
+                    </li>
+                    <li id="auth_and_reg2" style="display: none;">
+                        <a class="btn-group-au" data-toggle="modal" data-target="#myModal" href="#myModal">АВТОРИЗАЦИЯ</a>
+                    </li>
+                </ul>
                 </div>
             </div>
         </nav>

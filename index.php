@@ -57,7 +57,7 @@
                 <li  id="sign-out1" style="display: none;">
                     <a type=button class="account btn-group-au">
                         <span id="login"></span>
-                        <img src="../campus/pictures/arrow_w.png"/>
+                        <img src="/campus/pictures/arrow_w.png"/>
                     </a>
                 </li>
                 <li>
@@ -80,7 +80,7 @@
                 <li id="auth_and_reg2" style="display: none;">
                     <a class="btn-group-au" data-toggle="modal" data-target="#myModal" href="#myModal">АВТОРИЗАЦИЯ</a>
                 </li>
-    </ul>
+            </ul>
         </div>
     </div>
 </nav>
