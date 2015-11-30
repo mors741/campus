@@ -50,8 +50,37 @@
                 </li>
             </ul>
             <?php
-            include("lib/log.php"); //Включение кнопок авторизации и регистрации
-            ?>
+                include("lib/log.php"); //Включение кнопок авторизации и регистрации
+            ?> 
+
+            <ul class="nav navbar-nav navbar-right">
+                <li  id="sign-out1" style="display: none;">
+                    <a type=button class="account btn-group-au">
+                        <span id="login"></span>
+                        <img src="/campus/pictures/arrow_w.png"/>
+                    </a>
+                </li>
+                <li>
+                    <div class="submenu" style="display: none; ">
+                        <ul class="root" id="sign-out2" style="display: none;">
+                            <li>
+                                <a href="/campus/profile/index.php">Личный кабинет</a>
+                            </li>
+                            <li>
+                                <input type="button" id="logout_btn" onclick="logout()" value="Выйти"/>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li id="auth_and_reg1" style="display: none;">
+                    <a class="btn-group-au" href="/campus/registration/registration.php">РЕГИСТРАЦИЯ</a>
+                </li>
+                <li id="auth_and_reg2" style="display: none;">
+                    <a class="btn-group-au" data-toggle="modal" data-target="#myModal" href="#myModal">АВТОРИЗАЦИЯ</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -189,9 +218,9 @@
 </footer>
 <!-- Пол END-->
 <!-- JavaScript. Для быстрой загрзуки помещайте в конце страницы, указав в начале скрипт jQuery-->
-<script src="js/jquery2.4.1.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/dropdown.js"></script>
+<script src="/campus/js/jquery2.4.1.js"></script>
+<script src="/campus/js/bootstrap.min.js"></script>
+<script src="/campus/js/right-bar.js"></script>
 <script>
     $('.carousel').carousel({
         interval: 5000
