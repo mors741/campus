@@ -85,3 +85,34 @@ function get_request_type(){
 	return $req['type'];
 }
 
+function added_sort($db, $query, $req) {
+	$query = rtrim($query, ";");
+	$sort = (array) $req['sort'];
+	if ( count($sort) > 0 ) {
+		$query .= " ORDER BY";
+		foreach ($req['sort'] as $key => $value) {
+			$query .= " " . 
+			mysqli_real_escape_string($db, $key) . " " . 
+			mysqli_real_escape_string($db, $value) . ", ";
+		}
+		$query = rtrim($query, ", ");
+	}
+	$query .= ';';
+	return $query;
+}
+
+function added_limit($db, $query, $req) {
+	$query = rtrim($query, ";");
+	if ( !empty($req['current']) AND !empty($req['rowCount']) ) {
+		$query .= " LIMIT " . 
+			mysqli_real_escape_string($db, ($req['current'] - 1) * $req['rowCount']) . ", " .
+			mysqli_real_escape_string($db, $req['rowCount']);
+	}
+	$query .= ';';
+	return $query;
+}
+
+function added_total($db, $query, $req) {
+	$query = substr_replace($query, "SQL_CALC_FOUND_ROWS ", 7, 0);
+	return $query;
+}

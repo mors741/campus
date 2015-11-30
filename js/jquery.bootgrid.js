@@ -222,7 +222,7 @@
 
             var settings = {
                 url: url,
-                data: request,
+                data: JSON.stringify(request),
                 success: function(response)
                 {
                     that.xqr = null;

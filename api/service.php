@@ -233,6 +233,122 @@ $delete = function($req) {
 	return $ans;
 };
 
+$get_needs = function($req) {
+	$error = false;
+	$db = get_db_connection();
+	$answer['current'] = $req['current'];
+	$answer['rowCount'] = $req['rowCount'];
+
+	$author_id =  get_user($req)['id'];
+	$where = [
+		'author_id' => $author_id,
+	];
+
+	$select = [
+		'id' => 'id',
+		'category' => 'category',
+		'description' => 'description',
+		'ordate' => 'ordate',
+		'timeint' => 'timeint',
+		'date_create' => 'date_create',
+		'state' => 'state',
+		'mark' => 'mark',
+		'performer_id' => 'performer_id',
+	];
+
+	$query = create_select($db, 'orders_full', $select, $where);
+	$query = added_sort($db, $query, $req);
+	$query = added_limit($db, $query, $req);
+	$query = added_total($db, $query, $req);
+	$res = $db->query($query);
+
+	$rows = [];
+	while ( $order = $res->fetch_array(MYSQLI_ASSOC) ) {
+		$performer = get_user(['id' => $order['performer_id']]);
+		if ( empty($performer) ) {
+			$error = true;
+		}
+		$order = array_merge($order, ['performer' => $performer['fio']]);
+		unset($order['performer_id']);
+		$rows[] = $order;
+	}
+	$answer['rows'] = $rows;
+	
+	$res = $db->query("SELECT FOUND_ROWS()");
+	$res = $res->fetch_array(MYSQLI_ASSOC);
+	$answer['total'] = $res["FOUND_ROWS()"];
+
+	$answer['success'] = !$error;
+	return $answer;
+};
+
+$get_tasks = function($req) {
+	$error = false;
+	$db = get_db_connection();
+	$answer['current'] = $req['current'];
+	$answer['rowCount'] = $req['rowCount'];
+
+	$where = [];
+	if ( array_key_exists('login', $req) ) {
+		$where['performer_id'] = get_user($req)['id'];
+	}
+
+	if ( array_key_exists('mark', $req) ) {
+		$where['mark'] = $req['mark'];
+	}
+
+	if ( array_key_exists('ordate', $req) ) {
+		$where['ordate'] = $req['ordate'];
+	}
+
+	$select = [
+		'id' => 'id',
+		'author_id' => 'author_id',
+		'description' => 'description',
+		'ordate' => 'ordate',
+		'timeint' => 'timeint',
+		'date_create' => 'date_create',
+		'state' => 'state',
+		'mark' => 'mark',
+		'comment' => 'comment',
+		'performer_id' => 'performer_id'
+	];
+
+	$query = create_select($db, 'orders_full', $select, $where);
+	$query = added_sort($db, $query, $req);
+	$query = added_limit($db, $query, $req);
+	$query = added_total($db, $query, $req);
+	$res = $db->query($query);
+
+	$rows = [];
+	while ( $order = $res->fetch_array(MYSQLI_ASSOC) ) {
+		$performer = get_user(['id' => $order['performer_id']]);
+		if ( empty($performer) ) {
+			$error = true;
+		}
+		$order = array_merge($order, ['performer' => $performer['fio']]);
+		unset($order['performer_id']);
+
+		$author = get_user(['id' => $order['author_id']]);
+		if ( empty($author) ) {
+			$error = true;
+		}
+		$order = array_merge($order, ['author' => $author['fio'], 'address' => $author['address']]);
+		unset($order['author_id']);
+
+		$rows[] = $order;
+	}
+	$answer['rows'] = $rows;
+	
+	$res = $db->query("SELECT FOUND_ROWS()");
+	$res = $res->fetch_array(MYSQLI_ASSOC);
+	$answer['total'] = $res["FOUND_ROWS()"];
+
+	$answer['success'] = !$error;
+	return $answer;
+};
+
+
 $handlers = [
 	'create' => $create,
 	'set_state' => $set_state,
@@ -240,6 +356,8 @@ $handlers = [
 	'get_work' => $get_work,
 	'get_rating' => $get_rating,
 	'delete' => $delete,
+	'get_needs' => $get_needs,
+	'get_tasks' => $get_tasks,
 ];
 
 $req = get_json();

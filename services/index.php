@@ -108,7 +108,7 @@
                 </div>
                 <br/>
                 <br/>
-                <input type="submit" class="btn btn-primary" value="Отправить" name="add_order"/>
+                <input type="button" class="btn btn-primary" value="Отправить" name="add_order" onclick="create()" />
             </form>
         </div>
     </div>
@@ -143,6 +143,7 @@
 <script src="../js/bootstrap-datetimepicker.min.js"></script>
 <script src="../js/bootstrap-tab.js"></script>
 <script src="../js/dropdown.js"></script>
+<script src="../js/services/index.js"></script>
 <script>
     $(function () {
         $('#datetimepicker1').datetimepicker({

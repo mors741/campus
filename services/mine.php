@@ -23,13 +23,13 @@
 </head>
 
 <body>
-<!--Меню-->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <!--Для мобильных устройств-->
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
+    <!--Меню-->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <!--Для мобильных устройств-->
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -59,6 +59,56 @@
     </div>
 </nav>
 <!--Меню END-->
+<!-- Модальное окно подтверждения -->
+<div id="confirmedModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Подтвердить выполнение</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label class="control-label">Оценка</label>
+                        <textarea class="form-control" id="mark" name="mark"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Комментарий</label>
+                        <textarea class="form-control" id="comment" name="comment"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <button type="button" id="btn_confirmed" class="btn btn-primary">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Модальное окно жалобы -->
+<div id="complainModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Пожаловаться</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label class="control-label">Комментарий</label>
+                        <textarea class="form-control" id="complain" name="complain"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                        <button type="button" id="btn_complained" class="btn btn-primary">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Контейнер. Центральная часть-->
 <div class="container">
 
@@ -73,49 +123,17 @@
 
         <table id="grid-basic" class="table table-hover table-responsive table-bordered" width="100%">
             <thead>
-            <th data-visible="false" data-column-id="id"><strong>id</strong></th>
-            <th rowspan="3" data-column-id="category"><strong>Категория</strong></th>
-            <th rowspan="3" data-column-id="description"><strong>Описание</strong></th>
-            <th rowspan="3" data-column-id="ordate"><strong>Дата и время обслуживания</strong></th>
-            <th rowspan="3" data-column-id="address"><strong>Адрес</strong></th>
-            <th rowspan="3" data-column-id="author"><strong>Автор заявки</strong></th>
-            <th rowspan="3" data-column-id="date_create"><strong>Дата и время добавления заявки</strong></th>
-            <th rowspan="3" data-column-id="state"><strong>Состояние заказа</strong></th>
-            <th rowspan="3" data-column-id="performer"><strong>Исполнитель заказа</strong></th>
-            <th rowspan="3" data-column-id="commands" data-formatter="commands" data-sortable="false">Действия</th>
+                <th data-visible="false" data-column-id="id"><strong>id</strong></th>
+                <th rowspan="3" data-column-id="category"><strong>Категория</strong></th>
+                <th rowspan="3" data-column-id="description"><strong>Описание</strong></th>
+                <th rowspan="3" data-column-id="ordate"><strong>Дата и время обслуживания</strong></th>
+                <th rowspan="3" data-column-id="address"><strong>Адрес</strong></th>
+                <th rowspan="3" data-column-id="author"><strong>Автор заявки</strong></th>
+                <th rowspan="3" data-column-id="date_create"><strong>Дата и время добавления заявки</strong></th>
+                <th rowspan="3" data-column-id="state"><strong>Состояние заказа</strong></th>
+                <th rowspan="3" data-column-id="performer"><strong>Исполнитель заказа</strong></th>
+                <th rowspan="3" data-column-id="commands" data-formatter="commands" data-sortable="false">Действия</th>
             </thead>
-            <tbody>
-            <tr id="1">
-                <td>
-                    <p>111</p>
-                </td>
-                <td>
-                    <p>111</p>
-                </td>
-                <td>
-                    <p>111</p>
-                </td>
-                <td>
-                    <p>111</p>
-                </td>
-                <td>
-                    <p>111</p>
-                </td>
-                <td>
-                    <p>111</p>
-                </td>
-                <td>
-                    <p>111</p>
-                </td>
-                <td>
-                    <p>111</p>
-                </td>
-                <td>
-                    <p>111</p>
-                </td>
-            </tr>
-            </tbody>
-
         </table>
     </div>
 </div>
@@ -151,10 +169,7 @@
 <script src="../js/dropdown.js"></script>
 <script src="../js/jquery.bootgrid.js"></script>
 <script src="../js/jquery.rating-2.0.js"></script>
-
-<script>
-    $("#grid-basic").bootgrid();
-</script>
+<script src="../js/services/mine.js"></script>
 
 </body>
 </html>
