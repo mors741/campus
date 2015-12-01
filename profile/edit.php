@@ -9,6 +9,7 @@
     <meta name="description" content="Портал общежития НИЯУ МИФИ">
     <meta name="author" content="campus">
     <!--Конец-->
+я
     <!-- Стили-->
     <link rel="stylesheet" type="text/css" href="/campus/css/dropdown.css"/>
     <link rel="stylesheet" type="text/css" href="/campus/css/bootstrap.css"/>
@@ -36,51 +37,23 @@
                 <span class="icon-bar"></span>
             </button>
             <!--Для мобильных устройств END-->
-            <a class="navbar-brand" href="/campus/index.php">Портал общежития НИЯУ МИФИ</a>
+            <a class="navbar-brand" href="/campus/">Портал общежития НИЯУ МИФИ</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
                 <li>
-                    <a href="/campus/index.php">ГЛАВНАЯ</a>
+                    <a href="/campus/">ГЛАВНАЯ</a>
                 </li>
                 <li>
                     <a href="/campus/dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a>
                 </li>
                 <li>
-                    <a href="/campus/services/index.php">УСЛУГИ</a>
+                    <a href="/campus/services/">УСЛУГИ</a>
                 </li>
             </ul>
             <?php
             include("../lib/log.php"); //Включение кнопок авторизации и регистрации
             ?>
-            <ul class="nav navbar-nav navbar-right">
-                <li  id="sign-out1" style="display: none;">
-                    <a type=button class="account btn-group-au">
-                        <span id="login"></span>
-                        <img src="/campus/pictures/arrow_w.png"/>
-                    </a>
-                </li>
-                <li>
-                    <div class="submenu" style="display: none; ">
-                        <ul class="root" id="sign-out2" style="display: none;">
-                            <li>
-                                <a href="/campus/profile/index.php">Личный кабинет</a>
-                            </li>
-                            <li>
-                                <input type="button" id="logout_btn" onclick="logout()" value="Выйти"/>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li id="auth_and_reg1" style="display: none;">
-                    <a class="btn-group-au" href="/campus/registration/registration.php">РЕГИСТРАЦИЯ</a>
-                </li>
-                <li id="auth_and_reg2" style="display: none;">
-                    <a class="btn-group-au" data-toggle="modal" data-target="#myModal" href="#myModal">АВТОРИЗАЦИЯ</a>
-                </li>
-            </ul>
         </div>
     </div>
 </nav>
@@ -90,21 +63,18 @@
     <div class="span3">
         <div class="row">
             <div class="card">
-                <a class="btn btn-default" href="/campus/profile/index.php">Личные данные</a>
-                <a class="btn btn-default" href="/campus/profile/userEdit.php">Редактирование данных</a>
+                <a class="btn btn-default" href="/campus/profile/">Личные данные</a>
+                <a class="btn btn-default" href="/campus/profile/edit.php">Редактирование данных</a>
                 <a class="btn btn-default" href="/campus/profile/favs.php">Закладки</a>
             </div>
             <div class="content">
                 <div class="col-sm-2 col-md-2">
                     <form action="" method="post" enctype="form-data" id="js-upload-form">
-                        <div id="upload"
-                             style="background-image: url('<?php echo $user_data['picture'] ?>'); background-size: cover; width:100px; height:100px;"
-                             class="img-rounded">
+                        <div id="upload" style="background-size: cover; width:100px; height:100px;" class="img-rounded">
                         </div>
                         <div class="control-group form-group" style="margin-left: 40px">
                 <span class="btn btn-default btn-file"> Выбрать
-                    <input type="file" id="js-upload-files" name="datafile"
-                           onchange="fileUpload(this.form, '../lib/upload_file.php', 'upload')"/>
+                    <input type="file" id="js-upload-files" name="datafile" onchange="fileUpload(this.form, '../lib/upload_file.php', 'upload')"/>
                 </span>
                         </div>
                     </form>
@@ -168,9 +138,12 @@
                         <legend>Дополнительная информация</legend>
                         <div class="control-group form-group">
                             <label for="gender">Пол</label>
-
                             <div class="form-group">
-                                <input id="gender" class="editable_select">
+                                <select id="gender">
+                                    <option value = 'M'>мужской</option>
+                                    <option value = 'Ж'>женский</option>
+                                    <option value =  '-1'>не указан</option>
+                                </select>
                                 <br/>
                             </div>
                         </div>
@@ -203,8 +176,9 @@
                         <div class="control-group form-group">
                             <label for="address">Адрес (корпус):</label>
                             <div class="form-group">
-                                <div id="home" name="home" class="editable_address"></div>
-                                <br/>
+                                <select id = "home">
+                                    <option value = '-1'>Я не проживаю в общежитии</option>
+                                </select>
                             </div>
                         </div>
                         <div class="control-group form-group">
@@ -258,13 +232,13 @@
 <script src="/campus/js/bootstrap.min.js"></script>
 <script src="/campus/js/moment-with-locales.min.js"></script>
 <script src="/campus/js/bootstrap-tab.js"></script>
-<script src="/campus/js/right-bar.js"></script>
+<script src="/campus/js/dropdown.js"></script>
 <script src="/campus/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/campus/js/jquery.bootgrid.fa.js"></script>
 <script src="/campus/js/jquery.bootgrid.js"></script>
 <script src="/campus/js/mark_and_comment.js"></script>
 <script src="/campus/js/jquery.rating-2.0.js"></script>
-<script src="/campus/js/profile_edit.js"></script>
+<script src="/campus/js/user/edit.js"></script>
 
 </body>
 </html>

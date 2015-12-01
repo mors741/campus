@@ -53,6 +53,7 @@ $get = function($req) {
 				'contacts' => 'contacts',
 				'bdate' => 'bdate',
 				'gender' => 'gender',
+				'picture' => 'picture',
 	];
 	if ( array_key_exists('raw', $req) && $req['raw'] ) {
 		$table = 'users';
@@ -71,17 +72,30 @@ $get = function($req) {
 	return $ans; 
 };
 
+$update_pass = function($req){
+	$db = get_db_connection();
+	$login = $req['login'];
+	$old_pass = md5($res['pass']);
+	$new_pass = md5($res['new_pass']);
+
+	$query = create_update($db, 'users', ['passwd' => $new_pass], ['login' => $login, 'passwd' => $lod_pass]);
+	if ( $db->query($query) == false ) {
+		return [
+			'success' => false,
+			'error' => 'sql',
+		];
+	}
+	return ['success' => $db->affected_rows == 1];
+};
+
 $update = function($req){
 	$ans = [];
 	$db = get_db_connection();
 	$login = $req['login'];
+
 	$query = create_update($db, 'users', $req, ['login' => $login]);
 	$res = $db->query($query);
-	if ( $res == false ) {
-		$ans['success'] = false;
-	} else {
-		$ans['success'] = true;
-	}
+	$ans['success'] = !($res == false);
 	return $ans;
 };
 
@@ -120,6 +134,20 @@ $login = function($req){
 	return $ans;
 };
 
+$house = function($req){
+	$ans = [];
+	$db = get_db_connection();
+	$query = create_select($db, 'address', ['house' => 'house', 'street' => 'street', 'id' => 'id'], []);
+	$res = $db->query($query);
+	
+	if ( $res != false ) {
+		while ( $row = $res->fetch_array(MYSQLI_ASSOC) ) {
+			array_push($ans, $row);
+		}
+	}
+	return $ans;
+};
+
 $logout = function($req){
 	session_destroy();
 	$ans['success'] = true;
@@ -130,10 +158,12 @@ $handlers = [
 	'check_login' => $check_login,
 	'create' => $create,
 	'update' => $update,
+	'update_pass' => $update_pass,
 	'get' => $get,
 	'login' => $login,
 	'logout' => $logout,
 	'current' => $current,
+	'house' => $house,
 ];
 
 $req = get_json();

@@ -91,14 +91,14 @@
     <div class="span3">
         <div class="row">
             <div class="card">
-                <a class="btn btn-default" href="/campus/profile/index.php">Личные данные</a>
-                <a class="btn btn-default" href="/campus/profile/userEdit.php">Редактирование данных</a>
+                <a class="btn btn-default" href="/campus/profile/">Личные данные</a>
+                <a class="btn btn-default" href="/campus/profile/edit.php">Редактирование данных</a>
                 <a class="btn btn-default" href="/campus/profile/favs.php">Закладки</a>
             </div>
             <div class="content">
                 <div class="col-sm-2 col-md-2">
                     <br/>
-                    <img src="/campus/js/pictures/no_photo.jpg" alt="" class="img-rounded img-responsive"/>
+                    <img id="picture" alt="" class="img-rounded img-responsive"/>
                 </div>
                 <div class="col-sm-4 col-md-4">
                     <p>
@@ -162,7 +162,7 @@
 <script src="/campus/js/jquery.bootgrid.js"></script>
 <script src="/campus/js/mark_and_comment.js"></script>
 <script src="/campus/js/jquery.rating-2.0.js"></script>
-<script src="/campus/js/profile.js"></script>
+<script src="/campus/js/user/main.js"></script>
 </body>
 </html>
 

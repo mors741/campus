@@ -1,9 +1,9 @@
 function set_user_data(resp) {
 	for ( key in resp ) {
 		selector = "label[for='" + key + "']";
-		alert(selector);
 		$(selector).append(resp[key]);
 	}
+	$('#picture').attr('src', resp['picture']);
 }
 
 function get_user_data(resp) {
@@ -13,8 +13,6 @@ function get_user_data(resp) {
 			'login' : resp['login']
 		};
 		$.post("/campus/api/user.php", JSON.stringify(req), set_user_data, "json");	
-	} else {
-		alert('unauthorized');
 	}
 }
 
