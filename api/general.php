@@ -34,6 +34,56 @@ function create_constraint($db, $constraint) {
 	return $query;
 }
 
+function create_extended_constraint($db, $union, $constraint) {
+	$query = "";
+	if ( !empty($constraint) OR !empty($union)) {
+		$query .= " WHERE";
+		if ( !empty($union) ) {
+			foreach ($union as $key => $value) {
+				$query .= " " . 
+				mysqli_real_escape_string($db, $key) . " = " . 
+				mysqli_real_escape_string($db, $value) . " AND ";
+			}
+		}
+
+		if ( !empty($constraint) ) {
+			foreach ($constraint as $key => $value) {
+				$query .= " " . 
+				mysqli_real_escape_string($db, $key) . " = '" . 
+				mysqli_real_escape_string($db, $value) . "' AND ";
+			}
+		}
+
+		$query = rtrim($query, "AND ");
+	}
+	return $query;
+}
+
+function create_sort($db, $sort) {
+	$query = "";
+	if ( !empty($sort) ) {
+		$query .= " ORDER BY";
+		foreach ($sort as $key => $value) {
+			$query .= " " . 
+			mysqli_real_escape_string($db, $key) . " " . 
+			mysqli_real_escape_string($db, $value) . ", ";
+		}
+		$query = rtrim($query, ", ");
+	}
+	return $query;
+}
+
+function create_limit($db, $from, $count) {
+	$query = "";
+	if ( !empty($count) AND $count != '-1') {
+		$query .= " LIMIT " . 
+			mysqli_real_escape_string($db, $from) . ", " .
+			mysqli_real_escape_string($db, $count);
+	}
+	return $query;
+}
+
+
 function create_delete($db, $table_name, $constraint){
 	$query = "DELETE FROM " . mysqli_real_escape_string($db, $table_name) . " ";
 	$query .= create_constraint($db, $constraint);
@@ -85,34 +135,24 @@ function get_request_type(){
 	return $req['type'];
 }
 
-function added_sort($db, $query, $req) {
-	$query = rtrim($query, ";");
-	$sort = (array) $req['sort'];
-	if ( count($sort) > 0 ) {
-		$query .= " ORDER BY";
-		foreach ($req['sort'] as $key => $value) {
-			$query .= " " . 
-			mysqli_real_escape_string($db, $key) . " " . 
-			mysqli_real_escape_string($db, $value) . ", ";
-		}
-		$query = rtrim($query, ", ");
+function create_extended_select($db, $table, $val, $union, $constraint, $sort, $flag, $from, $count){
+	$query = "SELECT " . $flag . " ";
+	foreach ($val as $key => $name) {
+		$query .= " " . 
+			mysqli_real_escape_string($db, $key) . " as '" . 
+			mysqli_real_escape_string($db, $name) . "', ";
 	}
-	$query .= ';';
-	return $query;
-}
-
-function added_limit($db, $query, $req) {
-	$query = rtrim($query, ";");
-	if ( !empty($req['current']) AND !empty($req['rowCount']) ) {
-		$query .= " LIMIT " . 
-			mysqli_real_escape_string($db, ($req['current'] - 1) * $req['rowCount']) . ", " .
-			mysqli_real_escape_string($db, $req['rowCount']);
+	$query = rtrim($query, ", ");
+	$query .= " FROM ";
+	foreach ($table as $key => $name) {
+		$query .= 
+			mysqli_real_escape_string($db, $name) . " as " .
+			mysqli_real_escape_string($db, $key) . ", ";
 	}
-	$query .= ';';
-	return $query;
-}
-
-function added_total($db, $query, $req) {
-	$query = substr_replace($query, "SQL_CALC_FOUND_ROWS ", 7, 0);
+	$query = rtrim($query, ", ");
+	$query .= create_extended_constraint($db, $union, $constraint) . 
+			create_sort($db, $sort) . 
+			create_limit($db, $from, $count) . 
+			";";
 	return $query;
 }

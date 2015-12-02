@@ -1,53 +1,79 @@
-function confirm(id)
+function start_mark_modal(id)
 {
-    btn = document.getElementById("btn_confirmed");
-    btn.setAttribute("onclick", "confirmed(" + id + ")");
-    $("#confirmedModal").modal("show");
+    button = document.getElementById("mark_btn");
+    button.setAttribute("onclick", "confirmed(" + id + ")");
+    $("#mark_modal").modal("show");
 }
 
 function confirmed(id)
 {
-    $("#confirmedModal").modal("hide");
+    comment = document.getElementById("comment");
+    mark = document.getElementById("mark");
+
+    $("#mark_modal").modal("hide");
+
     req = { 
         'type' : 'set_state',
         'id' : id,
         'state' : 'Подтверждено',
-        'comment' : $('#comment').val(),
-        'mark' : $('#mark').val()
+        'comment' : comment.value,
+        'mark' : mark.value,
     };
-    $.post("/campus/api/service.php", JSON.stringify(req), function() { return; }, "json");
+
+    $.post(
+        "/campus/api/service.php", 
+        JSON.stringify(req), 
+        function() { 
+            comment.value = "";
+            mark.value = "";
+            return; 
+        }, 
+        "json"
+    );
+
     $("#grid-basic").bootgrid('reload');
 }
 
-function complain(id)
+function start_claim_modal(id)
 {
-    btn = document.getElementById("btn_complained");
-    btn.setAttribute("onclick", "complained(" + id + ")");
-    $("#complainModal").modal("show");
+    button = document.getElementById("claim_btn");
+    button.setAttribute("onclick", "complained(" + id + ")");
+    $("#claim_modal").modal("show");
 }
 
 function complained(id) 
 {
-    $("#complainModal").modal("hide");
+    claim = document.getElementById("claim");
+
+    $("#claim_modal").modal("hide");
+
     req = { 
         'type' : 'set_state',
         'id' : id,
         'state' : 'Подтверждено',
-        'comment' : $('#complain').val(),
+        'comment' : claim.value,
         'mark' : 0
     };
-    console.log(req);
-    $.post("/campus/api/service.php", JSON.stringify(req), function() { return; }, "json");
+    $.post(
+        "/campus/api/service.php", 
+        JSON.stringify(req), 
+        function() { 
+            claim.value = "";
+            return; 
+        }, 
+        "json"
+    );
+    
     $("#grid-basic").bootgrid('reload');
 }
 
-function set_command(user, column, row) 
+function set_command(column, row) 
 {
     var html;
     switch ( row["state"] ) {
         case "Выполнено":
-            html = "<button data-row-id=\"" + row.id + "\" onclick=\"confirm(" + row.id + ")\">Подтвердить выполнение</button> " +
-                "<button data-row-id=\"" + row.id + "\" onclick=\"complain(" + row.id + ")\">Пожаловаться</button>";
+            html = "<button data-row-id=\"" + row.id + "\"onclick=\"start_mark_modal(" + row.id + ")\">Подтвердить выполнение</button> " +
+                "<button data-row-id=\"" + row.id + "\" onclick=\"start_claim_modal(" + row.id + ")\">Пожаловаться</button>";
             break;
         case "Подтверждено":
             html = "Оценка: " + row["mark"];
@@ -59,8 +85,11 @@ function set_command(user, column, row)
     return html;
 }
 
-function init(user) 
+window.onload  = function()
 {
+    document.cookie = "login=admin@campus.mephi.ru";
+    document.cookie = "id=1";
+    document.cookie = "role=admin";
     $("#grid-basic").bootgrid({
         ajax: true,
         ajaxSettings : {
@@ -70,22 +99,24 @@ function init(user)
         post: function ()
         {
             return {
-                type: "get_needs",
-                login: user['login']
+                type: "get_data",
+                author_id: getCookie("id")
             };
         },
         url: "/campus/api/service.php",
         formatters: {
             "commands": function(column, row)
             {
-                return set_command(user, column, row);
+                return set_command(column, row);
             }
         }
     })
 }
 
-window.onload  = function()
-{
-    req = { 'type' : 'current'};
-    $.post("/campus/api/user.php", JSON.stringify(req), init, "json");
+
+function getCookie(name) {
+  var matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
 }

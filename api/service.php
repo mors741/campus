@@ -282,6 +282,76 @@ $get_needs = function($req) {
 	return $answer;
 };
 
+
+$get_data = function($req) {
+	$db = get_db_connection();
+
+	$flag = 'SQL_CALC_FOUND_ROWS';
+
+	$table = [
+		'o' => 'orders_full',
+		'a' => 'users_fio',
+		'p' => 'users_fio',
+	];
+
+	$select = [
+		'o.id' => 'id',
+		'a.fio' => 'author',
+		'a.address' => 'address',
+		'o.description' => 'description',
+		'o.ordate' => 'ordate',
+		'o.timeint' => 'timeint',
+		'o.date_create' => 'date_create',
+		'o.state' => 'state',
+		'o.mark' => 'mark',
+		'o.comment' => 'comment',
+		'p.fio' => 'performer',
+		'o.category' => 'category',
+	];
+
+	$union = [
+		'o.author_id' => 'a.id',
+		'o.performer_id' => 'p.id',
+	];
+
+	$where = [];
+	if ( array_key_exists('author_id', $req) ) {
+		$where['a.id'] = $req['author_id'];
+	}
+	if ( array_key_exists('performer_id', $req) ) {
+		$where['p.id'] = $req['performer_id'];
+	}
+	if ( array_key_exists('mark', $req) ) {
+		$where['o.mark'] = $req['mark'];
+	}
+	if ( array_key_exists('ordate', $req) ) {
+		$where['o.ordate'] = $req['ordate'];
+	}
+
+	$sort = (array) $req['sort'];
+
+	$from = ($req['current'] - 1) * $req['rowCount'];
+
+	$count = $req['rowCount'];
+
+	$query = create_extended_select($db, $table, $select, $union, $where, $sort, $flag, $from, $count);
+	$res = $db->query($query);
+	$rows = [];
+	while ( $order = $res->fetch_array(MYSQLI_ASSOC) ) {
+		$rows[] = $order;
+	}
+
+	$res = $db->query("SELECT FOUND_ROWS()");
+	$total = $res->fetch_array(MYSQLI_ASSOC);
+	$total = $total["FOUND_ROWS()"];
+
+	$answer['rows'] = $rows;
+	$answer['total'] = $total;
+	$answer['current'] = $req['current'];
+	$answer['rowCount'] = $req['rowCount'];
+	return $answer;
+};
+
 $get_tasks = function($req) {
 	$error = false;
 	$db = get_db_connection();
@@ -358,6 +428,7 @@ $handlers = [
 	'delete' => $delete,
 	'get_needs' => $get_needs,
 	'get_tasks' => $get_tasks,
+	'get_data' => $get_data,
 ];
 
 $req = get_json();

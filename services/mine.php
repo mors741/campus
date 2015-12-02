@@ -88,7 +88,7 @@
 </nav>
 <!--Меню END-->
 <!-- Модальное окно подтверждения -->
-<div id="confirmedModal" class="modal fade" role="dialog">
+<div id="mark_modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -99,7 +99,14 @@
                 <form role="form">
                     <div class="form-group">
                         <label class="control-label">Оценка</label>
-                        <textarea class="form-control" id="mark" name="mark"></textarea>
+                        <select name="mark" id="mark" class="form-control">
+                            <option value="" selected="selected">Оцените</option>
+                            <option value="1">Я бы лучше сделал</option>
+                            <option value="2">Я бы сам так смог</option>
+                            <option value="3">Нормально</option>
+                            <option value="4">Хорошо</option>
+                            <option value="5">Забожил</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Комментарий</label>
@@ -107,7 +114,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        <button type="button" id="btn_confirmed" class="btn btn-primary">Отправить</button>
+                        <button type="button" id="mark_btn" class="btn btn-primary">Отправить</button>
                     </div>
                 </form>
             </div>
@@ -115,7 +122,7 @@
     </div>
 </div>
 <!-- Модальное окно жалобы -->
-<div id="complainModal" class="modal fade" role="dialog">
+<div id="claim_modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -126,11 +133,11 @@
                 <form role="form">
                     <div class="form-group">
                         <label class="control-label">Комментарий</label>
-                        <textarea class="form-control" id="complain" name="complain"></textarea>
+                        <textarea class="form-control" id="claim" name="claim"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        <button type="button" id="btn_complained" class="btn btn-primary">Отправить</button>
+                        <button type="button" id="claim_btn" class="btn btn-primary">Отправить</button>
                     </div>
                 </form>
             </div>

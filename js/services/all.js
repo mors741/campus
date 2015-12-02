@@ -19,9 +19,10 @@ function completed(id)
     $("#grid-basic-all").bootgrid('reload');
 }
 
-function set_command(user, column, row) 
+function set_command(column, row) 
 {
     var html;
+    var role = getCookie("role");
     switch ( row["state"] ) {
         case "Выполнено":
             html = "Ожидает подтверждения";
@@ -30,7 +31,7 @@ function set_command(user, column, row)
             html = "Оценка: " + row["mark"];
             break;
         default:
-            if ( user["role"] == "staff" ) {
+            if ( role == "staff" ) {
                 html = "<button data-row-id=\"" + row.id + "\" onclick=\"completed(" + row.id + ")\">Выполнено</button>";
             } 
             else {
@@ -38,47 +39,45 @@ function set_command(user, column, row)
             }
             break;
     }
-    console.log(html);
     return html;
 }
 
-function set_post(user)
+function set_post()
 {
-    if ( user["role"] == "staff" ) {
-        post = {
-            type: "get_tasks",
-            login: user["login"]
-        };
+    if ( getCookie("role") == "staff" ) {
+        post = { type: "get_data", performer_id: getCookie("id") };
     }
     else {
-        post = {
-            type: "get_tasks"
-        };
+        post = { type: "get_data" };
     }
     return post;
 }
 
-function init(user) 
+window.onload  = function()
 {
+    document.cookie = "login=admin@campus.mephi.ru";
+    document.cookie = "id=1";
+    document.cookie = "role=admin";
     $("#grid-basic-all").bootgrid({
         ajax: true,
         ajaxSettings : {
             type: "POST",
             dataType: 'json',
         },
-        post: set_post(user),
+        post: set_post(),
         url: "/campus/api/service.php",
         formatters: {
             "commands": function(column, row)
             {
-                return set_command(user, column, row);
+                return set_command(column, row);
             }
         }
     })
 }
 
-window.onload  = function()
-{
-    req = { 'type' : 'current'};
-    $.post("/campus/api/user.php", JSON.stringify(req), init, "json");
+function getCookie(name) {
+  var matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
 }
