@@ -120,13 +120,9 @@
                         </div>
                         <div class="col-sm-6 col-md-6">
                             <div class="btn btn-group">
-                                <button type="button" class="glyphicon glyphicon-thumbs-up btn btn-default"> Мне
-                                    нравится
+                                <button type="button" class="glyphicon glyphicon-check btn btn-default"> Принять
                                 </button>
-                                <a type="button" href="../dashboard/my.php"
-                                   class="glyphicon glyphicon-comment btn btn-default"> Подробнее
-                                </a>
-                                <button type="button" class="glyphicon glyphicon-trash btn btn-default"> Не актуально
+                                <button type="button" class="glyphicon glyphicon-unchecked btn btn-default"> Отклонить
                                 </button>
                             </div>
                         </div>
@@ -135,7 +131,6 @@
                 </td>
 
             </tr>
-
             </tbody>
         </table>
 
