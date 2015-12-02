@@ -96,6 +96,17 @@
             <a class="btn btn-default" href="../dashboard/all.php">Объявления для проверки</a> <!/--для модеров
             и админов -->
         </div>
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <form action="" class="search-form">
+                    <div class="form-group has-feedback">
+                        <label for="search" class="sr-only">Поиск</label>
+                        <input type="text" class="form-control" name="search" id="search" placeholder="Поиск">
+                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    </div>
+                </form>
+            </div>
+        </div>
         <table class="table table-hover">
             <tbody>
             <tr>
