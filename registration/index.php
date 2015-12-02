@@ -138,10 +138,10 @@
                     <div class="control-group form-group">
                         <label for="login">Логин (email НИЯУ МИФИ)</label>
                         <div class="form-group">
-                            <input type="text" name="login" id="login" class="form-control" placeholder="email"/>
+                            <input type="text" name="email" id="email" class="form-control" placeholder="email"/>
                         </div>
                     </div>
-                </div>
+
                 <div class="control-group form-group">
                     <label for="password">Пароль</label>
                     <div class="form-group">
@@ -168,8 +168,7 @@
                     </div>
                 </div>
             </form>
-        </div>
-    </div>
+</div>
     <!--Первый блок регистрации END-->
     <!--Второй блок регистрации-->
     
@@ -209,12 +208,22 @@
                     <input type="text"  value="" name="room" id="room" class="form-control"/>
                 </div>
             </div>
+            
         </div>
+  
     </div>
+    
+
+        
     <!--Второй блок регистрации END-->
     <!--Третий блок регистрации-->
     <br>
     <div style="margin-top: 480px; ">
+              <div class="control-group form-group" >
+						<label><input type="checkbox"  value="agree" name="agree" />  </label>
+						<label>Я прочитал и согласен с правилами <a href="#?w=500"  rel="popup_name" class="poplight">пользовательского соглашения</a></label>
+						<label for="agree" class="error" generated="true" style="display:none"></label>
+						</div>
         <hr>
         <div id="popup_name" class="popup_block">
            <h1>Пользовательское соглашение</h1>
@@ -258,6 +267,7 @@
    </form>
 </div>
 </div>
+
 <!-- Контейнер. Центральная часть END-->
 <!-- Пол-->
 <footer>
