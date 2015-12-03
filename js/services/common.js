@@ -3,9 +3,10 @@ function set_card()
     var path = window.location.pathname;
     var path_all = "/campus/services/all.php";
     var path_mine = "/campus/services/mine.php";
-    var path_index = "/campus/services";
+    var path_index = "/campus/services/";
+    var path_index_full = "/campus/services/index.php";
     var path_staff = "/campus/services/staff.php";
-    var path_dome = "/campus";
+    var path_dome = "/campus/";
 
     var all = "<a class=\"btn btn-default\" href=" + path_all + ">Просмотр всех заявок</a> ";
     var mine = "<a class=\"btn btn-default\" href=" + path_mine + ">Просмотр моих заявок</a> ";
@@ -20,7 +21,17 @@ function set_card()
             if (role == "guest" || role == "local") {
                 window.location.replace(path_dome);  
             } 
-            if (home == 0){
+            if (home == "0"){
+            	alert(home);
+                window.location.replace(path_all); 
+            }
+            break;
+        case path_index_full:
+            if (role == "guest" || role == "local") {
+                window.location.replace(path_dome);  
+            } 
+            if (home == "0"){
+            	alert(home);
                 window.location.replace(path_all); 
             }
             break;
@@ -28,7 +39,7 @@ function set_card()
             if (role == "guest" || role == "local") {
                 window.location.replace(path_dome);
             } 
-            if (home == 0){
+            if (home == "0"){
                 window.location.replace(path_all); 
             }
             break;
