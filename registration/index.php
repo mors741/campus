@@ -35,18 +35,18 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!--Для мобильных устройств END-->
-                <a class="navbar-brand" href="index.php">Портал общежития НИЯУ МИФИ</a>
+                <a class="navbar-brand" href="/campus/index.php">Портал общежития НИЯУ МИФИ</a>
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
                     <li>
-                        <a href="index.php">ГЛАВНАЯ</a>
+                        <a href="/campus/index.php">ГЛАВНАЯ</a>
                     </li>
                     <li>
-                        <a href="dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a>
+                        <a href="/campus/dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a>
                     </li>
                     <li>
-                        <a href="services.php">УСЛУГИ</a>
+                        <a href="/campus/services.php">УСЛУГИ</a>
                     </li>
                 </ul>
                 <?php
@@ -63,7 +63,7 @@
                         <div class="submenu" style="display: none; ">
                             <ul class="root" id="sign-out2" style="display: none;">
                                 <li>
-                                    <a href="../campus/profile/index.php">Личный кабинет</a>
+                                    <a /campus/="/campus/profile/index.php">Личный кабинет</a>
                                 </li>
                                 <li>
                                     <input type="button" id="logout_btn" onclick="logout()" value="Выйти"/>
