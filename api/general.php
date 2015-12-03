@@ -4,7 +4,15 @@ session_start();
 if ( !array_key_exists('login', $_SESSION) ) {
 	$_SESSION['login'] = 'guest';
 	$_SESSION['role'] = 'guest';
+	$_SESSION['id'] =  '-1';
+	$_SESSION['home'] = '0';
 }
+$hour = 60*60;
+
+setcookie('login',	$_SESSION['login'], time() + $hour);
+setcookie('role',	$_SESSION['role'], 	time() + $hour);
+setcookie('id',		$_SESSION['id'], 	time() + $hour);
+setcookie('home',	$_SESSION['home'],  time() + $hour);
 
 function get_json(){
 	$request = file_get_contents('php://input');

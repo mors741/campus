@@ -41,6 +41,16 @@ $create = function($req) {
 	return $ans; 
 };
 
+$create_user = function($req) {
+	global $create;
+	if ( array_key_exists('home', $req) ) {
+		$req['role'] = 'campus';
+	} else {
+		$req['role'] = 'local';
+	}
+	return $create($req);
+};
+
 $get = function($req) {
 	$ans = [];
 	$db = get_db_connection();
@@ -111,7 +121,15 @@ $login = function($req){
 	
 	$login = $req['login'];
 	$pass = md5($req['pass']);
-	$query = create_select($db, 'users', ['role' => 'role'], ['login' => $login, 'passwd' => $pass]);
+	$query = create_select(
+		$db, 'users',
+		[
+			'role' => 'role',
+			'home' => 'home',
+			'id' => 'id'
+		],
+		['login' => $login, 'passwd' => $pass]
+	);
 	$res = $db->query($query);
 	
 	if ( $res == false ) {
@@ -129,6 +147,8 @@ $login = function($req){
 			
 			$_SESSION['login'] = $login;
 			$_SESSION['role'] = $res['role'];
+			$_SESSION['id'] = $res['id'];
+			$_SESSION['home'] = $res['home'];
 		}
 	}
 	return $ans;
@@ -157,6 +177,7 @@ $logout = function($req){
 $handlers = [
 	'check_login' => $check_login,
 	'create' => $create,
+	'create_user' => $create_user,
 	'update' => $update,
 	'update_pass' => $update_pass,
 	'get' => $get,

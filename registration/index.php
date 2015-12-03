@@ -167,8 +167,7 @@
                         <input type="text" name="name" id="name" class="form-control" placeholder="Имя"/>
                     </div>
                 </div>
-            </form>
-</div>
+            </div>
     <!--Первый блок регистрации END-->
     <!--Второй блок регистрации-->
     
@@ -191,14 +190,6 @@
                 <label for="home">Адрес</label>
                 <div class="form group">
                     <select name="home" id="home" class="form-control">
-                        <option value="0" selected="selected">(Выберите корпус общежития)</option>
-                        <option value="1">ул. Москворечье д.2 корп 1</option>
-                        <option value="2">ул. Москворечье д.2 корп 2</option>
-                        <option value="3">ул. Москворечье, д.19 корп 3</option>
-                        <option value="4">ул. Москворечье, д.19 корп 4</option>
-                        <option value="5">ул. Кошкина д.11 корп. 1</option>
-                        <option value="6">ул. Шкулева д.27 ст 2</option>
-                        <option value="7">ул. Пролетарский проспект д. 8 корп. 2</option>
                     </select>
                 </div>
             </div>
@@ -260,7 +251,7 @@
                <p>4.8. Настоящее Соглашение может быть изменено Администрацией Портала в любое время без какого-либо специального уведомления. Новая редакция Соглашения вступает в силу с момента ее опубликования на Портале, если иное не предусмотрено новой редакцией Соглашения. </p>
            </div>
            <div class="control-group form-group">
-               <input type="submit"  class="btn btn-primary" value="Зарегистрировать" name="register"/>
+               <input type="submit" id="send" class="btn btn-primary" value="Зарегистрировать" name="register"/>
            </div>
        </div>
        <!--Третий блок регистрации END-->
@@ -298,14 +289,14 @@ include('lib/reg.php');
 <!-- JavaScript. Для быстрой загрзуки помещайте в конце страницы, указав в начале скрипт jQuery-->
 <script src="/campus/js/jquery2.4.1.js"></script>
 <script src="/campus/js/jquery.validate.js"></script>
-<script src="/campus/js/registration.js"></script>
+<script src="/campus/js/validators.js"></script>
 <script src="/campus/js/bootstrap.min.js"></script> 
 <script src="/campus/js/jquery.pstrength-min.1.2.js"></script>
 <script src="/campus/js/right-bar.js"></script>
 <script src="/campus/js/jquery.agreement.js"></script>
 <script src="/campus/js/dm-modal.js"></script>
 <script src="/campus/js/common-edit.js"></script>      
-<script src="/campus/js/"></script>                 
+<script src="/campus/js/user/registration.js"></script>
 <!-- JavaScript. Для быстрой загрзуки помещайте в конце страницы, указав в начале скрипт jQuery END-->       
 </body>
 </html>
