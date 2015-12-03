@@ -9,10 +9,10 @@ if ( !array_key_exists('login', $_SESSION) ) {
 }
 $hour = 60*60;
 
-setcookie('login',	$_SESSION['login'], time() + $hour);
-setcookie('role',	$_SESSION['role'], 	time() + $hour);
-setcookie('id',		$_SESSION['id'], 	time() + $hour);
-setcookie('home',	$_SESSION['home'],  time() + $hour);
+setcookie('login',	$_SESSION['login'], time() + $hour, "/campus/");
+setcookie('role',	$_SESSION['role'], 	time() + $hour, "/campus/");
+setcookie('id',		$_SESSION['id'], 	time() + $hour, "/campus/");
+setcookie('home',	$_SESSION['home'],  time() + $hour, "/campus/");
 
 function get_json(){
 	$request = file_get_contents('php://input');
