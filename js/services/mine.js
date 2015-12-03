@@ -15,7 +15,7 @@ function confirmed(id)
     req = { 
         'type' : 'set_state',
         'id' : id,
-        'state' : 'Подтверждено',
+        'state' : 'Оценено',
         'comment' : comment.value,
         'mark' : mark.value,
     };
@@ -34,62 +34,24 @@ function confirmed(id)
     $("#grid-basic").bootgrid('reload');
 }
 
-function start_claim_modal(id)
-{
-    button = document.getElementById("claim_btn");
-    button.setAttribute("onclick", "complained(" + id + ")");
-    $("#claim_modal").modal("show");
-}
-
-function complained(id) 
-{
-    claim = document.getElementById("claim");
-
-    $("#claim_modal").modal("hide");
-
-    req = { 
-        'type' : 'set_state',
-        'id' : id,
-        'state' : 'Подтверждено',
-        'comment' : claim.value,
-        'mark' : 0
-    };
-    $.post(
-        "/campus/api/service.php", 
-        JSON.stringify(req), 
-        function() { 
-            claim.value = "";
-            return; 
-        }, 
-        "json"
-    );
-    
-    $("#grid-basic").bootgrid('reload');
-}
-
-function set_command(column, row) 
+function set_command(row) 
 {
     var html;
     switch ( row["state"] ) {
         case "Выполнено":
-            html = "<button data-row-id=\"" + row.id + "\"onclick=\"start_mark_modal(" + row.id + ")\">Подтвердить выполнение</button> " +
-                "<button data-row-id=\"" + row.id + "\" onclick=\"start_claim_modal(" + row.id + ")\">Пожаловаться</button>";
-            break;
-        case "Подтверждено":
-            html = "Оценка: " + row["mark"];
+            html = "<button data-row-id=\"" + row.id + "\"onclick=\"start_mark_modal(" + row.id + ")\">Оценить</button>";
             break;
         default:
-            html = "Нет доступных действий";
+            html = "";
             break;
     }
     return html;
 }
 
-window.onload  = function()
+function init()
 {
-    document.cookie = "login=admin@campus.mephi.ru";
-    document.cookie = "id=1";
-    document.cookie = "role=admin";
+    set_card();
+
     $("#grid-basic").bootgrid({
         ajax: true,
         ajaxSettings : {
@@ -107,16 +69,25 @@ window.onload  = function()
         formatters: {
             "commands": function(column, row)
             {
-                return set_command(column, row);
-            }
+                return set_command(row);
+            },
+            "time_and_date": function(column, row)
+            {
+                return get_datetime(row);
+            },
+            "mark": function(column, row)
+            {
+                return get_mark(row["mark"]);
+            },
+            "state_and_comment": function(column, row) 
+            {
+                return get_state_and_comment(row);
+            },
         }
     })
 }
 
-
-function getCookie(name) {
-  var matches = document.cookie.match(new RegExp(
-    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-  ));
-  return matches ? decodeURIComponent(matches[1]) : undefined;
-}
+document.addEventListener(
+    "DOMContentLoaded", 
+    init
+);

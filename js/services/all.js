@@ -5,7 +5,7 @@ function del(id)
         'id' : id
     };
     $.post("/campus/api/service.php", JSON.stringify(req), function() { return; }, "json");
-    $("#grid-basic-all").bootgrid('reload');
+    $("#grid-basic").bootgrid('reload');
 }
 
 function completed(id)
@@ -16,7 +16,7 @@ function completed(id)
         'state' : 'Выполнено'
     };
     $.post("/campus/api/service.php", JSON.stringify(req), function() { return; }, "json");
-    $("#grid-basic-all").bootgrid('reload');
+    $("#grid-basic").bootgrid('reload');
 }
 
 function set_command(column, row) 
@@ -25,19 +25,17 @@ function set_command(column, row)
     var role = getCookie("role");
     switch ( row["state"] ) {
         case "Выполнено":
-            html = "Ожидает подтверждения";
-            break;
-        case "Подтверждено":
-            html = "Оценка: " + row["mark"];
-            break;
+        break;
+        case "Оценено":
+        break;
         default:
-            if ( role == "staff" ) {
-                html = "<button data-row-id=\"" + row.id + "\" onclick=\"completed(" + row.id + ")\">Выполнено</button>";
-            } 
-            else {
-                html = "<button data-row-id=\"" + row.id + "\" onclick=\"del(" + row.id + ")\">Удалить</button>";
-            }
-            break;
+        if ( role == "staff" ) {
+            html = "<button data-row-id=\"" + row.id + "\" onclick=\"completed(" + row.id + ")\">Выполнено</button>";
+        } 
+        else {
+            html = "<button data-row-id=\"" + row.id + "\" onclick=\"del(" + row.id + ")\">Удалить</button>";
+        }
+        break;
     }
     return html;
 }
@@ -53,12 +51,11 @@ function set_post()
     return post;
 }
 
-window.onload  = function()
-{
-    document.cookie = "login=admin@campus.mephi.ru";
-    document.cookie = "id=1";
-    document.cookie = "role=admin";
-    $("#grid-basic-all").bootgrid({
+function init()
+{    
+    set_card();
+
+    $("#grid-basic").bootgrid({
         ajax: true,
         ajaxSettings : {
             type: "POST",
@@ -70,14 +67,20 @@ window.onload  = function()
             "commands": function(column, row)
             {
                 return set_command(column, row);
-            }
+            },
+            "time_and_date": function(column, row)
+            {
+                return get_datetime(row);
+            },
+            "state_and_comment": function(column, row) 
+            {
+                return get_state_and_comment(row);
+            },
         }
     })
 }
 
-function getCookie(name) {
-  var matches = document.cookie.match(new RegExp(
-    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-  ));
-  return matches ? decodeURIComponent(matches[1]) : undefined;
-}
+document.addEventListener(
+    "DOMContentLoaded", 
+    init
+);

@@ -92,25 +92,20 @@
 <div class="container">
 
     <div class="span3">
-        <div class="card">
-            <a class="btn btn-default" href="../services/index.php">Добавить заявку</a>
-            <a class="btn btn-default" href="../services/mine.php">Просмотр моих заявок</a>
-            <a class="btn btn-default" href="../services/all.php">Просмотр всех заявок</a>
+        <div class="card" id="card">
         </div>
         <br/>
-
-
-        <table id="grid-basic-all" class="table table-hover table-responsive table-bordered" width="100%">
+        
+        <table id="grid-basic" class="table table-hover table-responsive table-bordered" width="100%">
             <thead>
             <th data-visible="false" data-column-id="id"><strong>id</strong></th>
             <th rowspan="3" data-column-id="category"><strong>Категория</strong></th>
-            <th rowspan="3" data-column-id="description"><strong>Описание</strong></th>
-            <th rowspan="3" data-column-id="ordate"><strong>Дата и время обслуживания</strong></th>
-            <th rowspan="3" data-column-id="address"><strong>Адрес</strong></th>
-            <th rowspan="3" data-column-id="author"><strong>Автор заявки</strong></th>
-            <th rowspan="3" data-column-id="date_create"><strong>Дата и время добавления заявки</strong></th>
-            <th rowspan="3" data-column-id="state"><strong>Состояние заказа</strong></th>
             <th rowspan="3" data-column-id="performer"><strong>Исполнитель заказа</strong></th>
+            <th rowspan="3" data-column-id="description"><strong>Описание</strong></th>
+            <th rowspan="3" data-column-id="author"><strong>Автор заявки</strong></th>
+            <th rowspan="3" data-column-id="address"><strong>Адрес</strong></th>
+            <th rowspan="3" data-column-id="ordate" data-formatter="time_and_date"><strong>Дата и время обслуживания</strong></th>
+            <th rowspan="3" data-column-id="state" data-formatter="state_and_comment"><strong>Состояние заказа</strong></th>
             <th rowspan="3" data-column-id="commands" data-formatter="commands" data-sortable="false">Действия</th>
             </thead>
         </table>
@@ -149,5 +144,6 @@
 <script src="../js/jquery.bootgrid.js"></script>
 <script src="../js/jquery.rating-2.0.js"></script>
 <script src="../js/services/all.js"></script>
+<script src="../js/services/common.js"></script>
 </body>
 </html>

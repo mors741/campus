@@ -87,23 +87,22 @@
     </div>
 </nav>
 <!--Меню END-->
-<!-- Модальное окно подтверждения -->
+<!-- Модальное окно качества выполненных услуг -->
 <div id="mark_modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Подтвердить выполнение</h4>
+                <h4 class="modal-title">Качество выполненных услуг</h4>
             </div>
             <div class="modal-body">
                 <form role="form">
                     <div class="form-group">
                         <label class="control-label">Оценка</label>
                         <select name="mark" id="mark" class="form-control">
-                            <option value="" selected="selected">Оцените</option>
                             <option value="1">Я бы лучше сделал</option>
                             <option value="2">Я бы сам так смог</option>
-                            <option value="3">Нормально</option>
+                            <option value="3" selected="selected">Нормально</option>
                             <option value="4">Хорошо</option>
                             <option value="5">Забожил</option>
                         </select>
@@ -121,52 +120,23 @@
         </div>
     </div>
 </div>
-<!-- Модальное окно жалобы -->
-<div id="claim_modal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Пожаловаться</h4>
-            </div>
-            <div class="modal-body">
-                <form role="form">
-                    <div class="form-group">
-                        <label class="control-label">Комментарий</label>
-                        <textarea class="form-control" id="claim" name="claim"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-                        <button type="button" id="claim_btn" class="btn btn-primary">Отправить</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- Контейнер. Центральная часть-->
 <div class="container">
 
     <div class="span3">
-        <div class="card">
-            <a class="btn btn-default" href="../services/index.php">Добавить заявку</a>
-            <a class="btn btn-default" href="../services/mine.php">Просмотр моих заявок</a>
-            <a class="btn btn-default" href="../services/all.php">Просмотр всех заявок</a>
+        <div class="card" id="card">
         </div>
         <br/>
-
-
+        
         <table id="grid-basic" class="table table-hover table-responsive table-bordered" width="100%">
             <thead>
                 <th data-visible="false" data-column-id="id"><strong>id</strong></th>
                 <th rowspan="3" data-column-id="category"><strong>Категория</strong></th>
-                <th rowspan="3" data-column-id="description"><strong>Описание</strong></th>
-                <th rowspan="3" data-column-id="ordate"><strong>Дата и время обслуживания</strong></th>
-                <th rowspan="3" data-column-id="address"><strong>Адрес</strong></th>
-                <th rowspan="3" data-column-id="author"><strong>Автор заявки</strong></th>
-                <th rowspan="3" data-column-id="date_create"><strong>Дата и время добавления заявки</strong></th>
-                <th rowspan="3" data-column-id="state"><strong>Состояние заказа</strong></th>
                 <th rowspan="3" data-column-id="performer"><strong>Исполнитель заказа</strong></th>
+                <th rowspan="3" data-column-id="description"><strong>Описание</strong></th>
+                <th rowspan="3" data-column-id="ordate" data-formatter="time_and_date"><strong>Дата и время обслуживания</strong></th>
+                <th rowspan="3" data-column-id="state" data-formatter="state_and_comment"><strong>Состояние заказа</strong></th>
+                <th rowspan="3" data-column-id="mark" data-formatter="mark"><strong>Оценка</strong></th>
                 <th rowspan="3" data-column-id="commands" data-formatter="commands" data-sortable="false">Действия</th>
             </thead>
         </table>
@@ -205,6 +175,7 @@
 <script src="../js/jquery.bootgrid.js"></script>
 <script src="../js/jquery.rating-2.0.js"></script>
 <script src="../js/services/mine.js"></script>
+<script src="../js/services/common.js"></script>
 
 </body>
 </html>

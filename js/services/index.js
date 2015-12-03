@@ -1,9 +1,6 @@
 function create()
 {
-		user = "";
-	req = { 'type' : 'current'};
-    user = $.post("/campus/api/user.php", JSON.stringify(req), function(data) {return data}, "json");
-    console.log(user);
+	user_id = getCookie("id");
 
 	service = document.getElementById('service').value;
 	comment = document.getElementById('comment').value;
@@ -14,19 +11,35 @@ function create()
 
 	req = {
 		'type' : 'create',
-		'login' : user,
-		'performer_id' : get_performer_id, 
+		'id' : user_id,
 		'category_id' : service, 
 		'description' : comment, 
 		'ordate' : ordate, 
 		'timeint' : timeint
 	};
-	console.log(req);
-	$.post("/campus/api/service.php", JSON.stringify(req), function() { alert("Ваша заявка принята"); return; }, "json");
+	$.post(
+		"/campus/api/service.php", 
+		JSON.stringify(req), 
+		function(data) { 
+			if (data['success'] == true) {
+				alert("Ваша заявка принята");
+				window.location.replace("/campus");
+			}
+			else {
+				alert("Что-то пошло не так");
+			}
+			return; 
+		}, 
+		"json"
+	);
 }
 
-function get_performer_id()
+function init() 
 {
-	// Диман, ты мне должен вернуть id из таблицы staff
-	return performer_id;
+	set_card();
 }
+
+document.addEventListener(
+    "DOMContentLoaded", 
+    init
+);
