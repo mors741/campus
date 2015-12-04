@@ -91,20 +91,28 @@
 <div class="container">
     <div class="span3">
         <div class="card" style="margin-bottom: 2%">
-            <a class="btn btn-default" href="../dashboard/index.php">Просмотр объявлений</a>
-            <a class="btn btn-default" href="../dashboard/edit.php">Новое объявление</a>
-            <a class="btn btn-default" href="../dashboard/all.php">Объявления для проверки</a> <!/--для модеров
+            <a class="btn btn-default" href="/campus/dashboard/index.php">Просмотр объявлений</a>
+            <a class="btn btn-default" href="/campus/dashboard/edit.php">Новое объявление</a>
+            <a class="btn btn-default" href="/campus/dashboard/all.php">Объявления для проверки</a> <!/--для модеров
             и админов -->
         </div>
-        <div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <form action="" class="search-form">
-                    <div class="form-group has-feedback">
-                        <label for="search" class="sr-only">Поиск</label>
-                        <input type="text" class="form-control" name="search" id="search" placeholder="Поиск">
-                        <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                    </div>
-                </form>
+ <div class="col-xs-8 col-xs-offset-2">
+		    <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" >
+                    	<span id="search_concept">Категория</span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#contains">Продажа</a></li>
+                      <li><a href="#its_equal">Покупка</a></li>
+                      <li><a href="#greather_than">Прочее</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="search_param" value="all" id="search_param">         
+                <input type="text" class="form-control" name="dash-search" placeholder="Поиск" style="height:42px; border-left:none ">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
             </div>
         </div>
         <table class="table table-hover">
@@ -114,30 +122,30 @@
                     <div class="content">
                         <div class="col-sm-2 col-md-2">
                             <br/>
-                            <img id="picture" src="../pictures/no_photo.jpg" class="img-rounded img-responsive"/>
+                            <img id="picture" src="/campus/pictures/no_photo.jpg" class="img-rounded img-responsive"/>
                         </div>
                         <div class="col-sm-4 col-md-4">
 
                             <br/>
 
-                            <p><strong>Автор: </strong>Долгач</p>
+                            <p id="dash-author"><strong>Автор: </strong>Долгач</p>
 
-                            <p><strong>Категория: </strong>Покупка</p>
+                            <p id="dash-category"><strong>Категория: </strong>Покупка</p>
 
-                            <p>Куплю стиральную машину, недорого, 2 корпус</p>
+                            <p id="dash-desc">Куплю стиральную машину, недорого, 2 корпус</p>
                             </br>
-                            <p><strong>Добавлено: </strong> 6.6.666 в 6:06</p>
+                            <p id="dash-data"><strong>Добавлено: </strong> 6.6.666 в 6:06</p>
 
                         </div>
                         <div class="col-sm-6 col-md-6">
-                            <div class="btn btn-group">
-                                <button type="button" class="glyphicon glyphicon-thumbs-up btn btn-default"> Мне
-                                    нравится
+                            <div class="btn btn-group-sm">
+                                <button type="button" class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span> Мне нравится
+                                    
                                 </button>
                                 <a type="button" href="../dashboard/my.php"
-                                   class="glyphicon glyphicon-comment btn btn-default"> Подробнее
+                                   class="btn btn-primary"><span class="glyphicon glyphicon-info-sign"></span> Подбронее
                                 </a>
-                                <button type="button" class="glyphicon glyphicon-trash btn btn-default"> Не актуально
+                                <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Не актуально
                                 </button>
                             </div>
                         </div>
@@ -184,5 +192,16 @@
 <script src="../js/bootstrap-datetimepicker.min.js"></script>
 <script src="../js/bootstrap-tab.js"></script>
 <script src="../js/right-bar.js"></script>
+<script>
+    $(document).ready(function(e){
+    $('.search-panel .dropdown-menu').find('a').click(function(e) {
+		e.preventDefault();
+		var param = $(this).attr("href").replace("#","");
+		var concept = $(this).text();
+		$('.search-panel span#search_concept').text(concept);
+		$('.input-group #search_param').val(param);
+	});
+});
+    </script>
 </body>
 </html>
