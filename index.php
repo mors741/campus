@@ -12,11 +12,11 @@
 
 
     <!-- Стили-->
-    <link rel="stylesheet" type="text/css" href="CSS/dropdown.css"/>
-    <link rel="stylesheet" type="text/css" href="CSS/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="CSS/content.css">
-    <link rel="stylesheet" type="text/css" href="CSS/button.css"/>
-    <link rel="stylesheet" type="text/css" href="CSS/message.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/dropdown.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/content.css">
+    <link rel="stylesheet" type="text/css" href="/campus/css/button.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/message.css"/>
     <!--Конец-->
 </head>
 
@@ -143,7 +143,7 @@
             <!-- Индикаторы END-->
             <!-- Враппер для слайдов -->
             <div class="carousel-inner">
-                <div class="active item" data-slide-number="0"><img class="img-rounded" src="Pictures/1.jpg">
+                <div class="active item" data-slide-number="0"><img class="img-rounded" src="/campus/pictures/1.jpg">
 
                     <div class="carousel-caption"
                          style='background: rgba(0, 0, 0, 0.4) none repeat scroll 0px 0px; border-radius: 6px'>
@@ -153,7 +153,7 @@
                     </div>
                 </div>
 
-                <div class="item" data-slide-number="1"><img class="img-rounded" src="Pictures/2.jpg">
+                <div class="item" data-slide-number="1"><img class="img-rounded" src="/campus/pictures/2.jpg">
 
                     <div class="carousel-caption"
                          style='background: rgba(0, 0, 0, 0.4) none repeat scroll 0px 0px; border-radius: 6px'>
@@ -163,7 +163,7 @@
                     </div>
                 </div>
 
-                <div class="item" data-slide-number="2"><img class="img-rounded" src="Pictures/3.jpg">
+                <div class="item" data-slide-number="2"><img class="img-rounded" src="/campus/pictures/3.jpg">
 
                     <div class="carousel-caption"
                          style='background: rgba(0, 0, 0, 0.4) none repeat scroll 0px 0px; border-radius: 6px'>

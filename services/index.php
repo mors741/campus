@@ -11,14 +11,14 @@
     <!--Конец-->
 
     <!-- Cтили-->
-    <link rel="stylesheet" type="text/css" href="../css/dropdown.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/content.css">
-    <link rel="stylesheet" type="text/css" href="../css/datepicker3.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/bootstrap-datetimepicker.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/button.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/jquery.rating.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/jquery.bootgrid.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/dropdown.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/content.css">
+    <link rel="stylesheet" type="text/css" href="/campus/css/datepicker3.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/bootstrap-datetimepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/button.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/jquery.rating.css"/>
+    <link rel="stylesheet" type="text/css" href="/campus/css/jquery.bootgrid.css"/>
     <!--Конец-->
 </head>
 
@@ -102,8 +102,7 @@
                     <label for="service">Выберите тип оказываемой услуги</label>
 
                     <div class="controls">
-                        <select name="service" id="service" class="form-control"
-                                onchange="showButtons(document.getElementById('service').value, $('#datetimepicker1').data('date'))">
+                        <select name="service" id="service" class="form-control">
                             <option value="" selected="selected">Выберите услугу</option>
                             <option value="1">Сантехник</option>
                             <option value="2">Электрик</option>
@@ -121,7 +120,7 @@
 
                     <div class="form-group">
                         <div class="input-group date" id="datetimepicker1">
-                            <input type="text" Name="ordate" Id="ordate" class="form-control"/>
+                            <input type="text" name="ordate" id="ordate" class="form-control"/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -163,15 +162,15 @@
 </footer>
 <!-- Пол END-->
 <!-- JavaScript. Для быстрой загрзуки помещайте в конце страницы, указав в начале скрипт jQuery-->
-<script src="../js/jquery2.4.1.js"></script>
-<script src="../js/moment-with-locales.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/moment-with-locales.min.js"></script>
-<script src="../js/bootstrap-datetimepicker.min.js"></script>
-<script src="../js/bootstrap-tab.js"></script>
-<script src="../js/right-bar.js"></script>
-<script src="../js/services/common.js"></script>
-<script src="../js/services/index.js"></script>
+<script src="/campus/js/jquery2.4.1.js"></script>
+<script src="/campus/js/moment-with-locales.min.js"></script>
+<script src="/campus/js/bootstrap.min.js"></script>
+<script src="/campus/js/moment-with-locales.min.js"></script>
+<script src="/campus/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/campus/js/bootstrap-tab.js"></script>
+<script src="/campus/js/right-bar.js"></script>
+<script src="/campus/js/services/common.js"></script>
+<script src="/campus/js/services/index.js"></script>
 <script>
     $(function () {
         $('#datetimepicker1').datetimepicker({
