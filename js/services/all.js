@@ -1,3 +1,27 @@
+function permissions()
+{
+    var path_all = "/campus/services/all.php";
+    var path_home = "/campus/";
+    var role = getCookie("role");
+    var home = getCookie("home");
+
+    var go_to = {
+        "admin": "",
+        "manage": "", 
+        "staff": "",
+        "moder": "",
+        "campus": path_home,
+        "local": path_home,
+        "guest": path_home,
+    }
+
+    go_to = go_to[role];
+
+    if ( go_to ) {
+        window.location.replace(go_to);
+    }
+}
+
 function del(id)
 {
     req = { 
@@ -53,6 +77,7 @@ function set_post()
 
 function init()
 {    
+    permissions();
     set_card();
 
     $("#grid-basic").bootgrid({

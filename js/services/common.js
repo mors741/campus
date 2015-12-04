@@ -1,12 +1,9 @@
 function set_card() 
 {
-    var path = window.location.pathname;
     var path_all = "/campus/services/all.php";
     var path_mine = "/campus/services/mine.php";
     var path_index = "/campus/services/";
-    var path_index_full = "/campus/services/index.php";
     var path_staff = "/campus/services/staff.php";
-    var path_dome = "/campus/";
 
     var all = "<a class=\"btn btn-default\" href=" + path_all + ">Просмотр всех заявок</a> ";
     var mine = "<a class=\"btn btn-default\" href=" + path_mine + ">Просмотр моих заявок</a> ";
@@ -16,63 +13,21 @@ function set_card()
     var role = getCookie("role");
     var home = getCookie("home");
 
-    switch(path) {
-        case path_index:
-            if (role == "guest" || role == "local") {
-                window.location.replace(path_dome);  
-            } 
-            if (home == "0"){
-            	alert(home);
-                window.location.replace(path_all); 
-            }
-            break;
-        case path_index_full:
-            if (role == "guest" || role == "local") {
-                window.location.replace(path_dome);  
-            } 
-            if (home == "0"){
-            	alert(home);
-                window.location.replace(path_all); 
-            }
-            break;
-        case path_mine:
-            if (role == "guest" || role == "local") {
-                window.location.replace(path_dome);
-            } 
-            if (home == "0"){
-                window.location.replace(path_all); 
-            }
-            break;
-        case path_all:
-            if (role == "guest" || role == "local" || role == "campus") {
-                window.location.replace(path_dome);
-            }   
-            break;
-        case path_staff:
-            if (role == "guest" || role == "local" || role == "campus" || role == "staff") {
-                window.location.replace(path_dome);
-            }
-            break;
+    var action = {
+        "admin": all + staff,
+        "manage": all + staff, 
+        "staff": all,
+        "moder": all + staff,
+        "campus": "",
+        "local": "",
+        "guest": "",
     }
 
     var html = "";
-    switch(role) {
-        case "staff":
-            if (home != "0") {
-                html = index + mine;
-            }
-            html += all;
-            break;
-        case "campus":
-            html = index + mine;
-            break;
-        default:
-            if (home != "0") {
-                html = index + mine;
-            }
-            html += all + staff;
-            break;
+    if ( home != "0" ) {
+        html = index + mine;
     }
+    html += action[role];
 
     var card = document.getElementById("card");
     card.innerHTML = html;
@@ -80,65 +35,34 @@ function set_card()
 
 function get_timeint(id) 
 {
-    var ans;
-    switch(id) {
-        case "1":
-        ans = "9:00 - 9:45";
-        break;
-        case "2":
-        ans = "10:00 - 10:45";
-        break;
-        case "3":
-        ans = "11:00 - 11:45";
-        break;
-        case "4":
-        ans = "12:00 - 12:45";
-        break;
-        case "5":
-        ans = "13:00 - 13:45";
-        break;
-        case "6":
-        ans = "14:00 - 14:45";
-        break;
-        case "7":
-        ans = "15:00 - 15:45";
-        break;
-        case "8":
-        ans = "16:00 - 16:45";
-        break;
-        default:
-        ans = "ошибка";
-        break;
+    var time = {
+        "1": "9:00 - 9:45",
+        "2": "10:00 - 10:45",
+        "3": "11:00 - 11:45",
+        "4": "12:00 - 12:45",
+        "5": "13:00 - 13:45",
+        "6": "14:00 - 14:45",
+        "7": "15:00 - 15:45",
+        "8": "16:00 - 16:45",
     }
-    return ans;
+    return time[id];
 }
 
 function get_datetime(row)
 {   
-    return row['ordate'] + ' ' + get_timeint(row['timeint']);
+    return row['ordate'] + '\n' + get_timeint(row['timeint']);
 }
 
 function get_mark(id)
 {
-    var ans = "";
-    switch(id) {
-        case "1":
-        ans = "Ужасно";
-        break;
-        case "2":
-        ans = "Плохо";
-        break;
-        case "3":
-        ans = "Нормально";
-        break;
-        case "4":
-        ans = "Хорошо";
-        break;
-        case "5":
-        ans = "Отлично";
-        break;
+    var mark = {
+        "1": "Ужасно",
+        "2": "Плохо",
+        "3": "Нормально",
+        "4": "Хорошо",
+        "5": "Отлично",
     }
-    return ans;
+    return mark[id];
 }
 
 function get_state_and_comment(row)

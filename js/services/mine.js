@@ -1,3 +1,40 @@
+function permissions()
+{
+    var path_all = "/campus/services/all.php";
+    var path_home = "/campus/";
+    var role = getCookie("role");
+    var home = getCookie("home");
+
+    if ( home == "0" ) {
+        var go_to = {
+            "admin": path_all,
+            "manage": path_all, 
+            "staff": path_all,
+            "moder": path_all,
+            "campus": path_home,
+            "local": path_home,
+            "guest": path_home,
+        }
+    }
+    else {
+        var go_to = {
+            "admin": "",
+            "manage": "", 
+            "staff": "",
+            "moder": "",
+            "campus": "",
+            "local": path_home,
+            "guest": path_home,
+        }
+    }
+
+    go_to = go_to[role];
+
+    if ( go_to ) {
+        window.location.replace(go_to);
+    }
+}
+
 function start_mark_modal(id)
 {
     button = document.getElementById("mark_btn");
@@ -50,6 +87,7 @@ function set_command(row)
 
 function init()
 {
+    permissions();
     set_card();
 
     $("#grid-basic").bootgrid({

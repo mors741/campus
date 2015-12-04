@@ -143,7 +143,7 @@
 <script src="../js/right-bar.js"></script>
 <script src="../js/jquery.bootgrid.js"></script>
 <script src="../js/jquery.rating-2.0.js"></script>
-<script src="../js/services/all.js"></script>
 <script src="../js/services/common.js"></script>
+<script src="../js/services/all.js"></script>
 </body>
 </html>
