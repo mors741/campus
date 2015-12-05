@@ -45,10 +45,13 @@ function update(){
 		JSON.stringify(res));
 }
 
-window.onload  = function(){
-	$.post("/campus/api/user.php", 
-		JSON.stringify({ 'type' : 'current'}), get_user_data, "json");
-	$.post("/campus/api/user.php", 
-		JSON.stringify({'type' : 'house'}), set_houses, "json");
-	$('#update').click(update);
-};
+document.addEventListener(
+	"DOMContentLoaded", 
+	function(){
+		$.post("/campus/api/user.php",
+			JSON.stringify({ 'type' : 'current'}), get_user_data, "json");
+		$.post("/campus/api/user.php", 
+			JSON.stringify({'type' : 'house'}), set_houses, "json");
+		$('#update').click(update);
+	}
+);

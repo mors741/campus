@@ -16,7 +16,11 @@ function get_user_data(resp) {
 	}
 }
 
-window.onload  = function(){
-	req = { 'type' : 'current'};
-	$.post("/campus/api/user.php", JSON.stringify(req), get_user_data, "json");
-};
+
+document.addEventListener(
+	"DOMContentLoaded", 
+	function(){
+		req = { 'type' : 'current'};
+		$.post("/campus/api/user.php", JSON.stringify(req), get_user_data, "json");
+	}
+);
