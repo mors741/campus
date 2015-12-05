@@ -49,9 +49,7 @@
                     <a href="services/index.php">УСЛУГИ</a>
                 </li>
             </ul>
-            <?php
-                include("lib/log.php"); //Включение кнопок авторизации и регистрации
-            ?> 
+
 
             <ul class="nav navbar-nav navbar-right">
                 <li  id="sign-out1" style="display: none;">
@@ -101,7 +99,7 @@
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-user"></i>
                                     </span>
-                            <input type="email" class="form-control" id="login" name="login"
+                            <input type="email" class="form-control" id="authlogin" name="login"
                                    placeholder="Введите email"/>
                         </div>
                         <div style="margin-bottom: 25px" class="input-group">
@@ -117,7 +115,7 @@
                             </label>
                         </div>
                         <br>
-                        <button type="submit" name="enter" class="btn btn-primary">Отправить</button>
+                        <button type="submit" name="enter" class="btn btn-primary" onclick="log()">Отправить</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
                     </form>
                 </div>
@@ -221,6 +219,7 @@
 <script src="/campus/js/jquery2.4.1.js"></script>
 <script src="/campus/js/bootstrap.min.js"></script>
 <script src="/campus/js/right-bar.js"></script>
+<script src="/campus/js/log.js"</script>
 <script>
     $('.carousel').carousel({
         interval: 5000
