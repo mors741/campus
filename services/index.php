@@ -66,7 +66,7 @@
                     <div class="submenu" style="display: none; ">
                         <ul class="root" id="sign-out2" style="display: none;">
                             <li>
-                                <a href="/campus/profile/index.php">Личный кабинет</a>
+                                <a href="/campus/profile/">Личный кабинет</a>
                             </li>
                             <li>
                                 <input type="button" id="logout_btn" onclick="logout()" value="Выйти"/>
@@ -77,7 +77,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li id="auth_and_reg1" style="display: none;">
-                    <a class="btn-group-au" href="/campus/registration/registration.php">РЕГИСТРАЦИЯ</a>
+                    <a class="btn-group-au" href="/campus/registration/">РЕГИСТРАЦИЯ</a>
                 </li>
                 <li id="auth_and_reg2" style="display: none;">
                     <a class="btn-group-au" data-toggle="modal" data-target="#myModal" href="#myModal">АВТОРИЗАЦИЯ</a>

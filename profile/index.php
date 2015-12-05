@@ -76,7 +76,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li id="auth_and_reg1" style="display: none;">
-                    <a class="btn-group-au" href="/campus/registration/registration.php">РЕГИСТРАЦИЯ</a>
+                    <a class="btn-group-au" href="/campus/registration/">РЕГИСТРАЦИЯ</a>
                 </li>
                 <li id="auth_and_reg2" style="display: none;">
                     <a class="btn-group-au" data-toggle="modal" data-target="#myModal" href="#myModal">АВТОРИЗАЦИЯ</a>
@@ -156,13 +156,13 @@
 <script src="/campus/js/bootstrap.min.js"></script>
 <script src="/campus/js/moment-with-locales.min.js"></script>
 <script src="/campus/js/bootstrap-tab.js"></script>
-<script src="/campus/js/right-bar.js"></script>
 <script src="/campus/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/campus/js/jquery.bootgrid.fa.js"></script>
 <script src="/campus/js/jquery.bootgrid.js"></script>
 <script src="/campus/js/mark_and_comment.js"></script>
 <script src="/campus/js/jquery.rating-2.0.js"></script>
 <script src="/campus/js/user/main.js"></script>
+<script src="/campus/js/right-bar.js"></script>
 </body>
 </html>
 

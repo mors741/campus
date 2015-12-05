@@ -54,6 +54,34 @@
             <?php
             include("../lib/log.php"); //Включение кнопок авторизации и регистрации
             ?>
+            <ul class="nav navbar-nav navbar-right">
+                <li  id="sign-out1" style="display: none;">
+                    <a type=button class="account btn-group-au">
+                        <span id="login"></span>
+                        <img src="/campus/pictures/arrow_w.png"/>
+                    </a>
+                </li>
+                <li>
+                    <div class="submenu" style="display: none; ">
+                        <ul class="root" id="sign-out2" style="display: none;">
+                            <li>
+                                <a href="/campus/profile/index.php">Личный кабинет</a>
+                            </li>
+                            <li>
+                                <input type="button" id="logout_btn" onclick="logout()" value="Выйти"/>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li id="auth_and_reg1" style="display: none;">
+                    <a class="btn-group-au" href="/campus/registration/">РЕГИСТРАЦИЯ</a>
+                </li>
+                <li id="auth_and_reg2" style="display: none;">
+                    <a class="btn-group-au" data-toggle="modal" data-target="#myModal" href="#myModal">АВТОРИЗАЦИЯ</a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -232,13 +260,13 @@
 <script src="/campus/js/bootstrap.min.js"></script>
 <script src="/campus/js/moment-with-locales.min.js"></script>
 <script src="/campus/js/bootstrap-tab.js"></script>
-<script src="/campus/js/dropdown.js"></script>
 <script src="/campus/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/campus/js/jquery.bootgrid.fa.js"></script>
 <script src="/campus/js/jquery.bootgrid.js"></script>
 <script src="/campus/js/mark_and_comment.js"></script>
 <script src="/campus/js/jquery.rating-2.0.js"></script>
 <script src="/campus/js/user/edit.js"></script>
+<script src="/campus/js/right-bar.js"></script>
 
 </body>
 </html>
