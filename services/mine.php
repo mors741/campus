@@ -42,13 +42,13 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-left">
                 <li>
-                    <a href="../index.php">ГЛАВНАЯ</a>
+                    <a href="/campus/">ГЛАВНАЯ</a>
                 </li>
                 <li>
-                    <a href="../dashboard/index.php">ДОСКА ОБЪЯВЛЕНИЙ</a>
+                    <a href="/campus/dashboard/">ДОСКА ОБЪЯВЛЕНИЙ</a>
                 </li>
                 <li class="active">
-                    <a href="../services/index.php">УСЛУГИ</a>
+                    <a href="/campus/services/">УСЛУГИ</a>
                 </li>
             </ul>
             <?php

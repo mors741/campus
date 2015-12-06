@@ -43,13 +43,13 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-left">
                         <li>
-                            <a href="../index.php">ГЛАВНАЯ</a>
+                            <a href="/campus/">ГЛАВНАЯ</a>
                         </li>
                         <li class="active">
-                            <a href="/campus/dashboard/index.php">ДОСКА ОБЪЯВЛЕНИЙ</a>
+                            <a href="/campus/dashboard/">ДОСКА ОБЪЯВЛЕНИЙ</a>
                         </li>
                         <li>
-                            <a href="../services/index.php">УСЛУГИ</a>
+                            <a href="/campus/services/">УСЛУГИ</a>
                         </li>
                     </ul>
                     <?php
@@ -67,7 +67,7 @@
                             <div class="submenu" style="display: none; ">
                                 <ul class="root" id="sign-out2" style="display: none;">
                                     <li>
-                                        <a href="/campus/profile/index.php">Личный кабинет</a>
+                                        <a href="/campus/profile/">Личный кабинет</a>
                                     </li>
                                     <li>
                                         <input type="button" id="logout_btn" onclick="logout()" value="Выйти"/>
@@ -78,7 +78,7 @@
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li id="auth_and_reg1" style="display: none;">
-                            <a class="btn-group-au" href="/campus/registration/registration.php">РЕГИСТРАЦИЯ</a>
+                            <a class="btn-group-au" href="/campus/registration/">РЕГИСТРАЦИЯ</a>
                         </li>
                         <li id="auth_and_reg2" style="display: none;">
                             <a class="btn-group-au" data-toggle="modal" data-target="#myModal" href="#myModal">АВТОРИЗАЦИЯ</a>

@@ -40,13 +40,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-left">
                     <li>
-                        <a href="/campus/index.php">ГЛАВНАЯ</a>
+                        <a href="/campus/">ГЛАВНАЯ</a>
                     </li>
                     <li>
-                        <a href="/campus/dashboard.php">ДОСКА ОБЪЯВЛЕНИЙ</a>
+                        <a href="/campus/dashboard/">ДОСКА ОБЪЯВЛЕНИЙ</a>
                     </li>
                     <li>
-                        <a href="/campus/services.php">УСЛУГИ</a>
+                        <a href="/campus/services/">УСЛУГИ</a>
                     </li>
                 </ul>
                 <?php
@@ -63,7 +63,7 @@
                         <div class="submenu" style="display: none; ">
                             <ul class="root" id="sign-out2" style="display: none;">
                                 <li>
-                                    <a /campus/="/campus/profile/">Личный кабинет</a>
+                                    <a href="/campus/profile/index.php">Личный кабинет</a>
                                 </li>
                                 <li>
                                     <input type="button" id="logout_btn" onclick="logout()" value="Выйти"/>
