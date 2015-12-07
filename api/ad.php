@@ -102,6 +102,40 @@ $add_fav = function($req) {
 	return $answer;
 };
 
+$confirm = function($req) {
+	$error = false;
+	$db = get_db_connection();
+	
+	if (! array_key_exists('id', $req) ) {
+		$answer['success'] = false;
+		$answer['error'] = "id is undefined";
+		return $answer;
+	} 
+	$query = "UPDATE `campus`.`ad` SET `checked` = '1' WHERE `ad`.`id` = ".$req['id'].";";
+	
+	$res = $db->query($query) or die ("sql error");
+
+	$answer['success'] = $res;
+	return $answer;
+};
+
+$delete = function($req) {
+	$error = false;
+	$db = get_db_connection();
+	
+	if (! array_key_exists('id', $req) ) {
+		$answer['success'] = false;
+		$answer['error'] = "id is undefined";
+		return $answer;
+	}
+	$query = "DELETE FROM `campus`.`ad` WHERE `ad`.`id` = ".$req['id'].";";
+	
+	$res = $db->query($query) or die ("sql error");
+
+	$answer['success'] = $res;
+	return $answer;
+};
+
 $create = function($req) {
 	$error = false;
 	$db = get_db_connection();
@@ -158,6 +192,8 @@ $create = function($req) {
 
 $handlers = [
 	'create' => $create,
+	'confirm' => $confirm,
+	'delete' => $delete,
 	'mine' => $mine,
 	'list' => $list,
 	'add_fav' => $add_fav
