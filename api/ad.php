@@ -189,6 +189,42 @@ $create = function($req) {
 	return $answer;
 };
 
+$get_fav = function($req) {
+	$error = false;
+	$db = get_db_connection();
+
+	$where = [];
+	if ( array_key_exists('id', $req) ) {
+		$where['id'] = $req['id'];
+	}
+
+	$select = [
+		'id' => 'id',
+		'description' => 'description',
+		'owner' => 'ts',
+		'ts' => 'ts',
+		'address' => 'address',
+		'categories' => 'categories'
+	];
+
+	$query = create_select($db, 'ad_fav', $select, $where);
+	$res = $db->query($query) or die ("sql error");
+
+	$rows = [];
+	while ( $order = $res->fetch_array(MYSQLI_ASSOC) ) {
+		$rows[] = $order;
+	}
+	$answer['rows'] = $rows;
+	
+	$res = $db->query("SELECT FOUND_ROWS()");
+	$res = $res->fetch_array(MYSQLI_ASSOC);
+	$answer['total'] = $res["FOUND_ROWS()"];
+
+	$answer['success'] = !$error;
+	return $answer;
+};
+
+
 
 $handlers = [
 	'create' => $create,
@@ -196,7 +232,8 @@ $handlers = [
 	'delete' => $delete,
 	'mine' => $mine,
 	'list' => $list,
-	'add_fav' => $add_fav
+	'add_fav' => $add_fav,
+	'get_fav' => $get_fav
 ];
 
 $req = get_json();
