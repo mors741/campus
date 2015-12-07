@@ -146,8 +146,12 @@ $create = function($req) {
 	
 	$query = "COMMIT;";
 	$res = $db->query($query) or die ("error on COMMIT");
-
-	$answer['success'] = $res;
+	
+	$query = "SELECT @LAST_ID AS id;";
+	$res = $db->query($query) or die ("error on SELECT @LAST_ID");
+	$res = $res->fetch_array(MYSQLI_ASSOC);
+	$answer['success'] = true;
+	$answer['id'] = $res["id"];
 	return $answer;
 };
 
