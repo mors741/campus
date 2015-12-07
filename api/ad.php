@@ -26,7 +26,6 @@ $mine = function($req) {
 	];
 
 	$query = create_select($db, 'ad_v', $select, $where);
-	//return $query;
 	$res = $db->query($query) or die ("sql error");
 
 	$rows = [];
@@ -103,8 +102,58 @@ $add_fav = function($req) {
 	return $answer;
 };
 
+$create = function($req) {
+	$error = false;
+	$db = get_db_connection();
+	if (! array_key_exists('description', $req) ) {
+		$answer['success'] = false;
+		$answer['error'] = "description is undefined";
+		return $answer;
+	} 	
+	if (! array_key_exists('owner', $req) ) {
+		$answer['success'] = false;
+		$answer['error'] = "owner is undefined";
+		return $answer;
+	} 
+	if (! array_key_exists('location', $req) ) {
+		$answer['success'] = false;
+		$answer['error'] = "location is undefined";
+		return $answer;
+	} 
+
+	$query = "BEGIN;";
+	$res = $db->query($query) or die ("error on BEGIN");
+	
+	$query = "INSERT INTO `campus`.`ad` (`id`, `description`, `owner`, `checked`, `ts`, `location`) VALUES (NULL, '".$req['description']."', '".$req['owner']."', '0', CURRENT_TIME(), '".$req['location']."');";
+	$res = $db->query($query) or die ("error on ");
+	
+	$query = "SET @LAST_ID = LAST_INSERT_ID();";
+	$res = $db->query($query) or die ("error on SET @LAST_ID");
+	
+	if (array_key_exists('photo', $req) ) {
+		$query = "INSERT INTO `campus`.`photo` (`id`, `path`, `ad`) VALUES (NULL, '".$req['photo']."', @LAST_ID);";
+		$res = $db->query($query) or die ("error on INSERT INTO photo");
+	}
+	
+	if (array_key_exists('category', $req) ) {
+		$query = "INSERT INTO `campus`.`ad_cat` (`ad`, `cat`) VALUES";
+		foreach ($req['category'] as $category) {
+			$query .= " (@LAST_ID, '".$category."'),";
+		}
+		$query = rtrim($query, ",") . ";";
+		$res = $db->query($query) or die ("error on INSERT INTO ad_cat");
+	} 
+	
+	$query = "COMMIT;";
+	$res = $db->query($query) or die ("error on COMMIT");
+
+	$answer['success'] = $res;
+	return $answer;
+};
+
 
 $handlers = [
+	'create' => $create,
 	'mine' => $mine,
 	'list' => $list,
 	'add_fav' => $add_fav
