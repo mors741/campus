@@ -22,7 +22,7 @@
 
 <body>
 <!--Меню-->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <!--Для мобильных устройств-->
@@ -94,7 +94,7 @@
             </div>
             <div class="modal-body">
                 <div style="padding-top:30px" class="panel-body">
-                    <form role="form" method="post" action="index.php" class="form-horizontal">
+                    <form role="form" method="post" action= "index.php" id="authform" class="form-horizontal">
                         <div style="margin-bottom: 25px" class="input-group">
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-user"></i>
