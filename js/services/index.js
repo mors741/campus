@@ -118,7 +118,6 @@ function init()
 {
 	permissions();
 	set_card();
-	load_free_time();
 	$('#service').change(update_free_time);
 	$('#ordate').change(update_free_time);
 }
