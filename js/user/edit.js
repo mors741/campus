@@ -34,7 +34,9 @@ function update_password(){
 	req['new_pass'] = $('#passwd').val();
 
 
-	if ( !regexp.test(req['new_pass']) || req['new_pass'].length < 6 ||  req['new_pass'].length > 16) {
+	if (req['new_pass'].match(regexp) =! req['new_pass'] || 
+		req['new_pass'].length < 6 ||
+		req['new_pass'].length > 16 ) {
 		alert('Пароль должен быть не меньше 6 и не больше 16 символов и должен содержать только строчные латинские буквы и цифры');
 		return;
 	}
