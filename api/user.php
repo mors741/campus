@@ -84,11 +84,11 @@ $get = function($req) {
 
 $update_pass = function($req){
 	$db = get_db_connection();
-	$login = $req['login'];
-	$old_pass = md5($res['pass']);
-	$new_pass = md5($res['new_pass']);
+	$login = $_SESSION['login'];
+	$old_pass = md5($req['pass']);
+	$new_pass = md5($req['new_pass']);
 
-	$query = create_update($db, 'users', ['passwd' => $new_pass], ['login' => $login, 'passwd' => $lod_pass]);
+	$query = create_update($db, 'users', ['passwd' => $new_pass], ['login' => $login, 'passwd' => $old_pass]);
 	if ( $db->query($query) == false ) {
 		return [
 			'success' => false,

@@ -110,30 +110,28 @@
                 <div class="col-sm-8 col-md-6">
                     <fieldset>
                         <legend>Смена Пароля</legend>
-                        <div class="control-group form-group">
-                            <label id="password-error" class="error valid" generated="true"
-                                   style="display:none"></label>
-                            <br/>
-                            <label for="password">Старый пароль</label>
-
-                            <div class="form-group">
-                                <input type="password" id="password" class="form-control" placeholder="Старый пароль"/>
-                            </div>
-                        </div>
-                        <form id="check_passwd" action="/campus/lib/update_pass.php" method="POST">
+                        <div id="check_passwd" >
                             <div class="control-group form-group">
-                                <label for="passwd">Новый пароль</label>
+                                <label id="password-error" class="error valid" generated="true"
+                                style="display:none"></label>
+                                <br/>
+                                <label for="password">Старый пароль</label>
 
                                 <div class="form-group">
-                                    <input type="password" disabled="true" id="passwd" name="passwd"
+                                    <input type="password" id="password" class="form-control" placeholder="Старый пароль"/>
+                                </div>
+                            </div>
+                            <div class="control-group form-group">
+                                <label for="passwd">Новый пароль</label>
+                                <div class="form-group">
+                                    <input type="password" id="passwd" name="passwd"
                                            class="form-control" placeholder="Новый пароль"/>
-                                    <input type="hidden" id="submit_pass" value="Сохранить"/>
-
                                     <div id="passwd_new">
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                            <button id="update_pass" type="" onclick="update_password()" class="btn btn-primary">Обновить пароль</button>
+                        </div>
                     </fieldset>
                     <br/>
                     <fieldset>

@@ -27,6 +27,21 @@ function set_houses(resp) {
 	}
 }
 
+function update_password(){
+	req = { 'type' : 'update_pass' }
+	req['pass'] = $('#password').val();
+	req['new_pass'] = $('#passwd').val();
+	$.post("/campus/api/user.php", JSON.stringify(req),
+		function(resp) {
+			if ( resp['success'] ) {
+				alert('Пароль успешно обновлён');
+			} else { 
+				alert('Введен неправильный старый пароль');
+			}
+		}, "json"
+	);
+}
+
 function update(){
 	keys = ['home', 'name', 'surname', 'patronymic', 'gender', 'bdate', 'contacts', 'room'];
 	nullable = ['home', 'gender'];
