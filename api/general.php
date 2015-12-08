@@ -164,3 +164,10 @@ function create_extended_select($db, $table, $val, $union, $constraint, $sort, $
 			";";
 	return $query;
 }
+
+function base64_to_img($base64, $output) {
+    $ifp = fopen($output, "wb"); 
+    $data = explode(',', $base64);
+    fwrite($ifp, base64_decode($base64)); 
+    fclose($ifp); 
+}

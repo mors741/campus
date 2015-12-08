@@ -4,6 +4,7 @@ function set_user_data(resp) {
 		selector = "#" + key + "";
 		$(selector).val(resp[key]);
 	}
+	$('#upload').css("background-image","url('" + resp['picture'] +"')");
 }
 
 function get_user_data(resp) {
@@ -53,13 +54,41 @@ function update_password(){
 	);
 }
 
+function update_image(data){
+	if (data['success']) {
+		alert('Аватар успешно обновлён');
+		document.location.reload();
+	} else {
+		alert('Что-то пошло не так');
+	}
+}
+
+function upload_file(evt) {
+    var files = evt.target.files;
+    var file = files[0];
+    req = {'type' : 'update_image'}
+    if (files && file) {
+        var reader = new FileReader();
+        reader.onload = function(readerEvt) {
+            var binaryString = readerEvt.target.result;
+            req['data'] = btoa(binaryString);
+            $.post(
+            	"/campus/api/user.php", 
+            	JSON.stringify(req), 
+            	update_image, "json"
+            );
+        };
+        reader.readAsBinaryString(file);
+    }
+}
+
 function update(){
 	keys = ['home', 'name', 'surname', 'patronymic', 'gender', 'bdate', 'contacts', 'room'];
 	nullable = ['home', 'gender'];
 	pass = [];
 	res = {'login' : login};
 	for ( var i = 0; i < keys.length; i++ ) {
-		res[keys[i]] =$('#' + keys[i]).val();
+		res[keys[i]] = $('#' + keys[i]).val();
 	}
 	for ( var i = 0; i < nullable.length; i++ ) {
 		if( res[nullable[i]] == -1 ){
@@ -74,6 +103,8 @@ function update(){
 document.addEventListener(
 	"DOMContentLoaded", 
 	function(){
+
+		document.getElementById('js-upload-files').addEventListener('change', upload_file, false);
 		$.post("/campus/api/user.php",
 			JSON.stringify({ 'type' : 'current'}), get_user_data, "json");
 		$.post("/campus/api/user.php", 

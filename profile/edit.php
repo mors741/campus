@@ -101,9 +101,9 @@
                         <div id="upload" style="background-size: cover; width:100px; height:100px;" class="img-rounded">
                         </div>
                         <div class="control-group form-group" style="margin-left: 40px">
-                <span class="btn btn-default btn-file"> Выбрать
-                    <input type="file" id="js-upload-files" name="datafile" onchange="fileUpload(this.form, '../lib/upload_file.php', 'upload')"/>
-                </span>
+                        <span class="btn btn-default btn-file"> Выбрать
+                            <input type="file" id="js-upload-files" name="datafile" accept="image/jpeg,image/png,image/gif"/>
+                        </span>
                         </div>
                     </form>
                 </div>

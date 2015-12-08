@@ -6,6 +6,13 @@ error_reporting(E_ALL);
 
 include("general.php");
 
+function base64_to_imj($base64, $output) {
+    $ifp = fopen($output, "wb"); 
+    $data = explode(',', $base64_string);
+    fwrite($ifp, base64_decode($data[1])); 
+    fclose($ifp); 
+}
+
 $check_login = function($req) {
 	$ans = [];
 	$db = get_db_connection();
@@ -80,6 +87,29 @@ $get = function($req) {
 		$ans['is_free'] = true;
 	}
 	return $ans; 
+};
+
+$update_image = function($req){
+	$ans = ['success' => true];
+	$login = $_SESSION['login'];
+	$db = get_db_connection();
+
+	if ( $login != 'guest' ){
+		$fname = $login . '.jpg';
+		$fbase = "../pictures/user/";
+		$lbase = "/campus/pictures/user/";
+		base64_to_img($req['data'], $fbase.$fname);
+		$query = create_update(
+			$db, 'users',
+			['picture' => $lbase.$fname],
+			['login' => $login]
+		);
+		$db->query($query);
+	} else {
+		$ans['success'] = false;
+		$ans['error'] = 'auth';
+	}
+	return $ans;
 };
 
 $update_pass = function($req){
@@ -185,6 +215,7 @@ $handlers = [
 	'logout' => $logout,
 	'current' => $current,
 	'house' => $house,
+	'update_image' => $update_image,
 ];
 
 $req = get_json();
