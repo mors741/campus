@@ -28,9 +28,18 @@ function set_houses(resp) {
 }
 
 function update_password(){
+	regexp = /[a-z0-9]+/
 	req = { 'type' : 'update_pass' }
 	req['pass'] = $('#password').val();
 	req['new_pass'] = $('#passwd').val();
+
+
+	if ( !regexp.test(req['new_pass']) || req['new_pass'].length < 6 ||  req['new_pass'].length > 16) {
+		alert('Пароль должен быть не меньше 6 и не больше 16 символов и должен содержать только строчные латинские буквы и цифры');
+		return;
+	}
+
+
 	$.post("/campus/api/user.php", JSON.stringify(req),
 		function(resp) {
 			if ( resp['success'] ) {
