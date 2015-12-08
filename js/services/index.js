@@ -71,10 +71,56 @@ function create()
 	);
 }
 
+function set_free_time(resp)
+{
+	if (resp['success'] == true) {
+		have_free = false;
+		for ( key in resp['state'] ) {
+			have_free = have_free || resp['state'][key];
+			if ( resp['state'][key] ) {
+				option = $("<option>");
+				option.text(get_timeint(key));
+				option.attr('value', key);
+				$('#timeint').append(option);
+			}
+		}
+		if  ( !have_free ) {
+			alert('На эту дату запись окончена');
+		}
+	} else {
+		alert("Что-то пошло не так");
+	}
+}
+
+function time_convert(ordate)
+{
+	ordate = ordate.split(".");
+	ordate = ordate[2] + "-" + ordate[1] + "-" + ordate[0];
+	return ordate;
+}
+
+function update_free_time()
+{
+	req = {
+		'type' : 'get_free_time',
+		'date' : time_convert($('#ordate').val()),
+		'sid' : $('#service').val()
+	}
+	
+	$('#timeint').html();
+	$.post(
+		"/campus/api/service.php", 
+		JSON.stringify(req), set_free_time, "json"
+	);
+}
+
 function init() 
 {
 	permissions();
 	set_card();
+	load_free_time();
+	$('#service').change(update_free_time);
+	$('#ordate').change(update_free_time);
 }
 
 document.addEventListener(

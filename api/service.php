@@ -205,12 +205,55 @@ $get_data = function($req) {
 };
 
 
+
+$get_free_time = function($req) {
+	$ans = [];
+	$mandatory = ['sid', 'date'];
+	$times = [
+	1 => 0,	2 => 0, 3 => 0, 4 => 0,
+	5 => 0, 6 => 0, 7 => 0, 8 => 0,
+	];
+	foreach ($mandatory as $field) {
+		if ( !array_key_exists($field, $req) ) {
+			$ans['error'] = 'mandatory field missing';
+			$ans['success'] = false;
+			return $ans;
+		}
+	}
+
+	$db = get_db_connection();
+	$query = "SELECT timeint as 'time', count(1) AS 'load' FROM orders WHERE serv = %d AND ordate = '%s' GROUP BY timeint;";
+	$query = sprintf($query, $req['sid'], $req['date']);
+	$m_query = "SELECT count(1) as max FROM staff WHERE sid = %d AND exp is NULL;";
+	$m_query = sprintf($m_query, $req['sid']);
+	
+	$res = $db->query($query);
+	$m_res = $db->query($m_query);
+	
+	if ( $res == false or $m_res == false) {
+		$ans['success'] = true;
+		$ans['error'] = 'sql';
+	} else {
+		$ans['state'] = [];
+		$ans['success'] = true;
+		$max = $m_res->fetch_array(MYSQLI_ASSOC);
+		while ( $row = $res->fetch_array(MYSQLI_ASSOC) ) {
+			$times[intval($row['time'])] = intval($row['load']);
+		}
+		foreach ( $times as $time => $load ) {
+			$ans['state'][$time] = ($load < $max['max']);
+		}
+	}
+	return $ans;
+};
+
 $handlers = [
 	'create' => $create,
 	'set_state' => $set_state,
 	'get_rating' => $get_rating,
 	'delete' => $delete,
 	'get_data' => $get_data,
+	'get_free_time' => $get_free_time,
 ];
 
 $req = get_json();

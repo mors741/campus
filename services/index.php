@@ -128,9 +128,9 @@
                     </div>
                 </div>
 
-                <input type="number" name="timeint" id="timeint" value="1" style="display:none"/>
-
                 <div id="time" selectedValue="1" class=" btn-group" data-toggle="buttons" data-toggle="buttons">
+                    <select name="timeint" id="timeint" class="form-control">
+                    </select>
                 </div>
                 <br/>
                 <br/>
@@ -182,30 +182,6 @@
             maxDate: moment().add('d', 30).toDate()
         });
     });
-</script>
-<script>
-    function showButtons(serv, date) {
-        if (serv == "") {
-            document.getElementById("time").innerHTML = "";
-            return;
-        } else {
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                // code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function () {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    document.getElementById("time").innerHTML = "<label for='time'>Выберите удобный промежуток времени</label><br/>" + xmlhttp.responseText;
-                }
-            };
-            xmlhttp.open("GET", "../lib/serv_buttons.php?serv=" + serv + "&date=" + date.substr(6, 4) + "-" + date.substr(3, 2) + "-" + date.substr(0, 2), true);
-            //alert("serv_buttons.php?serv="+serv+"&date="+date.substr(6, 4)+"-"+date.substr(3, 2)+"-"+date.substr(0, 2));
-            xmlhttp.send();
-        }
-    }
 </script>
 </body>
 </html>
