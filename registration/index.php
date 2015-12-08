@@ -49,9 +49,6 @@
                         <a href="/campus/services/">УСЛУГИ</a>
                     </li>
                 </ul>
-                <?php
-                include("../lib/log.php"); 
-                ?>	
                 <ul class="nav navbar-nav navbar-right">
                     <li  id="sign-out1" style="display: none;">
                         <a type=button class="account btn-group-au">

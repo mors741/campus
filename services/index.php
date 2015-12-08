@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ву<!DOCTYPE html>
 <!-- saved from url=(0041)http://mybootstrap.ru/examples/hero.html# -->
 <html lang="ru">
 <head>
@@ -51,10 +51,6 @@
                     <a href="/campus/services/">УСЛУГИ</a>
                 </li>
             </ul>
-            <?php
-                include("../lib/log.php"); 
-                include("../lib/check_serv.php");
-            ?>
             <ul class="nav navbar-nav navbar-right">
                 <li  id="sign-out1" style="display: none;">
                     <a type=button class="account btn-group-au">
