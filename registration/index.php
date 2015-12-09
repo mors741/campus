@@ -278,11 +278,6 @@
 </footer>
 <!-- Пол END-->
 
-
-<?php
-include('lib/reg.php');
-?>
-
 <!-- JavaScript. Для быстрой загрзуки помещайте в конце страницы, указав в начале скрипт jQuery-->
 <script src="/campus/js/jquery2.4.1.js"></script>
 <script src="/campus/js/jquery.validate.js"></script>

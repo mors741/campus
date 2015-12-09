@@ -34,14 +34,30 @@ $create = function($req) {
 		}
 	}
 	$ans['success'] = !$error; 
+	
+	$post = $req['post'];
+	unset($req['post']);
+
 	if ( !$error ) {
 		$req['passwd'] = md5($req['passwd']);
 		$query = create_insert($db, 'users', $req);
 		$res = $db->query($query);
 		if ( $res == false ) {
-			$ans['success'] = fasle;
+			$ans['success'] = false;
 			$ans['cause'] = 'sql';
-		} 
+			return $ans;
+		}
+		if ( $req['role'] == 'staff' ) {
+			$query = create_select($db, 'users', ['id' => 'id'], ['login' => $req['login']]);
+			$res = $db->query($query);
+			$res = $res->fetch_array(MYSQLI_ASSOC);
+			$req = [
+				'uid' => $res['id'],
+				'sid' => $post,
+			];
+			$query = create_insert($db, 'staff', $req);
+			$res = $db->query($query);
+		}
 	} else {
 		$ans['cause'] = 'mandatory fields';
 	}
