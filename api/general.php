@@ -1,6 +1,5 @@
 <?php
 
-$hour = 60*60;
 session_start();
 if ( !array_key_exists('login', $_SESSION) ) {
 	$_SESSION['login'] = 'guest';
@@ -10,6 +9,7 @@ if ( !array_key_exists('login', $_SESSION) ) {
 }
 
 function update_cookie(){
+	$hour = 60*60;
 	setcookie('login',	$_SESSION['login'], time() + $hour, "/campus/");
 	setcookie('role',	$_SESSION['role'], 	time() + $hour, "/campus/");
 	setcookie('id',		$_SESSION['id'], 	time() + $hour, "/campus/");
