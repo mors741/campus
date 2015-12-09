@@ -179,6 +179,7 @@ $login = function($req){
 			$_SESSION['role'] = $res['role'];
 			$_SESSION['id'] = $res['id'];
 			$_SESSION['home'] = $res['home'];
+			update_cookie();
 		}
 	}
 	return $ans;

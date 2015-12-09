@@ -8,10 +8,13 @@ if ( !array_key_exists('login', $_SESSION) ) {
 	$_SESSION['id'] =  '-1';
 	$_SESSION['home'] = '0';
 }
-setcookie('login',	$_SESSION['login'], time() + $hour, "/campus/");
-setcookie('role',	$_SESSION['role'], 	time() + $hour, "/campus/");
-setcookie('id',		$_SESSION['id'], 	time() + $hour, "/campus/");
-setcookie('home',	$_SESSION['home'],  time() + $hour, "/campus/");
+
+function update_cookie(){
+	setcookie('login',	$_SESSION['login'], time() + $hour, "/campus/");
+	setcookie('role',	$_SESSION['role'], 	time() + $hour, "/campus/");
+	setcookie('id',		$_SESSION['id'], 	time() + $hour, "/campus/");
+	setcookie('home',	$_SESSION['home'],  time() + $hour, "/campus/");
+}
 
 function get_json(){
 	$request = file_get_contents('php://input');
@@ -184,3 +187,5 @@ function base64_to_img($base64, $output) {
     fwrite($ifp, base64_decode($base64)); 
     fclose($ifp); 
 }
+
+update_cookie();
