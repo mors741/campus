@@ -43,9 +43,24 @@ function create()
 	comment = document.getElementById('comment').value;
 	timeint = document.getElementById('timeint').value;
 	ordate = document.getElementById('ordate').value;
-	ordate = ordate.split(".");
-	ordate = ordate[2] + "-" + ordate[1] + "-" + ordate[0];
-
+	ordate = time_convert(ordate);
+	
+	if ( !service ) {
+		alert("Выберите тип оказываемой услуги.");
+		return;
+	}
+	if ( !comment ) {
+		alert("Опишите проблему.");
+		return;
+	}
+	if ( !timeint ) {
+		alert("Выберите доступное временное окно или смените дату.");
+		return;
+	}
+	if ( !ordate ) {
+		alert("Выберите доступную дату");
+		return;
+	}
 	req = {
 		'type' : 'create',
 		'id' : user_id,
@@ -107,7 +122,7 @@ function update_free_time()
 		'sid' : $('#service').val()
 	}
 	
-	$('#timeint').html();
+	$('#timeint').html("");
 	$.post(
 		"/campus/api/service.php", 
 		JSON.stringify(req), set_free_time, "json"
@@ -119,7 +134,7 @@ function init()
 	permissions();
 	set_card();
 	$('#service').change(update_free_time);
-	$('#ordate').change(update_free_time);
+	$('#ordate').onchange(update_free_time);
 }
 
 document.addEventListener(
