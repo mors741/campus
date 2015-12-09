@@ -96,11 +96,11 @@
                     <div class="form-group">
                         <label class="control-label">Оценка</label>
                         <select name="mark" id="mark" class="form-control">
-                            <option value="1">Я бы лучше сделал</option>
-                            <option value="2">Я бы сам так смог</option>
+                            <option value="1">Ужасно</option>
+                            <option value="2">Плохо</option>
                             <option value="3" selected="selected">Нормально</option>
                             <option value="4">Хорошо</option>
-                            <option value="5">Забожил</option>
+                            <option value="5">Отлично</option>
                         </select>
                     </div>
                     <div class="form-group">

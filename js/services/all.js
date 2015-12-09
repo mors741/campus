@@ -52,6 +52,8 @@ function set_command(column, row)
         break;
         case "Оценено":
         break;
+        case "Жалоба":
+        break;
         default:
         if ( role == "staff" ) {
             html = "<button data-row-id=\"" + row.id + "\" onclick=\"completed(" + row.id + ")\">Выполнено</button>";
@@ -70,7 +72,7 @@ function set_post()
         post = { type: "get_data", performer_id: getCookie("id") };
     }
     else {
-        post = { type: "get_data" };
+        post = { type: "get_data", performer_id: -1 };
     }
     return post;
 }
@@ -85,6 +87,9 @@ function init()
         ajaxSettings : {
             type: "POST",
             dataType: 'json',
+        },
+        templates: {
+            search: ""
         },
         post: set_post(),
         url: "/campus/api/service.php",

@@ -85,6 +85,8 @@ $get_rating = function($req) {
 		'p.id' => 's.sid',
 	];
 
+	$or = [];
+
 	$where = [];
 	if ( array_key_exists('performer_id', $req) ) {
 		$where['s.uid'] = $req['performer_id'];
@@ -96,7 +98,7 @@ $get_rating = function($req) {
 
 	$count = $req['rowCount'];
 
-	$query = create_extended_select($db, $table, $select, $union, $where, $sort, $flag, $from, $count);
+	$query = create_extended_select($db, $table, $select, $union, $where, $or, $sort, $flag, $from, $count);
 	$res = $db->query($query);
 	$rows = [];
 	while ( $staff = $res->fetch_array(MYSQLI_ASSOC) ) {
@@ -159,13 +161,21 @@ $get_data = function($req) {
 		'o.author_id' => 'a.id',
 		'o.performer_id' => 'p.id',
 	];
+	$or = [];
 
 	$where = [];
 	if ( array_key_exists('author_id', $req) ) {
 		$where['a.id'] = $req['author_id'];
 	}
 	if ( array_key_exists('performer_id', $req) ) {
-		$where['p.id'] = $req['performer_id'];
+		if ( $req['performer_id'] != "-1" ) {
+			$where['p.id'] = $req['performer_id'];
+		}
+		$or = [
+			'Ожидает выполнения' => 'o.state',
+			'Просрочено' => 'o.state',
+			'Жалоба' => 'o.state',
+		];
 	}
 	if ( array_key_exists('mark', $req) ) {
 		$where['o.mark'] = $req['mark'];
@@ -180,7 +190,7 @@ $get_data = function($req) {
 
 	$count = $req['rowCount'];
 
-	$query = create_extended_select($db, $table, $select, $union, $where, $sort, $flag, $from, $count);
+	$query = create_extended_select($db, $table, $select, $union, $where, $or, $sort, $flag, $from, $count);
 	$res = $db->query($query);
 	$rows = [];
 	while ( $order = $res->fetch_array(MYSQLI_ASSOC) ) {

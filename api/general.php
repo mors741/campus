@@ -42,9 +42,9 @@ function create_constraint($db, $constraint) {
 	return $query;
 }
 
-function create_extended_constraint($db, $union, $constraint) {
+function create_extended_constraint($db, $union, $constraint, $or) {
 	$query = "";
-	if ( !empty($constraint) OR !empty($union)) {
+	if ( !empty($constraint) OR !empty($union) OR !empty($or) ) {
 		$query .= " WHERE";
 		if ( !empty($union) ) {
 			foreach ($union as $key => $value) {
@@ -62,7 +62,20 @@ function create_extended_constraint($db, $union, $constraint) {
 			}
 		}
 
-		$query = rtrim($query, "AND ");
+		if ( !empty($or) ) {
+			$query .= " (";
+			foreach ($or as $key => $value) {
+				$query .= " " .
+				mysqli_real_escape_string($db, $value) . " = '" .
+				mysqli_real_escape_string($db, $key) . "' OR";
+			}
+			$query = rtrim($query, "OR ");
+			$query .= ")";
+		} 
+		else {
+			$query = rtrim($query, "AND ");
+		}
+
 	}
 	return $query;
 }
@@ -143,7 +156,7 @@ function get_request_type(){
 	return $req['type'];
 }
 
-function create_extended_select($db, $table, $val, $union, $constraint, $sort, $flag, $from, $count){
+function create_extended_select($db, $table, $val, $union, $constraint, $or, $sort, $flag, $from, $count){
 	$query = "SELECT " . $flag . " ";
 	foreach ($val as $key => $name) {
 		$query .= " " . 
@@ -158,7 +171,7 @@ function create_extended_select($db, $table, $val, $union, $constraint, $sort, $
 			mysqli_real_escape_string($db, $key) . ", ";
 	}
 	$query = rtrim($query, ", ");
-	$query .= create_extended_constraint($db, $union, $constraint) . 
+	$query .= create_extended_constraint($db, $union, $constraint, $or) . 
 			create_sort($db, $sort) . 
 			create_limit($db, $from, $count) . 
 			";";

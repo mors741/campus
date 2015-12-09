@@ -46,13 +46,18 @@ function confirmed(id)
 {
     comment = document.getElementById("comment");
     mark = document.getElementById("mark");
+    state = 'Оценено';
+    console.log(mark.value + "-" + mark.value == 1 + "-" + mark.value == '1');
+    if ( mark.value == 1 ) {
+        state = 'Жалоба';
+    }
 
     $("#mark_modal").modal("hide");
 
     req = { 
         'type' : 'set_state',
         'id' : id,
-        'state' : 'Оценено',
+        'state' : state,
         'comment' : comment.value,
         'mark' : mark.value,
     };
@@ -62,7 +67,7 @@ function confirmed(id)
         JSON.stringify(req), 
         function() { 
             comment.value = "";
-            mark.value = "";
+            mark.value = "3";
             return; 
         }, 
         "json"
@@ -95,6 +100,9 @@ function init()
         ajaxSettings : {
             type: "POST",
             dataType: 'json',
+        },
+        templates: {
+            search: ""
         },
         post: function ()
         {
