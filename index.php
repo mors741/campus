@@ -219,7 +219,7 @@
 <script src="/campus/js/jquery2.4.1.js"></script>
 <script src="/campus/js/bootstrap.min.js"></script>
 <script src="/campus/js/right-bar.js"></script>
-<script src="/campus/js/log.js"</script>
+<script src="/campus/js/log.js"></script>
 <script>
     $('.carousel').carousel({
         interval: 5000

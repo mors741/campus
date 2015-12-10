@@ -93,7 +93,6 @@
         <br/>
         
         <div class="content">
-            <form method="post" action="../lib/serv.php">
                 <div class="control-group">
                     <label for="service">Выберите тип оказываемой услуги</label>
 
@@ -131,7 +130,6 @@
                 <br/>
                 <br/>
                 <input type="button" class="btn btn-primary" value="Отправить" name="add_order" onclick="create()" />
-            </form>
         </div>
     </div>
 </div>
