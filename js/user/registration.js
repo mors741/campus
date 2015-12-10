@@ -40,6 +40,9 @@ document.addEventListener(
 	"DOMContentLoaded", 
 	function(){
 		$.post("/campus/api/user.php", JSON.stringify({'type' : 'house'}), set_houses, "json");
+		if ( getCookie("role") == 'admin' ) {
+			add_registration();
+		}
 	}
 );
 

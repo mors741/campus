@@ -87,7 +87,7 @@
 <div class="container">
     <div class="span3">
         <div class="row">
-            <div class="card">
+            <div id="links" class="card">
                 <a class="btn btn-default" href="/campus/profile/">Личные данные</a>
                 <a class="btn btn-default" href="/campus/profile/edit.php">Редактирование данных</a>
                 <a class="btn btn-default" href="/campus/profile/favs.php">Закладки</a>

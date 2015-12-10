@@ -100,10 +100,30 @@ function update(){
 		JSON.stringify(res));
 }
 
+
+
+function getCookie(name) 
+{
+  var matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+function add_registration(resp) {
+	href = $('<a>');
+	href.attr('class', "btn btn-default");
+	href.attr('href', "/campus/registration/staff.php");
+	href.text('Регистрация персонала');
+	$('#links').append(href);
+}
+
 document.addEventListener(
 	"DOMContentLoaded", 
 	function(){
-
+		if ( getCookie("role") == 'admin' ) {
+			add_registration();
+		}
 		document.getElementById('js-upload-files').addEventListener('change', upload_file, false);
 		$.post("/campus/api/user.php",
 			JSON.stringify({ 'type' : 'current'}), get_user_data, "json");
