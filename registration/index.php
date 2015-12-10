@@ -92,12 +92,12 @@
                 </div>
                 <div class="modal-body">
                     <div style="padding-top:30px" class="panel-body" >
-                        <form role="form" method="post" action="index.php" class="form-horizontal">
+                        <form role="form" method="post" action="index.php" id="authform" class="form-horizontal">
                             <div style="margin-bottom: 25px" class="input-group">
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-user"></i>
                                 </span>
-                                <input type="email" class="form-control" id="login" name="login" placeholder="Введите email"/>
+                                <input type="email" class="form-control" id="authlogin" name="login" placeholder="Введите email"/>
                             </div>
                             <div style="margin-bottom: 25px" class="input-group">
                                 <span class="input-group-addon">
@@ -111,7 +111,7 @@
                                 </label>
                             </div>
                             <br>
-                            <button type="submit" name="enter" class="btn btn-primary">Отправить</button>
+                            <button type="submit" name="enter" class="btn btn-primary" onclick="log()">Отправить</button>
                             <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
                         </form>
                     </div>
@@ -289,6 +289,8 @@
 <script src="/campus/js/dm-modal.js"></script>
 <script src="/campus/js/common-edit.js"></script>      
 <script src="/campus/js/user/registration.js"></script>
+<script src="/campus/js/log.js"></script>
+
 <!-- JavaScript. Для быстрой загрзуки помещайте в конце страницы, указав в начале скрипт jQuery END-->       
 </body>
 </html>
