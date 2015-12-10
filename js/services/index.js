@@ -1,3 +1,5 @@
+var old_data = "";
+
 function permissions()
 {
     var path_all = "/campus/services/all.php";
@@ -47,10 +49,6 @@ function create()
 	
 	if ( !service ) {
 		alert("Выберите тип оказываемой услуги.");
-		return;
-	}
-	if ( !comment ) {
-		alert("Опишите проблему.");
 		return;
 	}
 	if ( !timeint ) {
@@ -129,12 +127,22 @@ function update_free_time()
 	);
 }
 
+function bind_date()
+{
+	if ( old_data != $('#ordate').val() ) {
+		update_free_time();
+	}
+	old_data = $('#ordate').val();
+	setTimeout(bind_date, 100);
+}
+
 function init() 
 {
 	permissions();
 	set_card();
 	$('#service').change(update_free_time);
-	$('#ordate').onchange(update_free_time);
+	old_data = $('#ordate').val();
+	bind_date();
 }
 
 document.addEventListener(
