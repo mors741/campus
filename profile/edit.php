@@ -200,7 +200,6 @@
                             <label for="address">Адрес (корпус):</label>
                             <div class="form-group">
                                 <select id = "home">
-                                    <option value = '-1'>Я не проживаю в общежитии</option>
                                 </select>
                             </div>
                         </div>

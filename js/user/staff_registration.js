@@ -1,9 +1,11 @@
 function set_houses(resp) {
 	for ( var row = 0; row < resp.length; row++ ) { 
-		option = $("<option>");
-		option.text(resp[row]['street'] + ' ' + resp[row]['house']);
-		option.attr('value', resp[row]['id']);
-		$('#home').append(option);
+		if ( resp[row]['id'] > 0 ) {
+			option = $("<option>");
+			option.text(resp[row]['street'] + ' ' + resp[row]['house']);
+			option.attr('value', resp[row]['id']);
+			$('#home').append(option);
+		}
 	}
 }
 
