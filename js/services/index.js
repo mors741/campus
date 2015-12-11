@@ -149,3 +149,5 @@ document.addEventListener(
     "DOMContentLoaded", 
     init
 );
+
+permissions();
