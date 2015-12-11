@@ -164,7 +164,13 @@
                             <input type="text" name="name" id="name" class="form-control" placeholder="Имя"/>
                         </div>
                     </div>
-                    <div class="control-group form-group">
+
+                </div>
+                <!--Первый блок регистрации END-->
+                <!--Второй блок регистрации-->
+
+                <div class="span-reg">
+				        <div class="control-group form-group">
                         <label For="role">Роль</label>
                         <select onchange="update_visible()" Class="form-control" id="select_role" Name ="select_role">
                             <option value="admin">Администратор сайта</option>
@@ -185,11 +191,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <!--Первый блок регистрации END-->
-                <!--Второй блок регистрации-->
-
-                <div class="span-reg">
                     <div class="control-group form-group">
                         <label for="yes">Проживает в общежитии?</label>
                         <div class="form-group">
