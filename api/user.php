@@ -35,9 +35,11 @@ $create = function($req) {
 	}
 	$ans['success'] = !$error; 
 	
-	$post = $req['post'];
-	unset($req['post']);
-
+	if ( $req['role'] == 'staff' ) {
+		$post = $req['post'];
+		unset($req['post']);
+	}
+	
 	if ( !$error ) {
 		$req['passwd'] = md5($req['passwd']);
 		$query = create_insert($db, 'users', $req);
