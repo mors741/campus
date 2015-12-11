@@ -33,6 +33,9 @@ function permissions()
     go_to = go_to[role];
 
     if ( go_to ) {
+    	if ( go_to == path_home ) {
+            alert("У вас нет доступа")
+        }
         window.location.replace(go_to);
     }
 }
