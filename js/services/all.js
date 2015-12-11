@@ -82,7 +82,6 @@ function set_post()
 
 function init()
 {    
-    permissions();
     set_card();
 
     $("#grid-basic").bootgrid({

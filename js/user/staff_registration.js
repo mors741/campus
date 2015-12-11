@@ -47,6 +47,19 @@ function registration_handler(resp) {
 	}
 }
 
+function getCookie(name) 
+{
+  var matches = document.cookie.match(new RegExp(
+    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+  ));
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+}
+
+if ( getCookie("role") != 'admin' ) {
+	alert('У вас нет прав доступа на эту страницу');
+	window.location.replace("/campus/");
+}
+
 document.addEventListener(
 	"DOMContentLoaded", 
 	function(){

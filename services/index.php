@@ -1,4 +1,26 @@
-ву<!DOCTYPE html>
+<?php
+    session_start();
+    $path_all = "/campus/services/all.php";
+    if ( $_SESSION['home'] == '0' ) {
+        $go_to = [
+            "admin" => $path_all,
+            "manage" => $path_all, 
+            "staff" => $path_all,
+            "moder" => $path_all,
+            "campus" => NULL,
+            "local" => NULL,
+            "guest" => NULL
+        ];
+    }
+    $go_to = $go_to[$_SESSION['role']];
+    if ( $go_to != NULL) {
+        $host  = $_SERVER['HTTP_HOST'];
+        header("Location: ". $go_to);
+    }
+?>
+
+
+<!DOCTYPE html>
 <!-- saved from url=(0041)http://mybootstrap.ru/examples/hero.html# -->
 <html lang="ru">
 <head>

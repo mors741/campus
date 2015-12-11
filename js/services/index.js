@@ -141,7 +141,6 @@ function bind_date()
 
 function init() 
 {
-	permissions();
 	set_card();
 	$('#service').change(update_free_time);
 	old_data = $('#ordate').val();

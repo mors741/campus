@@ -95,7 +95,6 @@ function set_command(row)
 
 function init()
 {
-    permissions();
     set_card();
 
     $("#grid-basic").bootgrid({
