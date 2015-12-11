@@ -34,9 +34,9 @@ function permissions()
 
     if ( go_to ) {
     	if ( go_to == path_home ) {
-            window.location.replace('/campus/error.php');
+            alert("У вас нет доступа")
         }
-        
+        window.location.replace(go_to);
     }
 }
 
@@ -151,3 +151,5 @@ document.addEventListener(
     "DOMContentLoaded", 
     init
 );
+
+permissions();
