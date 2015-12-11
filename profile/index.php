@@ -160,6 +160,7 @@
 <script src="/campus/js/jquery.rating-2.0.js"></script>
 <script src="/campus/js/user/main.js"></script>
 <script src="/campus/js/right-bar.js"></script>
+<script src="/campus/js/profile.js"></script>
 </body>
 </html>
 
