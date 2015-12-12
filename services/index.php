@@ -1,6 +1,7 @@
-<?php
+﻿<?php
     session_start();
     $path_all = "/campus/services/all.php";
+	$go_to="";
     if ( $_SESSION['home'] == '0' ) {
         $go_to = [
             "admin" => $path_all,
@@ -12,6 +13,17 @@
             "guest" => NULL
         ];
     }
+	else {
+		$go_to = [
+            "admin" => NULL,
+            "manage" => NULL, 
+            "staff" => NULL,
+            "moder" => NULL,
+            "campus" => NULL,
+            "local" => NULL,
+            "guest" => NULL
+        ];
+	}
     $go_to = $go_to[$_SESSION['role']];
     if ( $go_to != NULL) {
         $host  = $_SERVER['HTTP_HOST'];
