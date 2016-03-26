@@ -44,9 +44,9 @@
                 <li>
                     <a href="/campus/">ГЛАВНАЯ</a>
                 </li>
-                <li>
-                   <a href="/campus/dashboard/">ДОСКА ОБЪЯВЛЕНИЙ</a>
-                </li>
+                <!--<li>
+                    <a href="/campus/dashboard/">ДОСКА ОБЪЯВЛЕНИЙ</a>
+                </li>-->
                 <li>
                     <a href="/campus/services/">УСЛУГИ</a>
                 </li>
@@ -90,7 +90,7 @@
             <div id = "links" class="card">
                 <a class="btn btn-default" href="/campus/profile/">Личные данные</a>
                 <a class="btn btn-default" href="/campus/profile/edit.php">Редактирование данных</a>
-                <a class="btn btn-default" onclick="alert('Страница в разработке')">Закладки</a>
+                <!--<a class="btn btn-default" onclick="alert('Страница в разработке')">Закладки</a>-->
             </div>
             <div class="content">
                 <div class="col-sm-2 col-md-2">

@@ -45,9 +45,9 @@
                 <li>
                     <a href="/campus/">ГЛАВНАЯ</a>
                 </li>
-                <li class="active">
+                <!--<li>
                     <a href="/campus/dashboard/">ДОСКА ОБЪЯВЛЕНИЙ</a>
-                </li>
+                </li>-->
                 <li>
                     <a href="/campus/services/">УСЛУГИ</a>
                 </li>
